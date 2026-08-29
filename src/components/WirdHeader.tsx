@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/logo-calligraphy.png.asset.json";
+import logoMark from "@/assets/logo-mark.png";
 
 /** ترويسة الوِرد اليومي: قوس مسجد بزخرفة ذهبية + بسملة + العنوان */
 export function WirdHeader() {
@@ -54,9 +54,9 @@ export function WirdHeader() {
 
       {/* اللوجو على الطرف الأيمن */}
       <img
-        src={logoAsset.url}
+        src={logoMark}
         alt="لوجو التطبيق"
-        className="absolute right-4 top-5 h-20 w-20 rounded-2xl border-2 border-gold/50 object-cover shadow-soft"
+        className="absolute right-3 top-4 h-24 w-20 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.5)]"
       />
 
       <p className="font-display mx-auto mt-8 max-w-[14rem] text-[1.9rem] leading-tight text-gold-soft drop-shadow-sm">
