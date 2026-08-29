@@ -53,6 +53,8 @@ function History() {
                 <li
                   key={e.id}
                   className="pattern-cream flex items-center justify-between rounded-3xl border border-gold/40 p-4 text-card-foreground"
+                >
+
 
                   <div>
                     <p className="font-display text-lg font-bold text-primary">
