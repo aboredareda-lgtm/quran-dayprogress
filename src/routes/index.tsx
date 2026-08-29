@@ -59,25 +59,29 @@ function Index() {
       </header>
 
       <section className="-mt-14 px-5">
-        <div className="shadow-soft rounded-3xl border border-border bg-card p-6 text-card-foreground">
+        <div className="shadow-soft rounded-3xl border border-border bg-card p-6 text-center text-card-foreground">
           <p className="text-sm text-muted-foreground">آخر ما وصلت إليه</p>
 
           {!loaded ? (
             <div className="mt-4 h-16 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display mt-3 text-3xl font-bold text-primary">
+              <p className="font-display mt-4 text-4xl font-bold leading-tight text-primary">
                 سورة {getSurah(last.surah).name}
               </p>
-              <p className="mt-1 text-lg">
-                الآية <span className="font-bold">{last.ayah}</span> من {getSurah(last.surah).ayahs}
+              <p className="mt-3 text-2xl font-bold">
+                الآية {last.ayah}
+                <span className="mr-2 text-base font-medium text-muted-foreground">
+                  من {getSurah(last.surah).ayahs}
+                </span>
               </p>
-              <p className="mt-3 text-xs text-muted-foreground">{formatDate(last.at)}</p>
+              <p className="mt-4 text-xs text-muted-foreground">{formatDate(last.at)}</p>
             </>
           ) : (
             <p className="mt-3 text-lg text-muted-foreground">
               لم تسجّل موضعك بعد — ابدأ الآن وسجّل أول موضع.
             </p>
+
           )}
 
           {saved && (
