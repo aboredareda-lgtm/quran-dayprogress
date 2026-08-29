@@ -30,21 +30,22 @@ function History() {
   const { entries, loaded, removeEntry, clearAll } = useReadingLog();
 
   return (
-    <main className="min-h-screen bg-background pb-16">
-      <header className="bg-gradient-calm px-5 pb-8 pt-10 text-primary-foreground">
-        <Link to="/" className="text-sm opacity-85">
+    <main className="pattern-cream min-h-screen pb-16">
+      <header className="bg-gradient-calm pattern-arch px-5 pb-8 pt-10 text-primary-foreground">
+        <Link to="/" className="text-sm text-gold-soft">
           → عودة للرئيسية
         </Link>
-        <h1 className="font-display mt-3 text-2xl font-bold">سجل القراءة</h1>
+        <h1 className="font-display mt-3 text-3xl font-bold">سجل القراءة</h1>
       </header>
 
       <section className="px-5 pt-6">
         {!loaded ? (
           <div className="h-20 animate-pulse rounded-2xl bg-muted" />
         ) : entries.length === 0 ? (
-          <p className="rounded-2xl border border-border bg-card p-6 text-center text-sm text-muted-foreground">
+          <p className="pattern-cream rounded-3xl border border-gold/40 p-6 text-center text-sm text-muted-foreground">
             لا توجد مواضع مسجّلة بعد.
           </p>
+
         ) : (
           <>
             <ul className="space-y-3">
