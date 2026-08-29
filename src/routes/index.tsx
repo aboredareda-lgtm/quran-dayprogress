@@ -77,9 +77,10 @@ function Index() {
                   من {getSurah(last.surah).ayahs}
                 </span>
               </p>
-              <p className="mt-4 inline-block rounded-full border border-gold/50 bg-secondary px-5 py-1.5 text-base font-bold text-secondary-foreground">
+              <p className="mt-4 inline-block rounded-full border-2 border-gold/60 bg-secondary px-7 py-2.5 text-3xl font-bold text-secondary-foreground">
                 الجزء {getJuz(last.surah, last.ayah)}
               </p>
+
               <p className="mt-4 text-xs text-muted-foreground">{formatDate(last.at)}</p>
             </>
           ) : (
