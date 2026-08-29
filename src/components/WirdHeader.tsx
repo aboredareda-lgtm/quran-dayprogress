@@ -4,7 +4,7 @@ import mushafMark from "@/assets/mushaf-mark.png";
 /** ترويسة الوِرد اليومي: قوس مسجد بزخرفة ذهبية + بسملة + العنوان */
 export function WirdHeader() {
   return (
-    <header className="bg-gradient-calm pattern-emerald relative overflow-hidden px-5 pb-28 pt-8 text-center text-primary-foreground">
+    <header className="bg-gradient-calm pattern-emerald relative overflow-hidden px-5 pb-28 safe-top text-center text-primary-foreground">
       {/* قوس المحراب */}
       <svg
         viewBox="0 0 320 260"

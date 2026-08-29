@@ -30,7 +30,7 @@ function History() {
   const { entries, loaded, removeEntry, clearAll } = useReadingLog();
 
   return (
-    <main className="pattern-cream min-h-screen pb-16">
+    <main className="pattern-cream screen-fill mx-auto w-full max-w-[26rem] overflow-x-hidden">
       <header className="bg-gradient-calm pattern-arch px-5 pb-8 pt-10 text-primary-foreground">
         <Link to="/" className="text-sm text-gold-soft">
           → عودة للرئيسية
