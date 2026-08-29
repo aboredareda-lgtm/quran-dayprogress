@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { getSurah } from "@/lib/surahs";
+import { getSurah, getJuz } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 
 export const Route = createFileRoute("/history")({
@@ -57,7 +57,9 @@ function History() {
                     <p className="font-display text-lg font-bold text-primary">
                       سورة {getSurah(e.surah).name}
                     </p>
-                    <p className="text-sm">الآية {e.ayah}</p>
+                    <p className="text-sm">
+                      الآية {e.ayah} · الجزء {getJuz(e.surah, e.ayah)}
+                    </p>
                     <p className="mt-1 text-xs text-muted-foreground">{formatDate(e.at)}</p>
                   </div>
                   <button
