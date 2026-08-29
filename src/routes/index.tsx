@@ -171,7 +171,7 @@ function Index() {
             </select>
 
             <label
-              className="mt-4 block text-center text-base text-muted-foreground"
+              className="mt-5 block text-center text-xl font-bold text-primary"
               htmlFor="ayah"
             >
               رقم الآية (1 - {ayahCount})
