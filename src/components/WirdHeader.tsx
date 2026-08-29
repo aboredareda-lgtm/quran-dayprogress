@@ -52,6 +52,13 @@ export function WirdHeader() {
         </svg>
       </div>
 
+      {/* اللوجو على الطرف الأيمن */}
+      <img
+        src={logoAsset.url}
+        alt="لوجو التطبيق"
+        className="absolute right-4 top-5 h-20 w-20 rounded-2xl border-2 border-gold/50 object-cover shadow-soft"
+      />
+
       <p className="font-display mx-auto mt-8 max-w-[14rem] text-[1.9rem] leading-tight text-gold-soft drop-shadow-sm">
         بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
       </p>
