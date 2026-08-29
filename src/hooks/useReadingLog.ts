@@ -1,0 +1,68 @@
+import { useCallback, useEffect, useState } from "react";
+
+export type ReadingEntry = {
+  id: string;
+  surah: number;
+  ayah: number;
+  at: string; // ISO timestamp
+};
+
+const STORAGE_KEY = "quran-reading-log-v1";
+
+function read(): ReadingEntry[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as ReadingEntry[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function useReadingLog() {
+  const [entries, setEntries] = useState<ReadingEntry[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setEntries(read());
+    setLoaded(true);
+  }, []);
+
+  const persist = useCallback((next: ReadingEntry[]) => {
+    setEntries(next);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      /* ignore quota errors */
+    }
+  }, []);
+
+  const addEntry = useCallback(
+    (surah: number, ayah: number) => {
+      const entry: ReadingEntry = {
+        id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        surah,
+        ayah,
+        at: new Date().toISOString(),
+      };
+      persist([entry, ...read()]);
+      return entry;
+    },
+    [persist],
+  );
+
+  const removeEntry = useCallback(
+    (id: string) => {
+      persist(read().filter((e) => e.id !== id));
+    },
+    [persist],
+  );
+
+  const clearAll = useCallback(() => persist([]), [persist]);
+
+  const last = entries[0] ?? null;
+  const daysTracked = new Set(entries.map((e) => e.at.slice(0, 10))).size;
+
+  return { entries, last, daysTracked, loaded, addEntry, removeEntry, clearAll };
+}
