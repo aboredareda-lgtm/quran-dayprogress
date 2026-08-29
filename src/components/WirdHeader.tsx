@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/logo-calligraphy.png.asset.json";
+import logoMark from "@/assets/logo-mark.png";
 
 /** ترويسة الوِرد اليومي: قوس مسجد بزخرفة ذهبية + بسملة + العنوان */
 export function WirdHeader() {
