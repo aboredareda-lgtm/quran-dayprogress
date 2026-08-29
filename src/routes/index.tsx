@@ -54,7 +54,7 @@ function Index() {
   };
 
   return (
-    <main className="pattern-cream min-h-screen pb-12">
+    <main className="pattern-cream screen-fill mx-auto w-full max-w-[26rem] overflow-x-hidden">
       <WirdHeader />
 
 
