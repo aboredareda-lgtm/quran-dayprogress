@@ -25,33 +25,13 @@ export function WirdHeader() {
         />
       </svg>
 
-      {/* أيقونة المصحف */}
-      <div className="absolute left-4 top-5 text-gold-soft">
-        <svg viewBox="0 0 64 72" aria-hidden className="h-16 w-14" fill="none">
-          <path
-            d="M32 4c5 4 8 8 8 12s-3 6-8 6-8-2-8-6 3-8 8-12Z"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <rect
-            x="6"
-            y="24"
-            width="52"
-            height="42"
-            rx="4"
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="currentColor"
-            fillOpacity="0.15"
-          />
-          <path d="M32 26v40" stroke="currentColor" strokeWidth="2" />
-          <path
-            d="M14 36h12M14 44h12M38 36h12M38 44h12"
-            stroke="currentColor"
-            strokeWidth="1.6"
-          />
-        </svg>
-      </div>
+      {/* لوجو المصحف على الطرف الأيسر */}
+      <img
+        src={mushafMark}
+        alt="لوجو المصحف"
+        className="absolute left-3 top-5 h-20 w-24 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.55)]"
+      />
+
 
       {/* اللوجو على الطرف الأيمن */}
       <img
