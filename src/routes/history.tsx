@@ -52,8 +52,8 @@ function History() {
               {entries.map((e) => (
                 <li
                   key={e.id}
-                  className="flex items-center justify-between rounded-2xl border border-border bg-card p-4 text-card-foreground"
-                >
+                  className="pattern-cream flex items-center justify-between rounded-3xl border border-gold/40 p-4 text-card-foreground"
+
                   <div>
                     <p className="font-display text-lg font-bold text-primary">
                       سورة {getSurah(e.surah).name}
