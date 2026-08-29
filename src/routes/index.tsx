@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { SURAHS, getSurah, getJuz } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 import { Ornament, OrnamentDivider } from "@/components/Ornament";
+import { WirdHeader } from "@/components/WirdHeader";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,17 +55,10 @@ function Index() {
 
   return (
     <main className="pattern-cream min-h-screen pb-12">
-      <header className="bg-gradient-calm pattern-arch relative px-5 pb-24 pt-9 text-center text-primary-foreground">
-        <div className="absolute left-5 top-6 rounded-2xl border border-gold/50 p-2.5">
-          <Ornament className="h-7 w-7 text-gold-soft" />
-        </div>
-        <p className="font-display text-2xl leading-relaxed text-gold-soft">
-          بسم الله الرحمن الرحيم
-        </p>
-        <h1 className="font-display mt-3 text-5xl font-bold tracking-tight">الوِرد اليومي</h1>
-      </header>
+      <WirdHeader />
 
-      <section className="-mt-16 px-4">
+
+      <section className="relative z-10 -mt-14 px-4">
         <div className="shadow-soft pattern-cream rounded-[2rem] border-2 border-gold/45 p-6 text-center text-card-foreground">
           <OrnamentDivider />
 
