@@ -32,12 +32,8 @@
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --shadow-soft: 0 10px 30px -12px oklch(0.42 0.07 155 / 0.28);
-  --background-image-gradient-calm: radial-gradient(
-      120% 80% at 50% 0%,
-      oklch(0.34 0.07 158) 0%,
-      transparent 70%
-    ),
-    linear-gradient(165deg, oklch(0.28 0.065 158) 0%, oklch(0.22 0.05 160) 60%, oklch(0.18 0.04 162) 100%);
+
+
 
 
   --color-background: var(--background);
