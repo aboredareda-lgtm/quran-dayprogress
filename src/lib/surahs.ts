@@ -118,5 +118,6 @@ export const SURAHS: Surah[] = [
 ];
 
 export function getSurah(number: number): Surah {
-  return SURAHS.find((s) => s.number === number) ?? SURAHS[0];
+  return SURAHS.find((s) => s.number === number) ?? SURAHS[0]!;
 }
+
