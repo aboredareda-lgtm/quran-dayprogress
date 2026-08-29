@@ -58,7 +58,7 @@ function Index() {
       <WirdHeader />
 
 
-      <section className="-mt-16 px-4">
+      <section className="relative z-10 -mt-14 px-4">
         <div className="shadow-soft pattern-cream rounded-[2rem] border-2 border-gold/45 p-6 text-center text-card-foreground">
           <OrnamentDivider />
 

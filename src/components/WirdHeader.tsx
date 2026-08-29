@@ -1,7 +1,7 @@
 /** ترويسة الوِرد اليومي: قوس مسجد بزخرفة ذهبية + بسملة + العنوان */
 export function WirdHeader() {
   return (
-    <header className="bg-gradient-calm pattern-emerald relative overflow-hidden px-5 pb-24 pt-6 text-center text-primary-foreground">
+    <header className="bg-gradient-calm pattern-emerald relative overflow-hidden px-5 pb-28 pt-8 text-center text-primary-foreground">
       {/* قوس المحراب */}
       <svg
         viewBox="0 0 320 260"
@@ -50,11 +50,11 @@ export function WirdHeader() {
         </svg>
       </div>
 
-      <p className="font-display mx-auto mt-10 max-w-[15rem] text-[2.1rem] leading-tight text-gold-soft drop-shadow-sm">
+      <p className="font-display mx-auto mt-8 max-w-[14rem] text-[1.9rem] leading-tight text-gold-soft drop-shadow-sm">
         بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
       </p>
 
-      <h1 className="font-display mt-6 text-[3.2rem] font-bold leading-none tracking-tight drop-shadow-[0_2px_6px_oklch(0.15_0.03_160/0.6)]">
+      <h1 className="font-display mt-7 text-[3.1rem] font-bold leading-none tracking-tight drop-shadow-[0_2px_6px_oklch(0.15_0.03_160/0.6)]">
         الوِرد اليومي
       </h1>
     </header>
