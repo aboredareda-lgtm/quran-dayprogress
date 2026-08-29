@@ -147,7 +147,10 @@ function Index() {
             <OrnamentDivider />
             <h2 className="mt-3 text-center text-lg font-bold text-primary">تحديث الموضع</h2>
 
-            <label className="mt-5 block text-sm text-muted-foreground" htmlFor="surah">
+            <label
+              className="mt-5 block text-center text-base text-muted-foreground"
+              htmlFor="surah"
+            >
               السورة
             </label>
             <select
@@ -158,7 +161,7 @@ function Index() {
                 setSurah(next);
                 setAyah((a) => Math.min(a, getSurah(next).ayahs));
               }}
-              className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-base"
+              className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-4 text-center text-2xl font-bold text-primary"
             >
               {SURAHS.map((s) => (
                 <option key={s.number} value={s.number}>
@@ -167,7 +170,10 @@ function Index() {
               ))}
             </select>
 
-            <label className="mt-4 block text-sm text-muted-foreground" htmlFor="ayah">
+            <label
+              className="mt-4 block text-center text-base text-muted-foreground"
+              htmlFor="ayah"
+            >
               رقم الآية (1 - {ayahCount})
             </label>
             <input
@@ -177,8 +183,9 @@ function Index() {
               max={ayahCount}
               value={ayah}
               onChange={(e) => setAyah(Number(e.target.value))}
-              className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-base"
+              className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-4 text-center text-2xl font-bold text-primary"
             />
+
 
             <div className="mt-6 flex gap-3">
               <button
