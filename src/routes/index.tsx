@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { SURAHS, getSurah, getJuz } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 import { Ornament, OrnamentDivider } from "@/components/Ornament";
+import { WirdHeader } from "@/components/WirdHeader";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
