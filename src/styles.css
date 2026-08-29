@@ -153,5 +153,12 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
   }
 }
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
