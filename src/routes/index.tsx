@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
 import { SURAHS, getSurah, getJuz } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 import { Ornament, OrnamentDivider } from "@/components/Ornament";
@@ -32,7 +32,20 @@ function formatDate(iso: string) {
 }
 
 function Index() {
+  const navigate = useNavigate();
   const { last, daysTracked, entries, loaded, addEntry } = useReadingLog();
+
+  // أول زيارة → صفحة الترحيب
+  useEffect(() => {
+    try {
+      if (!window.localStorage.getItem("wird:welcomed")) {
+        navigate({ to: "/welcome", replace: true });
+      }
+    } catch {
+      /* تجاهل */
+    }
+  }, [navigate]);
+
   const [editing, setEditing] = useState(false);
   const [surah, setSurah] = useState(1);
   const [ayah, setAyah] = useState(1);
