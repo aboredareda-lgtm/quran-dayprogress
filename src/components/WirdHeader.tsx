@@ -4,7 +4,7 @@ import mushafMark from "@/assets/mushaf-mark.png";
 /** ترويسة الوِرد اليومي: قوس مسجد بزخرفة ذهبية + بسملة + العنوان */
 export function WirdHeader() {
   return (
-    <header className="bg-gradient-calm pattern-emerald relative overflow-hidden px-5 pb-28 safe-top text-center text-primary-foreground">
+    <header className="bg-gradient-calm pattern-emerald safe-top relative min-h-[20rem] overflow-hidden px-4 pb-28 text-center text-primary-foreground sm:px-5">
       {/* قوس المحراب */}
       <svg
         viewBox="0 0 320 260"
@@ -29,7 +29,7 @@ export function WirdHeader() {
       <img
         src={mushafMark}
         alt="لوجو المصحف"
-        className="absolute left-3 top-5 h-20 w-24 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.55)]"
+        className="absolute left-2 top-5 h-16 w-20 shrink-0 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.55)] min-[380px]:left-3 min-[380px]:h-20 min-[380px]:w-24"
       />
 
 
@@ -37,14 +37,14 @@ export function WirdHeader() {
       <img
         src={logoMark}
         alt="لوجو التطبيق"
-        className="absolute right-3 top-4 h-24 w-20 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.5)]"
+        className="absolute right-2 top-4 h-20 w-16 shrink-0 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.5)] min-[380px]:right-3 min-[380px]:h-24 min-[380px]:w-20"
       />
 
-      <p className="font-display mx-auto mt-8 max-w-[14rem] text-[1.9rem] leading-tight text-gold-soft drop-shadow-sm">
+      <p className="font-display mx-auto mt-8 max-w-[11rem] text-2xl leading-tight text-gold-soft drop-shadow-sm min-[380px]:max-w-[14rem] min-[380px]:text-[1.9rem]">
         بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
       </p>
 
-      <h1 className="font-display mt-7 text-[3.1rem] font-bold leading-none tracking-tight drop-shadow-[0_2px_6px_oklch(0.15_0.03_160/0.6)]">
+      <h1 className="font-display mt-7 text-[2.65rem] font-bold leading-none drop-shadow-[0_2px_6px_oklch(0.15_0.03_160/0.6)] min-[380px]:text-[3.1rem]">
         الوِرد اليومي
       </h1>
     </header>

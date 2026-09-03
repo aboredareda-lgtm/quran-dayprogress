@@ -156,9 +156,13 @@
   body {
     min-height: 100%;
     background-color: var(--color-background);
+    overscroll-behavior-x: none;
   }
 
   body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-tap-highlight-color: transparent;
@@ -171,7 +175,8 @@
 @utility screen-fill {
   min-height: 100vh;
   min-height: 100dvh;
-  width: 100%;
+  width: 100vw;
+  max-width: 100%;
   padding-bottom: calc(env(safe-area-inset-bottom) + 1.5rem);
 }
 
