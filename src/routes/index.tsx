@@ -58,30 +58,30 @@ function Index() {
       <WirdHeader />
 
 
-      <section className="relative z-10 -mt-14 px-3 min-[380px]:px-4">
-        <div className="shadow-soft pattern-cream rounded-[2rem] border-2 border-gold/45 p-5 text-center text-card-foreground min-[380px]:p-6">
+      <section className="relative z-10 -mt-12 px-3 min-[380px]:px-4">
+        <div className="shadow-soft pattern-cream rounded-[2rem] border-2 border-gold/45 p-4 text-center text-card-foreground tall:p-6">
           <OrnamentDivider />
 
-          <p className="mt-4 text-base font-bold text-primary">آخر ما وصلت إليه</p>
+          <p className="mt-3 text-base font-bold text-primary">آخر ما وصلت إليه</p>
 
           {!loaded ? (
             <div className="mt-4 h-16 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display mt-4 text-3xl font-bold leading-tight text-primary min-[380px]:text-4xl">
+              <p className="font-display mt-3 text-3xl font-bold leading-tight text-primary tall:text-4xl">
                 سورة {getSurah(last.surah).name}
               </p>
-              <p className="mt-3 text-2xl font-bold">
+              <p className="mt-2 text-2xl font-bold">
                 الآية {last.ayah}
                 <span className="mr-2 text-base font-medium text-muted-foreground">
                   من {getSurah(last.surah).ayahs}
                 </span>
               </p>
-              <p className="mt-4 inline-block rounded-full border-2 border-gold/60 bg-secondary px-7 py-2.5 text-3xl font-bold text-secondary-foreground">
+              <p className="mt-3 inline-block rounded-full border-2 border-gold/60 bg-secondary px-6 py-2 text-[1.6rem] tall:text-3xl font-bold text-secondary-foreground">
                 الجزء {getJuz(last.surah, last.ayah)}
               </p>
 
-              <p className="mt-4 text-xs text-muted-foreground">{formatDate(last.at)}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{formatDate(last.at)}</p>
             </>
           ) : (
             <p className="mt-4 text-xl font-medium leading-relaxed">
@@ -97,25 +97,25 @@ function Index() {
 
           <button
             onClick={openEditor}
-            className="mt-6 flex w-full items-center justify-center gap-3 rounded-full border-2 border-gold/60 bg-primary px-5 py-4 text-lg font-bold text-primary-foreground transition-transform active:scale-[0.98]"
+            className="mt-4 flex w-full items-center justify-center gap-3 rounded-full border-2 border-gold/60 bg-primary px-5 py-3.5 text-lg tall:mt-6 tall:py-4 font-bold text-primary-foreground transition-transform active:scale-[0.98]"
           >
             <Ornament className="h-6 w-6 text-gold-soft" />
             تحديث الموضع
           </button>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-4">
+        <div className="mt-3 grid grid-cols-2 gap-3 tall:mt-4 tall:gap-4">
           {[
             { value: daysTracked, label: "أيام المتابعة" },
             { value: entries.length, label: "مرات التسجيل" },
           ].map((s) => (
             <div
               key={s.label}
-              className="pattern-cream rounded-3xl border border-gold/40 p-4 text-center"
+              className="pattern-cream rounded-3xl border border-gold/40 p-3 text-center tall:p-4"
             >
               <Ornament className="mx-auto h-5 w-5 text-gold" />
               <div className="mx-auto mt-2 h-px w-16 bg-gold/40" />
-              <p className="mt-2 text-3xl font-bold text-primary">{s.value}</p>
+              <p className="mt-1 text-2xl font-bold text-primary tall:text-3xl">{s.value}</p>
               <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
             </div>
           ))}
@@ -123,7 +123,7 @@ function Index() {
 
         <Link
           to="/history"
-          className="pattern-cream mt-4 flex items-center justify-between rounded-3xl border border-gold/40 px-5 py-4 font-bold text-primary"
+          className="pattern-cream mt-3 flex items-center justify-between rounded-3xl border border-gold/40 px-5 py-3.5 tall:mt-4 tall:py-4 font-bold text-primary"
         >
           <span className="flex items-center gap-3">
             <Ornament className="h-6 w-6 text-gold" />
@@ -136,7 +136,7 @@ function Index() {
         </Link>
 
 
-        <p className="mt-6 flex items-center justify-center gap-2 text-center text-xs leading-6 text-muted-foreground">
+        <p className="mt-4 flex items-center justify-center gap-2 text-center text-[0.7rem] leading-5 tall:mt-6 tall:text-xs text-muted-foreground">
           <Ornament className="h-4 w-4 shrink-0 text-gold" />
           بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
         </p>
