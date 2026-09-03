@@ -135,20 +135,6 @@ function Index() {
           </span>
         </Link>
 
-        <Link
-          to="/loans"
-          className="pattern-cream mt-4 flex items-center justify-between rounded-3xl border border-gold/40 px-5 py-4 font-bold text-primary"
-        >
-          <span className="flex items-center gap-3">
-            <Ornament className="h-6 w-6 text-gold" />
-            <span className="h-6 w-px bg-gold/40" />
-            سداد القروض
-          </span>
-          <span aria-hidden className="text-primary">
-            ←
-          </span>
-        </Link>
-
 
         <p className="mt-6 flex items-center justify-center gap-2 text-center text-xs leading-6 text-muted-foreground">
           <Ornament className="h-4 w-4 shrink-0 text-gold" />
