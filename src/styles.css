@@ -179,7 +179,7 @@
   min-height: 100dvh;
   width: 100vw;
   max-width: 100%;
-  padding-bottom: calc(env(safe-area-inset-bottom) + 1.5rem);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
 }
 
 @utility safe-top {
