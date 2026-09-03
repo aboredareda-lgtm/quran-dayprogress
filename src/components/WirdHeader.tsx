@@ -4,12 +4,12 @@ import mushafMark from "@/assets/mushaf-mark.png";
 /** ترويسة الوِرد اليومي: قوس مسجد بزخرفة ذهبية + بسملة + العنوان */
 export function WirdHeader() {
   return (
-    <header className="bg-gradient-calm pattern-emerald safe-top relative min-h-[20rem] overflow-hidden px-4 pb-28 text-center text-primary-foreground sm:px-5">
+    <header className="bg-gradient-calm pattern-emerald safe-top relative min-h-[13.5rem] overflow-hidden px-4 pb-20 tall:min-h-[20rem] tall:pb-28 text-center text-primary-foreground sm:px-5">
       {/* قوس المحراب */}
       <svg
         viewBox="0 0 320 260"
         aria-hidden
-        className="pointer-events-none absolute -top-2 right-1/2 h-[230px] w-[330px] translate-x-1/2 text-gold/45"
+        className="pointer-events-none absolute -top-2 right-1/2 h-[170px] w-[250px] translate-x-1/2 text-gold/45 tall:h-[230px] tall:w-[330px]"
         fill="none"
       >
         <path
@@ -29,7 +29,7 @@ export function WirdHeader() {
       <img
         src={mushafMark}
         alt="لوجو المصحف"
-        className="absolute left-2 top-5 h-16 w-20 shrink-0 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.55)] min-[380px]:left-3 min-[380px]:h-20 min-[380px]:w-24"
+        className="absolute left-2 top-4 h-12 w-16 shrink-0 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.55)] min-[380px]:left-3 tall:h-20 tall:w-24"
       />
 
 
@@ -37,14 +37,14 @@ export function WirdHeader() {
       <img
         src={logoMark}
         alt="لوجو التطبيق"
-        className="absolute right-2 top-4 h-20 w-16 shrink-0 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.5)] min-[380px]:right-3 min-[380px]:h-24 min-[380px]:w-20"
+        className="absolute right-2 top-3 h-16 w-12 shrink-0 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.5)] min-[380px]:right-3 tall:h-24 tall:w-20"
       />
 
-      <p className="font-display mx-auto mt-8 max-w-[11rem] text-2xl leading-tight text-gold-soft drop-shadow-sm min-[380px]:max-w-[14rem] min-[380px]:text-[1.9rem]">
+      <p className="font-display mx-auto mt-5 max-w-[11rem] text-xl leading-tight text-gold-soft drop-shadow-sm min-[380px]:max-w-[14rem] tall:mt-8 tall:text-[1.9rem]">
         بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
       </p>
 
-      <h1 className="font-display mt-7 text-[2.65rem] font-bold leading-none drop-shadow-[0_2px_6px_oklch(0.15_0.03_160/0.6)] min-[380px]:text-[3.1rem]">
+      <h1 className="font-display mt-4 text-[2.1rem] font-bold leading-none drop-shadow-[0_2px_6px_oklch(0.15_0.03_160/0.6)] tall:mt-7 tall:text-[3.1rem]">
         الوِرد اليومي
       </h1>
     </header>
