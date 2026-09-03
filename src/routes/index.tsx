@@ -135,6 +135,8 @@ function Index() {
           ))}
         </div>
 
+        {loaded && <ProgressPanel entries={entries} last={last} />}
+
         <Link
           to="/history"
           className="pattern-cream mt-3 flex items-center justify-between rounded-3xl border border-gold/40 px-5 py-3.5 tall:mt-4 tall:py-4 font-bold text-primary"
