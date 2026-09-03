@@ -3,6 +3,8 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+/* شاشات جوال طويلة: نكبّر المقاسات، والأساس مضبوط للشاشات القصيرة */
+@custom-variant tall (@media (min-height: 780px));
 
 /*
  * Design system definition.
