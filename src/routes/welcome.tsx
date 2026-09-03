@@ -38,7 +38,13 @@ function Welcome() {
       <img
         src={welcomeCover.url}
         alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-top"
+      />
+
+      {/* تدرّج يخفي شريط الصورة السفلي */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 z-[5] h-[22%] bg-gradient-to-t from-background via-background/90 to-transparent"
       />
 
       <div className="relative z-10 mt-auto w-full px-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)]">
