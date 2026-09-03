@@ -62,7 +62,7 @@ function Index() {
         <div className="shadow-soft pattern-cream rounded-[2rem] border-2 border-gold/45 p-4 text-center text-card-foreground tall:p-6">
           <OrnamentDivider />
 
-          <p className="mt-3 text-base font-bold text-primary">آخر ما وصلت إليه</p>
+          <p className="mt-2 text-base font-bold text-primary">آخر ما وصلت إليه</p>
 
           {!loaded ? (
             <div className="mt-4 h-16 animate-pulse rounded-2xl bg-muted" />
@@ -136,7 +136,7 @@ function Index() {
         </Link>
 
 
-        <p className="mt-4 flex items-center justify-center gap-2 text-center text-[0.7rem] leading-5 tall:mt-6 tall:text-xs text-muted-foreground">
+        <p className="mt-3 flex items-center justify-center gap-2 text-center text-[0.7rem] leading-4 tall:mt-6 tall:text-xs text-muted-foreground">
           <Ornament className="h-4 w-4 shrink-0 text-gold" />
           بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
         </p>
