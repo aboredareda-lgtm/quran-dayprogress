@@ -54,12 +54,12 @@ function Index() {
   };
 
   return (
-    <main className="pattern-cream screen-fill mx-auto w-full max-w-[26rem] overflow-x-hidden">
+    <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem]">
       <WirdHeader />
 
 
-      <section className="relative z-10 -mt-14 px-4">
-        <div className="shadow-soft pattern-cream rounded-[2rem] border-2 border-gold/45 p-6 text-center text-card-foreground">
+      <section className="relative z-10 -mt-14 px-3 min-[380px]:px-4">
+        <div className="shadow-soft pattern-cream rounded-[2rem] border-2 border-gold/45 p-5 text-center text-card-foreground min-[380px]:p-6">
           <OrnamentDivider />
 
           <p className="mt-4 text-base font-bold text-primary">آخر ما وصلت إليه</p>
@@ -68,7 +68,7 @@ function Index() {
             <div className="mt-4 h-16 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display mt-4 text-4xl font-bold leading-tight text-primary">
+              <p className="font-display mt-4 text-3xl font-bold leading-tight text-primary min-[380px]:text-4xl">
                 سورة {getSurah(last.surah).name}
               </p>
               <p className="mt-3 text-2xl font-bold">
@@ -143,8 +143,8 @@ function Index() {
       </section>
 
       {editing && (
-        <div className="fixed inset-0 z-50 flex items-end bg-foreground/50 px-4 pb-4">
-          <div className="pattern-cream w-full rounded-[2rem] border-2 border-gold/50 p-6 text-card-foreground">
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 px-3 pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)] min-[380px]:px-4">
+          <div className="pattern-cream max-h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1.5rem)] w-full max-w-[26rem] overflow-y-auto rounded-[2rem] border-2 border-gold/50 p-5 text-card-foreground min-[380px]:p-6">
             <OrnamentDivider />
             <h2 className="mt-3 text-center text-lg font-bold text-primary">تحديث الموضع</h2>
 

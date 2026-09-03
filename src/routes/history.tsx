@@ -30,15 +30,15 @@ function History() {
   const { entries, loaded, removeEntry, clearAll } = useReadingLog();
 
   return (
-    <main className="pattern-cream screen-fill mx-auto w-full max-w-[26rem] overflow-x-hidden">
-      <header className="bg-gradient-calm pattern-arch px-5 pb-8 pt-10 text-primary-foreground">
+    <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem]">
+      <header className="bg-gradient-calm pattern-arch safe-top px-4 pb-8 text-primary-foreground min-[380px]:px-5">
         <Link to="/" className="text-sm text-gold-soft">
           → عودة للرئيسية
         </Link>
         <h1 className="font-display mt-3 text-3xl font-bold">سجل القراءة</h1>
       </header>
 
-      <section className="px-5 pt-6">
+      <section className="px-3 pt-6 min-[380px]:px-5">
         {!loaded ? (
           <div className="h-20 animate-pulse rounded-2xl bg-muted" />
         ) : entries.length === 0 ? (
@@ -52,11 +52,11 @@ function History() {
               {entries.map((e) => (
                 <li
                   key={e.id}
-                  className="pattern-cream flex items-center justify-between rounded-3xl border border-gold/40 p-4 text-card-foreground"
+                  className="pattern-cream grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-3xl border border-gold/40 p-4 text-card-foreground"
                 >
 
 
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-display text-lg font-bold text-primary">
                       سورة {getSurah(e.surah).name}
                     </p>
