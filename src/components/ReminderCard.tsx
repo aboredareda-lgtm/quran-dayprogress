@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useReminder } from "@/hooks/useReminder";
 import { Ornament } from "@/components/Ornament";
 
 export function ReminderCard() {
   const { reminder, loaded, permission, enable, disable, setTime } = useReminder();
+  const [open, setOpen] = useState(false);
 
   if (!loaded) return null;
 
@@ -10,51 +12,68 @@ export function ReminderCard() {
   const blocked = permission === "denied";
 
   return (
-    <div className="pattern-cream mt-3 rounded-3xl border border-gold/40 p-4 text-center tall:mt-4">
-      <Ornament className="mx-auto h-5 w-5 text-gold" />
-      <p className="mt-2 text-lg font-bold text-primary">تذكير الوِرد اليومي</p>
+    <div className="pattern-cream mt-1.5 rounded-2xl border border-gold/40 px-3 py-2 tall:mt-4 tall:rounded-3xl tall:px-4 tall:py-3">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between gap-2"
+      >
+        <span className="flex min-w-0 items-center gap-2 text-sm font-bold text-primary tall:text-base">
+          <Ornament className="h-4 w-4 shrink-0 text-gold tall:h-5 tall:w-5" />
+          تذكير الوِرد اليومي
+        </span>
+        <span className="flex shrink-0 items-center gap-2">
+          <span className="rounded-full border border-gold/40 bg-secondary px-2.5 py-0.5 text-[0.68rem] font-bold text-secondary-foreground tall:text-xs">
+            {unsupported ? "غير مدعوم" : reminder.enabled ? reminder.time : "معطّل"}
+          </span>
+          <span aria-hidden className="text-xs text-primary">
+            {open ? "▲" : "▼"}
+          </span>
+        </span>
+      </button>
 
-      {unsupported ? (
-        <p className="mt-2 text-xs leading-5 text-muted-foreground">
-          التذكير غير مدعوم في هذا المتصفح. أضف التطبيق إلى الشاشة الرئيسية لتفعيله.
-        </p>
-      ) : (
-        <>
-          <div className="mt-3 flex items-center justify-center gap-3">
-            <label htmlFor="reminder-time" className="text-sm font-medium text-muted-foreground">
-              الوقت
-            </label>
-            <input
-              id="reminder-time"
-              type="time"
-              value={reminder.time}
-              onChange={(e) => setTime(e.target.value)}
-              className="rounded-xl border border-input bg-background px-3 py-2 text-center text-xl font-bold text-primary"
-            />
-          </div>
-
-          <button
-            onClick={() => (reminder.enabled ? disable() : enable())}
-            className={`mt-3 w-full rounded-full border-2 px-5 py-3 text-base font-bold transition-transform active:scale-[0.98] ${
-              reminder.enabled
-                ? "border-gold/50 bg-secondary text-secondary-foreground"
-                : "border-gold/60 bg-primary text-primary-foreground"
-            }`}
-          >
-            {reminder.enabled ? "التذكير مُفعَّل — إيقاف" : "تفعيل التذكير"}
-          </button>
-
-          {blocked && (
-            <p className="mt-2 text-xs leading-5 text-muted-foreground">
-              الإشعارات محجوبة — اسمح بها من إعدادات المتصفح أو النظام.
+      {open && (
+        <div className="mt-2 text-center">
+          {unsupported ? (
+            <p className="text-[0.68rem] leading-4 text-muted-foreground tall:text-xs">
+              التذكير غير مدعوم في هذا المتصفح. أضف التطبيق إلى الشاشة الرئيسية لتفعيله.
             </p>
+          ) : (
+            <>
+              <div className="flex items-center justify-center gap-2 tall:gap-3">
+                <label
+                  htmlFor="reminder-time"
+                  className="text-xs font-medium text-muted-foreground tall:text-sm"
+                >
+                  الوقت
+                </label>
+                <input
+                  id="reminder-time"
+                  type="time"
+                  value={reminder.time}
+                  onChange={(e) => setTime(e.target.value)}
+                  className="rounded-lg border border-input bg-background px-2 py-1 text-center text-base font-bold text-primary tall:rounded-xl tall:px-3 tall:py-2 tall:text-xl"
+                />
+              </div>
+
+              <button
+                onClick={() => (reminder.enabled ? disable() : enable())}
+                className={`mt-2 w-full rounded-full border-2 px-4 py-2 text-sm font-bold transition-transform active:scale-[0.98] tall:mt-3 tall:px-5 tall:py-3 tall:text-base ${
+                  reminder.enabled
+                    ? "border-gold/50 bg-secondary text-secondary-foreground"
+                    : "border-gold/60 bg-primary text-primary-foreground"
+                }`}
+              >
+                {reminder.enabled ? "التذكير مُفعَّل — إيقاف" : "تفعيل التذكير"}
+              </button>
+
+              {blocked && (
+                <p className="mt-1.5 text-[0.68rem] leading-4 text-muted-foreground tall:text-xs">
+                  الإشعارات محجوبة — اسمح بها من إعدادات المتصفح أو النظام.
+                </p>
+              )}
+            </>
           )}
-          {reminder.enabled && !blocked && (
-            <p className="mt-2 text-xs leading-5 text-muted-foreground">
-              سيصلك تذكير يوميًا في الوقت المحدد ما دام التطبيق مضافًا إلى شاشتك.
-            </p>
-          )}
-        </>
+        </div>
       )}
     </div>
   );

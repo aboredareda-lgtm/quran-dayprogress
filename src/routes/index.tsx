@@ -73,68 +73,73 @@ function Index() {
       <WirdHeader />
 
 
-      <section className="relative z-10 -mt-12 px-3 min-[380px]:px-4">
-        <div className="shadow-soft pattern-cream rounded-[2rem] border-2 border-gold/45 p-4 text-center text-card-foreground tall:p-6">
-          <OrnamentDivider />
+      <section className="relative z-10 -mt-8 px-3 pb-2 min-[380px]:px-4 tall:-mt-12">
+        <div className="shadow-soft pattern-cream rounded-[1.75rem] border-2 border-gold/45 p-2.5 text-center text-card-foreground tall:rounded-[2rem] tall:p-6">
+          <div className="hidden tall:block">
+            <OrnamentDivider />
+          </div>
 
-          <p className="mt-2 text-base font-bold text-primary">آخر ما وصلت إليه</p>
+          <p className="hidden text-xs font-bold text-primary tall:mt-2 tall:block tall:text-base">
+            آخر ما وصلت إليه
+          </p>
 
           {!loaded ? (
-            <div className="mt-4 h-16 animate-pulse rounded-2xl bg-muted" />
+            <div className="mt-2 h-12 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display mt-3 text-3xl font-bold leading-tight text-primary tall:text-4xl">
+              <p className="font-display text-[1.5rem] font-bold leading-tight text-primary tall:mt-3 tall:text-4xl">
                 سورة {getSurah(last.surah).name}
               </p>
-              <p className="mt-2 text-2xl font-bold">
+              <p className="mt-0.5 text-base font-bold tall:mt-2 tall:text-2xl">
                 الآية {last.ayah}
-                <span className="mr-2 text-base font-medium text-muted-foreground">
+                <span className="mr-2 text-xs font-medium text-muted-foreground tall:text-base">
                   من {getSurah(last.surah).ayahs}
                 </span>
               </p>
-              <p className="mt-3 inline-block rounded-full border-2 border-gold/60 bg-secondary px-6 py-2 text-[1.6rem] tall:text-3xl font-bold text-secondary-foreground">
+              <p className="mt-1.5 inline-block rounded-full border-2 border-gold/60 bg-secondary px-3.5 py-0.5 text-lg font-bold text-secondary-foreground tall:mt-3 tall:px-6 tall:py-2 tall:text-3xl">
                 الجزء {getJuz(last.surah, last.ayah)}
               </p>
 
-              <p className="mt-2 text-xs text-muted-foreground">{formatDate(last.at)}</p>
+              <p className="mt-1 text-[0.65rem] text-muted-foreground tall:mt-2 tall:text-xs">
+                {formatDate(last.at)}
+              </p>
             </>
           ) : (
-            <p className="mt-4 text-xl font-medium leading-relaxed">
+            <p className="mt-2 text-sm font-medium leading-relaxed tall:text-xl">
               لم تسجّل موضعك بعد — ابدأ الآن وسجّل أول موضع.
             </p>
           )}
 
           {saved && (
-            <p className="mt-4 rounded-xl border border-gold/40 bg-secondary px-4 py-2 text-sm text-secondary-foreground">
+            <p className="mt-2 rounded-xl border border-gold/40 bg-secondary px-3 py-1 text-[0.7rem] text-secondary-foreground tall:text-sm">
               تم حفظ الموضع، بارك الله فيك.
             </p>
           )}
 
           <button
             onClick={openEditor}
-            className="mt-4 flex w-full items-center justify-center gap-3 rounded-full border-2 border-gold/60 bg-primary px-5 py-3.5 text-lg tall:mt-6 tall:py-4 font-bold text-primary-foreground transition-transform active:scale-[0.98]"
+            className="mt-2 flex w-full items-center justify-center gap-2 rounded-full border-2 border-gold/60 bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-transform active:scale-[0.98] tall:mt-6 tall:gap-3 tall:py-4 tall:text-lg"
           >
-            <Ornament className="h-6 w-6 text-gold-soft" />
+            <Ornament className="h-4 w-4 text-gold-soft tall:h-6 tall:w-6" />
             تحديث الموضع
           </button>
+
         </div>
 
-        <div className="mt-3 grid grid-cols-2 gap-3 tall:mt-4 tall:gap-4">
+        <div className="pattern-cream mt-1.5 grid grid-cols-2 divide-x divide-gold/30 rounded-2xl border border-gold/40 text-center tall:mt-4 tall:rounded-3xl">
           {[
             { value: daysTracked, label: "أيام المتابعة" },
             { value: entries.length, label: "مرات التسجيل" },
           ].map((s) => (
-            <div
-              key={s.label}
-              className="pattern-cream rounded-3xl border border-gold/40 p-3 text-center tall:p-4"
-            >
-              <Ornament className="mx-auto h-5 w-5 text-gold" />
-              <div className="mx-auto mt-2 h-px w-16 bg-gold/40" />
-              <p className="mt-1 text-2xl font-bold text-primary tall:text-3xl">{s.value}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+            <div key={s.label} className="px-2 py-1.5 tall:py-4">
+              <p className="text-xl font-bold text-primary tall:text-3xl">{s.value}</p>
+              <p className="text-[0.7rem] text-muted-foreground tall:mt-1 tall:text-sm">
+                {s.label}
+              </p>
             </div>
           ))}
         </div>
+
 
         {loaded && <ProgressPanel entries={entries} last={last} />}
 
@@ -142,11 +147,11 @@ function Index() {
 
         <Link
           to="/history"
-          className="pattern-cream mt-3 flex items-center justify-between rounded-3xl border border-gold/40 px-5 py-3.5 tall:mt-4 tall:py-4 font-bold text-primary"
+          className="pattern-cream mt-1.5 flex items-center justify-between rounded-2xl border border-gold/40 px-4 py-2 text-sm font-bold text-primary tall:mt-4 tall:rounded-3xl tall:px-5 tall:py-4 tall:text-base"
         >
-          <span className="flex items-center gap-3">
-            <Ornament className="h-6 w-6 text-gold" />
-            <span className="h-6 w-px bg-gold/40" />
+          <span className="flex items-center gap-2 tall:gap-3">
+            <Ornament className="h-5 w-5 text-gold tall:h-6 tall:w-6" />
+            <span className="h-5 w-px bg-gold/40 tall:h-6" />
             سجل القراءة
           </span>
           <span aria-hidden className="text-primary">
@@ -154,12 +159,12 @@ function Index() {
           </span>
         </Link>
 
-
-        <p className="mt-3 flex items-center justify-center gap-2 text-center text-[0.7rem] leading-4 tall:mt-6 tall:text-xs text-muted-foreground">
-          <Ornament className="h-4 w-4 shrink-0 text-gold" />
+        <p className="mt-1.5 flex items-center justify-center gap-2 text-center text-[0.65rem] leading-4 text-muted-foreground tall:mt-6 tall:text-xs">
+          <Ornament className="h-3.5 w-3.5 shrink-0 text-gold tall:h-4 tall:w-4" />
           بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
         </p>
       </section>
+
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 px-3 pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)] min-[380px]:px-4">
