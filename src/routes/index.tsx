@@ -5,6 +5,7 @@ import { useReadingLog } from "@/hooks/useReadingLog";
 import { Ornament, OrnamentDivider } from "@/components/Ornament";
 import { WirdHeader } from "@/components/WirdHeader";
 import { ProgressPanel } from "@/components/ProgressPanel";
+import { ReminderCard } from "@/components/ReminderCard";
 
 
 export const Route = createFileRoute("/")({
@@ -136,6 +137,8 @@ function Index() {
         </div>
 
         {loaded && <ProgressPanel entries={entries} last={last} />}
+
+        <ReminderCard />
 
         <Link
           to="/history"
