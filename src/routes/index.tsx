@@ -79,7 +79,7 @@ function Index() {
             <OrnamentDivider />
           </div>
 
-          <p className="text-xs font-bold text-primary tall:mt-2 tall:text-base">
+          <p className="hidden text-xs font-bold text-primary tall:mt-2 tall:block tall:text-base">
             آخر ما وصلت إليه
           </p>
 
@@ -87,7 +87,7 @@ function Index() {
             <div className="mt-2 h-12 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display mt-1 text-[1.6rem] font-bold leading-tight text-primary tall:mt-3 tall:text-4xl">
+              <p className="font-display text-[1.5rem] font-bold leading-tight text-primary tall:mt-3 tall:text-4xl">
                 سورة {getSurah(last.surah).name}
               </p>
               <p className="mt-0.5 text-base font-bold tall:mt-2 tall:text-2xl">
