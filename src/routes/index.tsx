@@ -73,8 +73,8 @@ function Index() {
       <WirdHeader />
 
 
-      <section className="relative z-10 -mt-7 px-3 pb-2 min-[380px]:px-4 tall:-mt-10">
-        <div className="shadow-soft pattern-cream rounded-[1.75rem] border-2 border-gold/45 p-2 text-center text-card-foreground tall:rounded-[2rem] tall:p-4">
+      <section className="relative z-10 -mt-7 px-3 pb-2 min-[380px]:px-4 tall:-mt-8">
+        <div className="shadow-soft pattern-cream rounded-[1.75rem] border-2 border-gold/45 p-2 text-center text-card-foreground tall:rounded-[2rem] tall:p-3">
           <div className="hidden tall:block">
             <OrnamentDivider />
           </div>
@@ -87,7 +87,7 @@ function Index() {
             <div className="mt-2 h-12 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display text-[1.35rem] font-bold leading-tight text-primary tall:mt-2 tall:text-[1.9rem]">
+              <p className="font-display text-[1.35rem] font-bold leading-tight text-primary tall:mt-1 tall:text-[1.65rem]">
                 سورة {getSurah(last.surah).name}
               </p>
               <p className="mt-0.5 text-[0.95rem] font-bold tall:mt-1 tall:text-xl">
@@ -96,7 +96,7 @@ function Index() {
                   من {getSurah(last.surah).ayahs}
                 </span>
               </p>
-              <p className="mt-1 inline-block rounded-full border-2 border-gold/60 bg-secondary px-3.5 py-0.5 text-base font-bold text-secondary-foreground tall:mt-2 tall:px-5 tall:py-1 tall:text-2xl">
+              <p className="mt-1 inline-block rounded-full border-2 border-gold/60 bg-secondary px-3.5 py-0.5 text-base font-bold text-secondary-foreground tall:mt-1 tall:px-5 tall:py-1 tall:text-xl">
                 الجزء {getJuz(last.surah, last.ayah)}
               </p>
 
@@ -118,7 +118,7 @@ function Index() {
 
           <button
             onClick={openEditor}
-            className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-full border-2 border-gold/60 bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground transition-transform active:scale-[0.98] tall:mt-3 tall:gap-3 tall:py-3 tall:text-base"
+            className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-full border-2 border-gold/60 bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground transition-transform active:scale-[0.98] tall:mt-2 tall:gap-3 tall:py-2 tall:text-base"
           >
             <Ornament className="h-4 w-4 text-gold-soft tall:h-6 tall:w-6" />
             تحديث الموضع
@@ -131,7 +131,7 @@ function Index() {
             { value: daysTracked, label: "أيام المتابعة" },
             { value: entries.length, label: "مرات التسجيل" },
           ].map((s) => (
-            <div key={s.label} className="px-2 py-1 tall:py-2.5">
+            <div key={s.label} className="px-2 py-1 tall:py-1.5">
               <p className="text-xl font-bold text-primary tall:text-2xl">{s.value}</p>
               <p className="text-[0.7rem] text-muted-foreground tall:mt-1 tall:text-sm">
                 {s.label}
@@ -147,7 +147,7 @@ function Index() {
 
         <Link
           to="/history"
-          className="pattern-cream mt-1 flex items-center justify-between rounded-2xl border border-gold/40 px-4 py-1.5 text-sm font-bold text-primary tall:mt-2 tall:rounded-3xl tall:px-5 tall:py-4 tall:text-base"
+          className="pattern-cream mt-1 flex items-center justify-between rounded-2xl border border-gold/40 px-4 py-1.5 text-sm font-bold text-primary tall:mt-2 tall:rounded-3xl tall:px-5 tall:py-2 tall:text-base"
         >
           <span className="flex items-center gap-2 tall:gap-3">
             <Ornament className="h-5 w-5 text-gold tall:h-6 tall:w-6" />
