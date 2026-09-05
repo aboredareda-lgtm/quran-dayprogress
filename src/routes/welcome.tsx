@@ -34,18 +34,19 @@ function Welcome() {
   };
 
   return (
-    <main className="relative flex min-h-[100dvh] w-full flex-col overflow-hidden bg-background">
+    <main className="bg-gradient-calm fixed inset-0 flex h-[100dvh] w-full flex-col overflow-hidden">
       <img
         src={welcomeCover.url}
         alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-        className="absolute inset-0 h-full w-full object-cover object-top"
+        className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain object-center"
       />
 
       {/* تدرّج يخفي شريط الصورة السفلي */}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 z-[5] h-[22%] bg-gradient-to-t from-background via-background/90 to-transparent"
+        className="absolute inset-x-0 bottom-0 z-[5] h-[20%] bg-gradient-to-t from-background via-background/85 to-transparent"
       />
+
 
       <div className="relative z-10 mt-auto w-full px-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)]">
         <button
