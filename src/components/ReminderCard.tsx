@@ -12,7 +12,7 @@ export function ReminderCard() {
   const blocked = permission === "denied";
 
   return (
-    <div className="pattern-cream mt-1.5 rounded-2xl border border-gold/40 px-3 py-2 tall:mt-4 tall:rounded-3xl tall:px-4 tall:py-3">
+    <div className="pattern-cream mt-1 rounded-2xl border border-gold/40 px-3 py-1 tall:mt-2 tall:rounded-3xl tall:px-4 tall:py-2">
       <button
         onClick={() => setOpen((v) => !v)}
         className="flex w-full items-center justify-between gap-2"

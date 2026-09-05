@@ -37,7 +37,7 @@ export function ProgressPanel({
   const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : 0;
 
   return (
-    <div className="pattern-cream mt-1.5 rounded-2xl border border-gold/40 p-2.5 text-card-foreground tall:mt-4 tall:rounded-3xl tall:p-4">
+    <div className="pattern-cream mt-1 rounded-2xl border border-gold/40 p-1.5 text-card-foreground tall:mt-2 tall:rounded-3xl tall:p-2.5">
       {/* الهدف اليومي */}
       <div className="flex items-center justify-between gap-2">
         <span className="flex min-w-0 items-center gap-2 text-sm font-bold text-primary tall:text-base">
@@ -60,7 +60,7 @@ export function ProgressPanel({
       </p>
 
       {pickerOpen && (
-        <div className="mt-2 flex flex-wrap gap-1.5 tall:mt-3 tall:gap-2">
+        <div className="mt-2 flex flex-wrap gap-1.5 tall:mt-2 tall:gap-2">
           {GOAL_OPTIONS.map((o) => (
             <button
               key={o.value}
@@ -80,7 +80,7 @@ export function ProgressPanel({
         </div>
       )}
 
-      <div className="mt-2 h-px w-full bg-gold/30 tall:mt-4" />
+      <div className="mt-2 h-px w-full bg-gold/30 tall:mt-2" />
 
       {/* التقدّم في المصحف */}
       <div className="mt-1.5 flex items-center justify-between gap-2 text-sm font-bold text-primary tall:mt-3 tall:text-base">
