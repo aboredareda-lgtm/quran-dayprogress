@@ -37,7 +37,7 @@ export function ProgressPanel({
   const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : 0;
 
   return (
-    <div className="pattern-cream mt-1.5 rounded-2xl border border-gold/40 p-2.5 text-card-foreground tall:mt-4 tall:rounded-3xl tall:p-4">
+    <div className="pattern-cream mt-1.5 rounded-2xl border border-gold/40 p-2.5 text-card-foreground tall:mt-2 tall:rounded-3xl tall:p-3">
       {/* الهدف اليومي */}
       <div className="flex items-center justify-between gap-2">
         <span className="flex min-w-0 items-center gap-2 text-sm font-bold text-primary tall:text-base">
