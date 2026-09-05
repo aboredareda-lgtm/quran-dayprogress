@@ -147,7 +147,7 @@ function Index() {
 
         <Link
           to="/history"
-          className="pattern-cream mt-1 flex items-center justify-between rounded-2xl border border-gold/40 px-4 py-1.5 text-sm font-bold text-primary tall:mt-2 tall:rounded-3xl tall:px-5 tall:py-2 tall:text-base"
+          className="pattern-cream mt-1 flex items-center justify-between rounded-2xl border border-gold/40 px-4 py-1 text-sm font-bold text-primary tall:mt-2 tall:rounded-3xl tall:px-5 tall:py-2 tall:text-base"
         >
           <span className="flex items-center gap-2 tall:gap-3">
             <Ornament className="h-5 w-5 text-gold tall:h-6 tall:w-6" />
