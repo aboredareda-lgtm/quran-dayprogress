@@ -159,7 +159,7 @@ function Index() {
           </span>
         </Link>
 
-        <p className="mt-1 flex items-center justify-center gap-2 text-center text-[0.65rem] leading-4 text-muted-foreground tall:mt-3 tall:text-xs">
+        <p className="mt-1 flex items-center justify-center gap-2 text-center text-[0.6rem] leading-3.5 text-muted-foreground tall:mt-3 tall:text-xs">
           <Ornament className="h-3.5 w-3.5 shrink-0 text-gold tall:h-4 tall:w-4" />
           بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
         </p>
