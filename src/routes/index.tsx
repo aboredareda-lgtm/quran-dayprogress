@@ -90,13 +90,14 @@ function Index() {
               <p className="font-display text-[1.35rem] font-bold leading-tight text-primary tall:mt-1 tall:text-[1.65rem]">
                 سورة {getSurah(last.surah).name}
               </p>
-              <p className="mt-0.5 text-[0.95rem] font-bold tall:mt-1 tall:text-xl">
-                الآية {last.ayah}
-                <span className="mr-2 text-xs font-medium text-muted-foreground tall:text-base">
+              <p className="mt-0.5 text-[1.15rem] font-bold tall:mt-1 tall:text-2xl">
+                الآية <span className="text-[1.35rem] tall:text-3xl">{last.ayah}</span>
+                <span className="mr-2 text-[0.8rem] font-medium text-muted-foreground tall:text-base">
                   من {getSurah(last.surah).ayahs}
                 </span>
               </p>
-              <p className="mt-1 inline-block rounded-full border-2 border-gold/60 bg-secondary px-3.5 py-0.5 text-base font-bold text-secondary-foreground tall:mt-1 tall:px-5 tall:py-1 tall:text-xl">
+              <p className="mt-1 inline-block rounded-full border-2 border-gold/60 bg-secondary px-3.5 py-0.5 text-[1.15rem] font-bold text-secondary-foreground tall:mt-1 tall:px-5 tall:py-1 tall:text-2xl">
+
                 الجزء {getJuz(last.surah, last.ayah)}
               </p>
 
@@ -132,7 +133,7 @@ function Index() {
             { value: entries.length, label: "مرات التسجيل" },
           ].map((s) => (
             <div key={s.label} className="px-2 py-1 tall:py-1.5">
-              <p className="text-xl font-bold text-primary tall:text-2xl">{s.value}</p>
+              <p className="text-2xl font-bold text-primary tall:text-3xl">{s.value}</p>
               <p className="text-[0.7rem] text-muted-foreground tall:mt-1 tall:text-sm">
                 {s.label}
               </p>

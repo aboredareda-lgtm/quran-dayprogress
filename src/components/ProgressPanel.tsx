@@ -54,8 +54,8 @@ export function ProgressPanel({
 
       <Bar percent={goalPercent} />
 
-      <p className="mt-1 text-[0.72rem] tall:mt-2 tall:text-sm">
-        قرأت <span className="font-bold text-primary">{today}</span> آية من {goal}
+      <p className="mt-1 text-[0.85rem] tall:mt-2 tall:text-base">
+        قرأت <span className="text-[1.05rem] font-bold text-primary tall:text-xl">{today}</span> آية من {goal}
         {today >= goal && <span className="mr-2 font-bold text-primary">— أحسنت!</span>}
       </p>
 
@@ -88,7 +88,7 @@ export function ProgressPanel({
           <Ornament className="h-4 w-4 shrink-0 text-gold tall:h-5 tall:w-5" />
           تقدّمك في المصحف
         </span>
-        <span className="shrink-0 text-base tall:text-lg">{overall}%</span>
+        <span className="shrink-0 text-xl tall:text-2xl">{overall}%</span>
       </div>
 
       <Bar percent={overall} />
@@ -99,7 +99,7 @@ export function ProgressPanel({
             ? `ختمتك بعد نحو ${remainingDays} يومًا بإذن الله.`
             : "سجّل موضعك ليبدأ حساب تقدّمك."}
         </p>
-        <span className="shrink-0 rounded-full border border-gold/40 bg-secondary px-2.5 py-0.5 text-[0.68rem] font-bold text-secondary-foreground tall:text-xs">
+        <span className="shrink-0 rounded-full border border-gold/40 bg-secondary px-2.5 py-0.5 text-[0.8rem] font-bold text-secondary-foreground tall:text-sm">
           {streak} أيام متواصلة
         </span>
       </div>
