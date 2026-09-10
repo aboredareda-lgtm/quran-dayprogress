@@ -236,6 +236,22 @@ function Index() {
               className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-4 text-center text-2xl font-bold text-primary"
             />
 
+            <label
+              className="mt-4 block text-center text-lg font-bold text-primary"
+              htmlFor="note"
+            >
+              ملاحظة (اختياري)
+            </label>
+            <input
+              id="note"
+              type="text"
+              maxLength={120}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="تدبّر، أو: مع التفسير"
+              className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-center text-base"
+            />
+
 
             <div className="mt-6 flex gap-3">
               <button
