@@ -47,7 +47,7 @@ function Settings() {
 
   return (
     <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem]">
-      <header className="bg-gradient-calm pattern-arch safe-top px-4 pb-8 text-primary-foreground min-[380px]:px-5">
+      <header className="bg-gradient-calm pattern-arch safe-top px-4 pb-8 text-on-emerald min-[380px]:px-5">
         <Link to="/" className="text-sm text-gold-soft">
           → عودة للرئيسية
         </Link>
