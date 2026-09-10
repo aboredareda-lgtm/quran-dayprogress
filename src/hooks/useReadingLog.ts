@@ -58,17 +58,20 @@ export function useReadingLog() {
   const updateEntry = useCallback(
     (id: string, patch: { surah?: number; ayah?: number; note?: string }) => {
       persist(
-        read().map((e) =>
-          e.id === id
-            ? {
-                ...e,
-                ...(patch.surah ? { surah: patch.surah } : {}),
-                ...(patch.ayah ? { ayah: patch.ayah } : {}),
-                note: patch.note?.trim() ? patch.note.trim() : undefined,
-              }
-            : e,
-        ),
+        read().map((e) => {
+          if (e.id !== id) return e;
+          const next: ReadingEntry = {
+            id: e.id,
+            at: e.at,
+            surah: patch.surah ?? e.surah,
+            ayah: patch.ayah ?? e.ayah,
+          };
+          const note = patch.note?.trim();
+          if (note) next.note = note;
+          return next;
+        }),
       );
+
     },
     [persist],
   );
