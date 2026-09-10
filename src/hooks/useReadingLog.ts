@@ -5,6 +5,8 @@ export type ReadingEntry = {
   surah: number;
   ayah: number;
   at: string; // ISO timestamp
+  /** ملاحظة قصيرة اختيارية */
+  note?: string;
 };
 
 const STORAGE_KEY = "quran-reading-log-v1";
@@ -39,15 +41,37 @@ export function useReadingLog() {
   }, []);
 
   const addEntry = useCallback(
-    (surah: number, ayah: number) => {
+    (surah: number, ayah: number, note?: string) => {
       const entry: ReadingEntry = {
         id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
         surah,
         ayah,
         at: new Date().toISOString(),
+        ...(note && note.trim() ? { note: note.trim() } : {}),
       };
       persist([entry, ...read()]);
       return entry;
+    },
+    [persist],
+  );
+
+  const updateEntry = useCallback(
+    (id: string, patch: { surah?: number; ayah?: number; note?: string }) => {
+      persist(
+        read().map((e) => {
+          if (e.id !== id) return e;
+          const next: ReadingEntry = {
+            id: e.id,
+            at: e.at,
+            surah: patch.surah ?? e.surah,
+            ayah: patch.ayah ?? e.ayah,
+          };
+          const note = patch.note?.trim();
+          if (note) next.note = note;
+          return next;
+        }),
+      );
+
     },
     [persist],
   );
@@ -64,5 +88,14 @@ export function useReadingLog() {
   const last = entries[0] ?? null;
   const daysTracked = new Set(entries.map((e) => e.at.slice(0, 10))).size;
 
-  return { entries, last, daysTracked, loaded, addEntry, removeEntry, clearAll };
+  return {
+    entries,
+    last,
+    daysTracked,
+    loaded,
+    addEntry,
+    updateEntry,
+    removeEntry,
+    clearAll,
+  };
 }
