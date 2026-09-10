@@ -79,6 +79,52 @@ export function daysToFinish(
   return Math.ceil(remaining / goalAyahs);
 }
 
+/** عدد الآيات المقروءة في كل يوم (بناءً على تقدّم الموضع) */
+export function ayahsPerDay(entries: ReadingEntry[]): Map<string, number> {
+  const perDay = new Map<string, number>();
+  for (const e of entries) {
+    const key = dayKey(e.at);
+    const idx = ayahIndex(e.surah, e.ayah);
+    perDay.set(key, Math.max(perDay.get(key) ?? 0, idx));
+  }
+
+  const days = [...perDay.keys()].sort();
+  const result = new Map<string, number>();
+  let previous = 0;
+  for (const day of days) {
+    const idx = perDay.get(day)!;
+    result.set(day, Math.max(idx - previous, 0));
+    previous = Math.max(previous, idx);
+  }
+  return result;
+}
+
+export type MonthlyStats = {
+  days: number;
+  ayahs: number;
+  bestDay: { day: string; ayahs: number } | null;
+};
+
+/** إحصائية الشهر الحالي: أيام القراءة، مجموع الآيات، وأكثر يوم قراءة */
+export function monthlyStats(entries: ReadingEntry[], now = new Date()): MonthlyStats {
+  const prefix = todayKey(now).slice(0, 7);
+  const perDay = ayahsPerDay(entries);
+
+  let days = 0;
+  let ayahs = 0;
+  let bestDay: { day: string; ayahs: number } | null = null;
+
+  for (const [day, count] of perDay) {
+    if (!day.startsWith(prefix)) continue;
+    days += 1;
+    ayahs += count;
+    if (!bestDay || count > bestDay.ayahs) bestDay = { day, ayahs: count };
+  }
+
+  return { days, ayahs, bestDay };
+}
+
 export function formatArabicDate(d: Date) {
   return new Intl.DateTimeFormat("ar", { dateStyle: "long" }).format(d);
 }
+
