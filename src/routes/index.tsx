@@ -2,10 +2,12 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { SURAHS, getSurah, getJuz } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
+import { useKhatmahs } from "@/hooks/useKhatmahs";
 import { Ornament, OrnamentDivider } from "@/components/Ornament";
 import { WirdHeader } from "@/components/WirdHeader";
 import { ProgressPanel } from "@/components/ProgressPanel";
 import { ReminderCard } from "@/components/ReminderCard";
+
 
 
 export const Route = createFileRoute("/")({
