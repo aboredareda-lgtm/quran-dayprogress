@@ -128,9 +128,12 @@ function Index() {
 
           {saved && (
             <p className="mt-2 rounded-xl border border-gold/40 bg-secondary px-3 py-1 text-[0.7rem] text-secondary-foreground tall:text-sm">
-              تم حفظ الموضع، بارك الله فيك.
+              {khatmahSaved
+                ? "تمت الختمة، تقبّل الله منك — سُجّلت في عدّاد الختمات."
+                : "تم حفظ الموضع، بارك الله فيك."}
             </p>
           )}
+
 
           <button
             onClick={openEditor}
@@ -142,14 +145,15 @@ function Index() {
 
         </div>
 
-        <div className="pattern-cream mt-1 grid grid-cols-2 divide-x divide-gold/30 rounded-2xl border border-gold/40 text-center tall:mt-2 tall:rounded-3xl">
+        <div className="pattern-cream mt-1 grid grid-cols-3 divide-x divide-gold/30 rounded-2xl border border-gold/40 text-center tall:mt-2 tall:rounded-3xl">
           {[
             { value: daysTracked, label: "أيام المتابعة" },
             { value: entries.length, label: "مرات التسجيل" },
+            { value: khatmahCount, label: "الخَتمات" },
           ].map((s) => (
-            <div key={s.label} className="px-2 py-1 tall:py-1.5">
+            <div key={s.label} className="px-1.5 py-1 tall:py-1.5">
               <p className="text-2xl font-bold text-primary tall:text-3xl">{s.value}</p>
-              <p className="text-[0.7rem] text-muted-foreground tall:mt-1 tall:text-sm">
+              <p className="text-[0.68rem] text-muted-foreground tall:mt-1 tall:text-sm">
                 {s.label}
               </p>
             </div>
@@ -157,23 +161,28 @@ function Index() {
         </div>
 
 
+
         {loaded && <ProgressPanel entries={entries} last={last} />}
 
         <ReminderCard />
 
-        <Link
-          to="/history"
-          className="pattern-cream mt-1 flex items-center justify-between rounded-2xl border border-gold/40 px-4 py-1 text-sm font-bold text-primary tall:mt-2 tall:rounded-3xl tall:px-5 tall:py-2 tall:text-base"
-        >
-          <span className="flex items-center gap-2 tall:gap-3">
-            <Ornament className="h-5 w-5 text-gold tall:h-6 tall:w-6" />
-            <span className="h-5 w-px bg-gold/40 tall:h-6" />
+        <div className="mt-1 grid grid-cols-2 gap-1 tall:mt-2 tall:gap-2">
+          <Link
+            to="/history"
+            className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
+          >
+            <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
             سجل القراءة
-          </span>
-          <span aria-hidden className="text-primary">
-            ←
-          </span>
-        </Link>
+          </Link>
+          <Link
+            to="/settings"
+            className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
+          >
+            <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
+            الإعدادات
+          </Link>
+        </div>
+
 
         <p className="mt-1 flex items-center justify-center gap-2 text-center text-[0.6rem] leading-3.5 text-muted-foreground tall:mt-3 tall:text-xs">
           <Ornament className="h-3.5 w-3.5 shrink-0 text-gold tall:h-4 tall:w-4" />
