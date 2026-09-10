@@ -27,6 +27,7 @@ function Welcome() {
   const start = () => {
     try {
       window.localStorage.setItem(WELCOME_KEY, "1");
+      window.sessionStorage.setItem("wird:welcomed-session", "1");
     } catch {
       /* تجاهل */
     }

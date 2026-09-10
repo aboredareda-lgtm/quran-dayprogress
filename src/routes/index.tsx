@@ -40,10 +40,10 @@ function Index() {
   const { last, daysTracked, entries, loaded, addEntry } = useReadingLog();
   const { count: khatmahCount, addKhatmah } = useKhatmahs();
 
-  // أول زيارة → صفحة الترحيب
+  // عند كل فتح للبرنامج → صفحة الترحيب
   useEffect(() => {
     try {
-      if (!window.localStorage.getItem("wird:welcomed")) {
+      if (!window.sessionStorage.getItem("wird:welcomed-session")) {
         navigate({ to: "/welcome", replace: true });
       }
     } catch {
