@@ -38,6 +38,7 @@ function formatDate(iso: string) {
 function Index() {
   const navigate = useNavigate();
   const { last, daysTracked, entries, loaded, addEntry } = useReadingLog();
+  const { count: khatmahCount, addKhatmah } = useKhatmahs();
 
   // أول زيارة → صفحة الترحيب
   useEffect(() => {
@@ -53,22 +54,34 @@ function Index() {
   const [editing, setEditing] = useState(false);
   const [surah, setSurah] = useState(1);
   const [ayah, setAyah] = useState(1);
+  const [note, setNote] = useState("");
   const [saved, setSaved] = useState(false);
+  const [khatmahSaved, setKhatmahSaved] = useState(false);
 
   const ayahCount = useMemo(() => getSurah(surah).ayahs, [surah]);
 
   const openEditor = () => {
     setSurah(last?.surah ?? 1);
     setAyah(last?.ayah ?? 1);
+    setNote("");
     setSaved(false);
+    setKhatmahSaved(false);
     setEditing(true);
   };
 
   const save = () => {
-    addEntry(surah, Math.min(Math.max(ayah, 1), getSurah(surah).ayahs));
+    const safeAyah = Math.min(Math.max(ayah, 1), getSurah(surah).ayahs);
+    addEntry(surah, safeAyah, note);
+
+    // إتمام المصحف (سورة الناس) → تسجيل ختمة
+    const finished = surah === 114 && safeAyah >= getSurah(114).ayahs;
+    if (finished) addKhatmah();
+    setKhatmahSaved(finished);
+
     setEditing(false);
     setSaved(true);
   };
+
 
   return (
     <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem]">
