@@ -102,12 +102,12 @@ function Index() {
             <div className="mt-2 h-12 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display text-[1.35rem] font-bold leading-tight text-primary tall:mt-1 tall:text-[1.65rem]">
+              <p className="font-display text-[1.85rem] font-bold leading-tight text-primary tall:mt-1 tall:text-[2.3rem]">
                 سورة {getSurah(last.surah).name}
               </p>
-              <p className="mt-0.5 text-[1.15rem] font-bold tall:mt-1 tall:text-2xl">
-                الآية <span className="text-[1.35rem] tall:text-3xl">{last.ayah}</span>
-                <span className="mr-2 text-[0.8rem] font-medium text-muted-foreground tall:text-base">
+              <p className="mt-0.5 text-[1.5rem] font-bold tall:mt-1 tall:text-[1.9rem]">
+                الآية <span className="text-[1.85rem] tall:text-[2.4rem]">{last.ayah}</span>
+                <span className="mr-2 text-[0.9rem] font-medium text-muted-foreground tall:text-lg">
                   من {getSurah(last.surah).ayahs}
                 </span>
               </p>
