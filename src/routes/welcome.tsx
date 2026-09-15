@@ -21,8 +21,61 @@ export const Route = createFileRoute("/welcome")({
   component: Welcome,
 });
 
+const POS_KEY = "wird:welcome-btn-pos";
+
 function Welcome() {
   const navigate = useNavigate();
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const dragRef = useRef<{ startX: number; startY: number; baseX: number; baseY: number; moved: boolean } | null>(null);
+  const [dragging, setDragging] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(POS_KEY);
+      if (raw) {
+        const p = JSON.parse(raw) as { x: number; y: number };
+        if (typeof p?.x === "number" && typeof p?.y === "number") setPos(p);
+      }
+    } catch {
+      /* تجاهل */
+    }
+  }, []);
+
+  const onPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      baseX: pos.x,
+      baseY: pos.y,
+      moved: false,
+    };
+    setDragging(true);
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
+    const d = dragRef.current;
+    if (!d) return;
+    const dx = e.clientX - d.startX;
+    const dy = e.clientY - d.startY;
+    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) d.moved = true;
+    setPos({ x: d.baseX + dx, y: d.baseY + dy });
+  };
+
+  const onPointerUp = () => {
+    const d = dragRef.current;
+    dragRef.current = null;
+    setDragging(false);
+    if (d?.moved) {
+      try {
+        window.localStorage.setItem(POS_KEY, JSON.stringify(pos));
+      } catch {
+        /* تجاهل */
+      }
+      return;
+    }
+    start();
+  };
 
   const start = () => {
     try {
