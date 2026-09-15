@@ -184,6 +184,21 @@ function Index() {
         </div>
 
 
+        <button
+          onClick={() => {
+            try {
+              window.sessionStorage.removeItem("wird:welcomed-session");
+            } catch {
+              /* تجاهل */
+            }
+            navigate({ to: "/welcome", replace: true });
+          }}
+          className="pattern-cream mt-1 flex w-full items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base"
+        >
+          <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
+          الخروج من البرنامج
+        </button>
+
         <p className="mt-1 flex items-center justify-center gap-2 text-center text-[0.6rem] leading-3.5 text-muted-foreground tall:mt-3 tall:text-xs">
           <Ornament className="h-3.5 w-3.5 shrink-0 text-gold tall:h-4 tall:w-4" />
           بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
