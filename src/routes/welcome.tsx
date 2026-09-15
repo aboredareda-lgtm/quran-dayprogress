@@ -22,29 +22,8 @@ export const Route = createFileRoute("/welcome")({
   component: Welcome,
 });
 
-const POS_KEY = "wird:welcome-btn-pos";
-
 function Welcome() {
   const navigate = useNavigate();
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [dragging, setDragging] = useState(false);
-  const dragRef = useRef<{ startX: number; startY: number; baseX: number; baseY: number; moved: boolean } | null>(null);
-  const posRef = useRef({ x: 0, y: 0 });
-
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(POS_KEY);
-      if (raw) {
-        const p = JSON.parse(raw) as { x: number; y: number };
-        if (typeof p?.x === "number" && typeof p?.y === "number") {
-          posRef.current = p;
-          setPos(p);
-        }
-      }
-    } catch {
-      /* تجاهل */
-    }
-  }, []);
 
   const start = () => {
     try {
@@ -55,6 +34,7 @@ function Welcome() {
     }
     navigate({ to: "/" });
   };
+
 
   const onPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
     e.currentTarget.setPointerCapture(e.pointerId);
