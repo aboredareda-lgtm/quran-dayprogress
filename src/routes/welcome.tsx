@@ -56,14 +56,15 @@ function Welcome() {
 
   return (
     <main className="bg-gradient-calm fixed inset-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden">
-      <div className="relative mx-auto flex h-full max-h-full w-fit max-w-full items-center">
+      <div className="relative inline-block">
         <img
           src={welcomeCover.url}
           alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-          className="pointer-events-none block h-auto max-h-full w-auto max-w-full select-none"
+          className="pointer-events-none block h-auto max-h-[100dvh] w-auto max-w-[100vw] select-none"
         />
 
         <div className="absolute inset-x-0 bottom-[4%] z-10 w-full px-5">
+
           <button
             onClick={start}
             style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
