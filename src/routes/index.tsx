@@ -89,7 +89,7 @@ function Index() {
 
 
       <section className="relative z-10 -mt-7 px-3 pb-2 min-[380px]:px-4 tall:-mt-8">
-        <div className="shadow-soft pattern-cream rounded-[1.75rem] border-2 border-gold/45 p-2 text-center text-card-foreground tall:rounded-[2rem] tall:p-3">
+        <div className="shadow-raised pattern-cream translate-y-0 rounded-[1.75rem] border-2 border-gold/55 p-2 text-center text-card-foreground transition-transform tall:rounded-[2rem] tall:p-3">
           <div className="hidden tall:block">
             <OrnamentDivider />
           </div>
