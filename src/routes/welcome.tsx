@@ -55,27 +55,29 @@ function Welcome() {
   };
 
   return (
-    <main className="bg-gradient-calm fixed inset-0 flex h-[100dvh] w-full flex-col overflow-hidden">
-      <img
-        src={welcomeCover.url}
-        alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-        className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain object-center"
-      />
+    <main className="bg-gradient-calm fixed inset-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden">
+      <div className="relative mx-auto h-full w-full max-w-[26rem]">
+        <img
+          src={welcomeCover.url}
+          alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
+          className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain object-center"
+        />
 
-      {/* تدرّج يخفي شريط الصورة السفلي */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 z-[5] h-[20%] bg-gradient-to-t from-background via-background/85 to-transparent"
-      />
+        {/* تدرّج يخفي شريط الصورة السفلي */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 z-[5] h-[20%] bg-gradient-to-t from-background via-background/85 to-transparent"
+        />
 
-      <div className="absolute inset-x-0 bottom-[19%] z-10 w-full px-5">
-        <button
-          onClick={start}
-          style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
-          className="shadow-soft mx-auto block w-[52%] rounded-full border-2 border-gold/70 bg-primary px-4 py-2 text-center font-display text-base font-bold tracking-wide text-primary-foreground select-none active:scale-[0.98]"
-        >
-          ابدأ المتابعة
-        </button>
+        <div className="absolute inset-x-0 bottom-[19%] z-10 w-full px-5">
+          <button
+            onClick={start}
+            style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
+            className="shadow-soft mx-auto block w-[52%] rounded-full border-2 border-gold/70 bg-primary px-4 py-2 text-center font-display text-base font-bold tracking-wide text-primary-foreground select-none active:scale-[0.98]"
+          >
+            ابدأ المتابعة
+          </button>
+        </div>
       </div>
     </main>
   );
