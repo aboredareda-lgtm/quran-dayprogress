@@ -108,14 +108,10 @@ function Welcome() {
         className="absolute inset-x-0 bottom-0 z-[5] h-[20%] bg-gradient-to-t from-background via-background/85 to-transparent"
       />
 
-      <div className="relative z-10 mt-auto w-full px-5 pb-[calc(env(safe-area-inset-bottom)+8rem)]">
+      <div className="absolute inset-x-0 bottom-[19%] z-10 w-full px-5">
         <button
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerCancel={onPointerUp}
-          style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
-          className={`shadow-soft mx-auto block w-[52%] touch-none rounded-full border-2 border-gold/70 bg-primary px-4 py-2 text-center font-display text-base font-bold tracking-wide text-primary-foreground select-none active:scale-[0.98] ${dragging ? "opacity-90" : ""}`}
+          onClick={start}
+          className="shadow-soft mx-auto block w-[52%] rounded-full border-2 border-gold/70 bg-primary px-4 py-2 text-center font-display text-base font-bold tracking-wide text-primary-foreground select-none active:scale-[0.98]"
         >
           ابدأ المتابعة
         </button>
