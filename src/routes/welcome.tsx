@@ -124,7 +124,3 @@ function Welcome() {
   );
 }
 
-    </main>
-  );
-}
-
