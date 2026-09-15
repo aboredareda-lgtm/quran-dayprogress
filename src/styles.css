@@ -36,6 +36,14 @@
   --color-on-emerald: var(--on-emerald);
 
   --shadow-soft: 0 10px 30px -12px oklch(0.42 0.07 155 / 0.28);
+  --shadow-raised:
+    inset 0 2px 0 oklch(1 0 0 / 0.65),
+    inset 0 -3px 6px oklch(0.42 0.07 155 / 0.12),
+    0 2px 0 oklch(0.78 0.11 85 / 0.5),
+    0 6px 0 oklch(0.42 0.07 155 / 0.18),
+    0 14px 24px -8px oklch(0.42 0.07 155 / 0.35),
+    0 26px 44px -18px oklch(0.42 0.07 155 / 0.3);
+
 
 
 
