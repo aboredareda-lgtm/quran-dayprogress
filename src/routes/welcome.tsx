@@ -105,8 +105,12 @@ function Welcome() {
 
       <div className="relative z-10 mt-auto w-full px-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)]">
         <button
-          onClick={start}
-          className="shadow-soft w-full rounded-full border-2 border-gold/70 bg-primary px-6 py-5 font-display text-3xl font-extrabold tracking-wide text-primary-foreground transition-transform active:scale-[0.98]"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+          style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
+          className={`shadow-soft w-full touch-none rounded-full border-2 border-gold/70 bg-primary px-6 py-5 font-display text-3xl font-extrabold tracking-wide text-primary-foreground select-none active:scale-[0.98] ${dragging ? "opacity-90" : ""}`}
         >
           ابدأ المتابعة
         </button>
