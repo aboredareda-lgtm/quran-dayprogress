@@ -36,43 +36,6 @@ function Welcome() {
   };
 
 
-  const onPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
-    e.currentTarget.setPointerCapture(e.pointerId);
-    dragRef.current = {
-      startX: e.clientX,
-      startY: e.clientY,
-      baseX: posRef.current.x,
-      baseY: posRef.current.y,
-      moved: false,
-    };
-    setDragging(true);
-  };
-
-  const onPointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
-    const d = dragRef.current;
-    if (!d) return;
-    const dx = e.clientX - d.startX;
-    const dy = e.clientY - d.startY;
-    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) d.moved = true;
-    const next = { x: d.baseX + dx, y: d.baseY + dy };
-    posRef.current = next;
-    setPos(next);
-  };
-
-  const onPointerUp = () => {
-    const d = dragRef.current;
-    dragRef.current = null;
-    setDragging(false);
-    if (d?.moved) {
-      try {
-        window.localStorage.setItem(POS_KEY, JSON.stringify(posRef.current));
-      } catch {
-        /* تجاهل */
-      }
-      return;
-    }
-    start();
-  };
 
   return (
     <main className="bg-gradient-calm fixed inset-0 flex h-[100dvh] w-full flex-col overflow-hidden">
