@@ -63,7 +63,7 @@ function Welcome() {
           className="pointer-events-none block h-auto max-h-full w-auto max-w-full select-none"
         />
 
-        <div className="absolute inset-x-0 bottom-[8.5%] z-10 w-full px-5">
+        <div className="absolute inset-x-0 bottom-[4%] z-10 w-full px-5">
           <button
             onClick={start}
             style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
