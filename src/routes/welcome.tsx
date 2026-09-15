@@ -1,4 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
+
 
 import welcomeCover from "@/assets/welcome-cover.png.asset.json";
 
