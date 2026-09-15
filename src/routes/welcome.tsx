@@ -108,7 +108,7 @@ function Welcome() {
         className="absolute inset-x-0 bottom-0 z-[5] h-[20%] bg-gradient-to-t from-background via-background/85 to-transparent"
       />
 
-      <div className="relative z-10 mt-auto w-full px-5 pb-[calc(env(safe-area-inset-bottom)+4.5rem)]">
+      <div className="relative z-10 mt-auto w-full px-5 pb-[calc(env(safe-area-inset-bottom)+8rem)]">
         <button
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
