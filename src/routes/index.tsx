@@ -140,7 +140,7 @@ function Index() {
             className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-full border-2 border-gold/60 bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground transition-transform active:scale-[0.98] tall:mt-2 tall:gap-3 tall:py-2 tall:text-base"
           >
             <Ornament className="h-4 w-4 text-gold-soft tall:h-6 tall:w-6" />
-            تحديث الموضع
+            حدد للمتابعة
           </button>
 
         </div>
@@ -195,7 +195,7 @@ function Index() {
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 px-3 pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)] min-[380px]:px-4">
           <div className="pattern-cream max-h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1.5rem)] w-full max-w-[26rem] overflow-y-auto rounded-[2rem] border-2 border-gold/50 p-5 text-card-foreground min-[380px]:p-6">
             <OrnamentDivider />
-            <h2 className="mt-3 text-center text-lg font-bold text-primary">تحديث الموضع</h2>
+            <h2 className="mt-3 text-center text-lg font-bold text-primary">حدد للمتابعة</h2>
 
             <label
               className="mt-5 block text-center text-xl font-bold text-primary"
