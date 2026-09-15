@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import welcomeCover from "@/assets/welcome-cover.png.asset.json";
 
 export const WELCOME_KEY = "wird:welcomed";
@@ -22,61 +22,16 @@ export const Route = createFileRoute("/welcome")({
   component: Welcome,
 });
 
-const POS_KEY = "wird:welcome-btn-pos";
-
 function Welcome() {
   const navigate = useNavigate();
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const dragRef = useRef<{ startX: number; startY: number; baseX: number; baseY: number; moved: boolean } | null>(null);
-  const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
     try {
-      const raw = window.localStorage.getItem(POS_KEY);
-      if (raw) {
-        const p = JSON.parse(raw) as { x: number; y: number };
-        if (typeof p?.x === "number" && typeof p?.y === "number") setPos(p);
-      }
+      window.localStorage.removeItem("wird:welcome-btn-pos");
     } catch {
       /* تجاهل */
     }
   }, []);
-
-  const onPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
-    e.currentTarget.setPointerCapture(e.pointerId);
-    dragRef.current = {
-      startX: e.clientX,
-      startY: e.clientY,
-      baseX: pos.x,
-      baseY: pos.y,
-      moved: false,
-    };
-    setDragging(true);
-  };
-
-  const onPointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
-    const d = dragRef.current;
-    if (!d) return;
-    const dx = e.clientX - d.startX;
-    const dy = e.clientY - d.startY;
-    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) d.moved = true;
-    setPos({ x: d.baseX + dx, y: d.baseY + dy });
-  };
-
-  const onPointerUp = () => {
-    const d = dragRef.current;
-    dragRef.current = null;
-    setDragging(false);
-    if (d?.moved) {
-      try {
-        window.localStorage.setItem(POS_KEY, JSON.stringify(pos));
-      } catch {
-        /* تجاهل */
-      }
-      return;
-    }
-    start();
-  };
 
   const start = () => {
     try {
@@ -102,15 +57,10 @@ function Welcome() {
         className="absolute inset-x-0 bottom-0 z-[5] h-[20%] bg-gradient-to-t from-background via-background/85 to-transparent"
       />
 
-
       <div className="relative z-10 mt-auto w-full px-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)]">
         <button
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerCancel={onPointerUp}
-          style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
-          className={`shadow-soft w-full touch-none rounded-full border-2 border-gold/70 bg-primary px-6 py-5 font-display text-3xl font-extrabold tracking-wide text-primary-foreground select-none active:scale-[0.98] ${dragging ? "opacity-90" : ""}`}
+          onClick={start}
+          className="shadow-soft mx-auto block w-full rounded-full border-2 border-gold/70 bg-primary px-6 py-5 text-center font-display text-3xl font-extrabold tracking-wide text-primary-foreground select-none active:scale-[0.98]"
         >
           ابدأ المتابعة
         </button>
@@ -118,3 +68,4 @@ function Welcome() {
     </main>
   );
 }
+
