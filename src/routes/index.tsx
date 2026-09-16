@@ -183,6 +183,14 @@ function Index() {
           </Link>
         </div>
 
+        <Link
+          to="/contact"
+          className="pattern-cream mt-1 flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base"
+        >
+          <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
+          تواصل مع الإدارة
+        </Link>
+
 
         <button
           onClick={() => {
