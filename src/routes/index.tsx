@@ -84,11 +84,11 @@ function Index() {
 
 
   return (
-    <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem]">
+    <main className="pattern-cream screen-fill mx-auto flex flex-col overflow-x-hidden sm:max-w-[26rem]">
       <WirdHeader />
 
 
-      <section className="relative z-10 -mt-7 px-3 pb-2 min-[380px]:px-4 tall:-mt-8">
+      <section className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col justify-between px-3 pb-2 min-[380px]:px-4 tall:-mt-8">
         <div className="shadow-raised pattern-cream translate-y-0 rounded-[1.75rem] border-2 border-gold/55 p-2 text-center text-card-foreground transition-transform tall:rounded-[2rem] tall:p-3">
           <div className="hidden tall:block">
             <OrnamentDivider />
