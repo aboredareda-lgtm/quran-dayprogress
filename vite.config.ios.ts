@@ -4,7 +4,7 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  nitro: { preset: "node-server" },
+  nitro: false,
   tanstackStart: {
     spa: {
       enabled: true,
