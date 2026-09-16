@@ -1,0 +1,12 @@
+{
+  "appId": "com.aboreda.wird",
+  "appName": "الوِرد",
+  "webDir": "dist/client",
+  "ios": {
+    "contentInset": "always"
+  },
+  "server": {
+    "androidScheme": "https",
+    "iosScheme": "capacitor"
+  }
+}
