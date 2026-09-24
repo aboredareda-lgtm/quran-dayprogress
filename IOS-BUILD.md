@@ -1,39 +1,28 @@
-# تصدير ملف IPA لتطبيق «الوِرد» على الآيفون
+# بناء تطبيق الوِرد للآيفون
 
-المشروع مُهيّأ الآن لإنتاج نسخة تعمل **داخل الجهاز بدون إنترنت**.
+المشروع يحتوي على تطبيق iOS من Capacitor، ومعرّفه `com.aboreda.wird`. تطبيق الويب المضمّن يعمل دون اتصال لخدمات القراءة الأساسية. التذكير المحلي يُجدول على الجهاز عند تفعيله بعد منح الإذن.
 
-## على جهاز الماك (مرة واحدة)
+## المتطلبات
 
-```bash
-npm install
-npm install @capacitor/core @capacitor/cli @capacitor/ios
-npm run build:ios          # يبني النسخة الثابتة في dist/client
-npx cap add ios            # ينشئ مشروع iOS
-npx cap sync ios
-npx cap open ios           # يفتح Xcode
-```
+- Xcode وApple Developer Team يملك `com.aboreda.wird`.
+- شهادة Apple Distribution وملف provisioning من الفريق الصحيح لبناء الأرشيف الموقّع.
+- سجّل التطبيق في App Store Connect بالمعرّف نفسه.
 
-## في Xcode
-
-1. اختر الهدف (Target) ثم تبويب **Signing & Capabilities**.
-2. فعّل **Automatically manage signing** واختر حسابك في **Team**.
-3. اختر الجهاز: **Any iOS Device (arm64)**.
-4. من القائمة: **Product → Archive**.
-5. بعد انتهاء الأرشفة يفتح Organizer:
-   - **Distribute App → App Store Connect** للرفع إلى المتجر.
-   - أو **Distribute App → Export** للحصول على ملف **.ipa** على جهازك.
-
-## عند أي تعديل لاحق على البرنامج
+## تطوير واختبار
 
 ```bash
+npm ci
 npm run build:ios
 npx cap sync ios
+npx tsc --noEmit
+bun test tests/backup-and-date.test.ts
+open ios/App/App.xcodeproj
 ```
 
-ثم أعِد خطوة Archive في Xcode.
+شغّل `App` على محاكي iPhone، واختبر بدء التطبيق وتسجيل قراءة والتاريخ والإعدادات وسياسة الخصوصية، ثم تفعيل وإيقاف التذكير وتصدير واستعادة النسخة الاحتياطية. تأكد أيضًا من التشغيل دون إنترنت بعد تثبيت التطبيق.
 
-## ملاحظات
+## أرشفة المتجر
 
-- ملف `capacitor.config.json` يحدد اسم التطبيق ومعرّفه (`com.aboreda.wird`) — عدّل المعرّف إن أردت.
-- الأيقونات: ضع أيقونة 1024×1024 في Xcode داخل `App/Assets.xcassets/AppIcon`.
-- جميع بيانات القراءة تُحفظ داخل الجهاز، فلا يحتاج التطبيق أي خادم.
+في Xcode اختر Team الصحيح من Signing & Capabilities، ثم `Any iOS Device` و`Product > Archive`. ارفع الأرشيف من Organizer أو صدّره كـ IPA وارفعه بـ Transporter أو أداة Apple الرسمية. لا تضع مفاتيح API أو الشهادات أو ملفات IPA في Git.
+
+رابط سياسة الخصوصية المقترح لـ App Store Connect بعد نشر تغييرات الويب: `https://quran-dayprogress.lovable.app/privacy`. تحقق من فتحه علنًا قبل إرسال التطبيق للمراجعة.

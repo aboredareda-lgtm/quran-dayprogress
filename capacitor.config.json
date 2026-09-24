@@ -3,10 +3,20 @@
   "appName": "الوِرد",
   "webDir": "dist/client",
   "ios": {
-    "contentInset": "always"
+    "contentInset": "never",
+    "backgroundColor": "#1e3a30"
   },
   "server": {
     "androidScheme": "https",
     "iosScheme": "capacitor"
+  },
+  "plugins": {
+    "LocalNotifications": {
+      "presentationOptions": [
+        "banner",
+        "sound",
+        "list"
+      ]
+    }
   }
 }

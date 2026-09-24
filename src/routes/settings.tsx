@@ -11,8 +11,7 @@ export const Route = createFileRoute("/settings")({
       { title: "الإعدادات — وِرد" },
       {
         name: "description",
-        content:
-          "الوضع الليلي، عدّاد الخَتمات، والنسخة الاحتياطية لسجل قراءتك في تطبيق الوِرد.",
+        content: "الوضع الليلي، عدّاد الخَتمات، والنسخة الاحتياطية لسجل قراءتك في تطبيق الوِرد.",
       },
       { property: "og:title", content: "الإعدادات — وِرد" },
       {
@@ -55,6 +54,12 @@ function Settings() {
       </header>
 
       <section className="space-y-3 px-3 pt-6 min-[380px]:px-5">
+        <Link
+          to="/privacy"
+          className="block rounded-2xl border border-gold/40 p-4 font-bold text-primary"
+        >
+          سياسة الخصوصية
+        </Link>
         {/* الوضع الليلي */}
         <div className="pattern-cream flex items-center justify-between gap-3 rounded-3xl border border-gold/40 p-4 text-card-foreground">
           <span className="flex items-center gap-2 text-sm font-bold text-primary">
@@ -124,9 +129,13 @@ function Settings() {
 
           <div className="mt-3 flex gap-2">
             <button
-              onClick={() => {
-                downloadBackup();
-                setMessage("تم حفظ ملف النسخة الاحتياطية.");
+              onClick={async () => {
+                try {
+                  await downloadBackup();
+                  setMessage("اختر حفظ الملف أو مشاركته من الخيارات المتاحة.");
+                } catch {
+                  setMessage("لم تكتمل مشاركة النسخة. حاول مرة أخرى.");
+                }
               }}
               className="flex-1 rounded-full border-2 border-gold/60 bg-primary px-3 py-3 text-sm font-bold text-primary-foreground"
             >

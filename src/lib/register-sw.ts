@@ -5,6 +5,7 @@ const SW_URL = "/sw.js";
 
 function isBlockedContext(): boolean {
   if (!import.meta.env.PROD) return true;
+  if (typeof window !== "undefined" && window.location.protocol === "capacitor:") return true;
   if (typeof window === "undefined") return true;
   if (window.top !== window.self) return true;
 

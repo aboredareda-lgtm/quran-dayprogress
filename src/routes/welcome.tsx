@@ -1,8 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-
-import welcomeCover from "@/assets/welcome-cover.png.asset.json";
+import welcomeCover from "@/assets/welcome-cover.png";
 
 export const WELCOME_KEY = "wird:welcomed";
 
@@ -58,13 +57,12 @@ function Welcome() {
     <main className="bg-gradient-calm fixed inset-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden">
       <div className="relative inline-block">
         <img
-          src={welcomeCover.url}
+          src={welcomeCover}
           alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
           className="pointer-events-none block h-auto max-h-[100dvh] w-auto max-w-[100vw] select-none"
         />
 
         <div className="absolute inset-x-0 bottom-[4%] z-10 w-full px-5">
-
           <button
             onClick={start}
             style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
@@ -77,5 +75,3 @@ function Welcome() {
     </main>
   );
 }
-
-
