@@ -202,6 +202,13 @@
     overflow-x: hidden;
   }
 
+  /* ظل أسود لكل الأزرار */
+  button,
+  a[class*="rounded"],
+  [role="button"] {
+    box-shadow: 0 4px 10px -2px oklch(0 0 0 / 0.45);
+  }
+
   /* إطار فيروزي حول أي زر عند الضغط */
   button:active,
   a:active,
