@@ -201,6 +201,16 @@
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
   }
+
+  /* إطار فيروزي حول أي زر عند الضغط */
+  button:active,
+  a:active,
+  [role="button"]:active,
+  button:focus-visible,
+  a:focus-visible {
+    outline: 3px solid oklch(0.72 0.12 190);
+    outline-offset: 2px;
+  }
 }
 
 /* ملء شاشة الجوال بالكامل مع مراعاة المناطق الآمنة */
