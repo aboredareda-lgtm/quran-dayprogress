@@ -8,8 +8,6 @@ import { WirdHeader } from "@/components/WirdHeader";
 import { ProgressPanel } from "@/components/ProgressPanel";
 import { ReminderCard } from "@/components/ReminderCard";
 
-
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -70,7 +68,7 @@ function Index() {
   };
 
   const save = () => {
-    const safeAyah = Math.min(Math.max(ayah, 1), getSurah(surah).ayahs);
+    const safeAyah = Math.min(Math.max(Math.trunc(ayah) || 1, 1), getSurah(surah).ayahs);
     addEntry(surah, safeAyah, note);
 
     // إتمام المصحف (سورة الناس) → تسجيل ختمة
@@ -82,11 +80,9 @@ function Index() {
     setSaved(true);
   };
 
-
   return (
     <main className="pattern-cream screen-fill mx-auto flex flex-col overflow-x-hidden sm:max-w-[26rem]">
       <WirdHeader />
-
 
       <section className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col justify-between px-3 pb-2 min-[380px]:px-4 tall:-mt-8">
         <div className="shadow-raised pattern-cream translate-y-0 rounded-[1.75rem] border-2 border-gold/55 p-2 text-center text-card-foreground transition-transform tall:rounded-[2rem] tall:p-3">
@@ -112,7 +108,6 @@ function Index() {
                 </span>
               </p>
               <p className="mt-1 inline-block rounded-full border-2 border-gold/60 bg-secondary px-3.5 py-0.5 text-[1.15rem] font-bold text-secondary-foreground tall:mt-1 tall:px-5 tall:py-1 tall:text-2xl">
-
                 الجزء {getJuz(last.surah, last.ayah)}
               </p>
 
@@ -134,7 +129,6 @@ function Index() {
             </p>
           )}
 
-
           <button
             onClick={openEditor}
             className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-full border-2 border-gold/60 bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground transition-transform active:scale-[0.98] tall:mt-2 tall:gap-3 tall:py-2 tall:text-base"
@@ -142,7 +136,6 @@ function Index() {
             <Ornament className="h-4 w-4 text-gold-soft tall:h-6 tall:w-6" />
             حدد للمتابعة
           </button>
-
         </div>
 
         <div className="pattern-cream mt-1 grid grid-cols-3 divide-x divide-gold/30 rounded-2xl border border-gold/40 text-center tall:mt-2 tall:rounded-3xl">
@@ -159,8 +152,6 @@ function Index() {
             </div>
           ))}
         </div>
-
-
 
         {loaded && <ProgressPanel entries={entries} last={last} />}
 
@@ -191,7 +182,6 @@ function Index() {
           تواصل مع الإدارة
         </Link>
 
-
         <button
           onClick={() => {
             try {
@@ -204,7 +194,7 @@ function Index() {
           className="mt-1 flex w-full items-center justify-center gap-1.5 rounded-2xl border border-destructive/40 bg-destructive-soft px-2 py-1 text-[0.8rem] font-bold text-destructive-soft-foreground tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base"
         >
           <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
-          الخروج من البرنامج
+          صفحة الترحيب
         </button>
 
         <p className="mt-1 flex items-center justify-center gap-2 text-center text-[0.6rem] leading-3.5 text-muted-foreground tall:mt-3 tall:text-xs">
@@ -212,7 +202,6 @@ function Index() {
           بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
         </p>
       </section>
-
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 px-3 pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)] min-[380px]:px-4">
@@ -243,10 +232,7 @@ function Index() {
               ))}
             </select>
 
-            <label
-              className="mt-5 block text-center text-xl font-bold text-primary"
-              htmlFor="ayah"
-            >
+            <label className="mt-5 block text-center text-xl font-bold text-primary" htmlFor="ayah">
               رقم الآية (1 - {ayahCount})
             </label>
             <input
@@ -259,10 +245,7 @@ function Index() {
               className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-4 text-center text-2xl font-bold text-primary"
             />
 
-            <label
-              className="mt-4 block text-center text-lg font-bold text-primary"
-              htmlFor="note"
-            >
+            <label className="mt-4 block text-center text-lg font-bold text-primary" htmlFor="note">
               ملاحظة (اختياري)
             </label>
             <input
@@ -274,7 +257,6 @@ function Index() {
               placeholder="تدبّر، أو: مع التفسير"
               className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-center text-base"
             />
-
 
             <div className="mt-6 flex gap-3">
               <button

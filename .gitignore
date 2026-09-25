@@ -30,3 +30,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Apple credentials and local build products
+*.p8
+*.p12
+*.mobileprovision
+*.cer
+*.csr
+*.key
+*.ipa
+*.xcarchive
+build/
+DerivedData/

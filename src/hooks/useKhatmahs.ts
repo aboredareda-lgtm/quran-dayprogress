@@ -1,3 +1,4 @@
+import { khatmahsSchema } from "@/lib/backup-schema";
 import { useCallback, useEffect, useState } from "react";
 
 export type Khatmah = {
@@ -12,7 +13,8 @@ function read(): Khatmah[] {
     const raw = localStorage.getItem(KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as Khatmah[]) : [];
+    const result = khatmahsSchema.safeParse(parsed);
+    return result.success ? result.data : [];
   } catch {
     return [];
   }

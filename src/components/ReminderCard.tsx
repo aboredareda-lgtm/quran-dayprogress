@@ -1,9 +1,10 @@
+import { Capacitor } from "@capacitor/core";
 import { useState } from "react";
 import { useReminder } from "@/hooks/useReminder";
 import { Ornament } from "@/components/Ornament";
 
 export function ReminderCard() {
-  const { reminder, loaded, permission, enable, disable, setTime } = useReminder();
+  const { reminder, loaded, permission, enable, disable, setTime, busy, error } = useReminder();
   const [open, setOpen] = useState(false);
 
   if (!loaded) return null;
@@ -33,9 +34,19 @@ export function ReminderCard() {
 
       {open && (
         <div className="mt-2 text-center">
+          {error && (
+            <p role="alert" className="text-xs text-destructive">
+              {error}
+            </p>
+          )}
+          {!Capacitor.isNativePlatform() && (
+            <p className="mb-2 text-xs text-muted-foreground">
+              في نسخة الويب، يعمل التذكير أثناء فتح الصفحة فقط.
+            </p>
+          )}
           {unsupported ? (
             <p className="text-[0.68rem] leading-4 text-muted-foreground tall:text-xs">
-              التذكير غير مدعوم في هذا المتصفح. أضف التطبيق إلى الشاشة الرئيسية لتفعيله.
+              التذكير غير متاح في هذا المتصفح.
             </p>
           ) : (
             <>
@@ -49,6 +60,7 @@ export function ReminderCard() {
                 <input
                   id="reminder-time"
                   type="time"
+                  disabled={busy}
                   value={reminder.time}
                   onChange={(e) => setTime(e.target.value)}
                   className="rounded-lg border border-input bg-background px-2 py-1 text-center text-base font-bold text-primary tall:rounded-xl tall:px-3 tall:py-2 tall:text-xl"
@@ -56,7 +68,8 @@ export function ReminderCard() {
               </div>
 
               <button
-                onClick={() => (reminder.enabled ? disable() : enable())}
+                disabled={busy}
+                onClick={() => void (reminder.enabled ? disable() : enable())}
                 className={`mt-2 w-full rounded-full border-2 px-4 py-2 text-sm font-bold transition-transform active:scale-[0.98] tall:mt-3 tall:px-5 tall:py-3 tall:text-base ${
                   reminder.enabled
                     ? "border-gold/50 bg-secondary text-secondary-foreground"
