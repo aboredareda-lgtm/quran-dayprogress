@@ -56,22 +56,23 @@ function Welcome() {
   };
 
   return (
-    <main className="fixed inset-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-card">
-      <div className="relative aspect-[879/1920] h-full max-w-[100vw]">
-        <img
-          src={welcomeCover.url}
-          alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-          className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover"
-        />
-        <div className="absolute inset-x-0 top-[75%] z-10 mx-auto w-[78%]">
-          <button
-            onClick={start}
-            style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
-            className="btn-turquoise-3d block w-full rounded-full px-3 py-3 text-center font-display text-lg font-bold tracking-wide select-none"
-          >
-            ابدأ المتابعة
-          </button>
-        </div>
+    <main className="fixed inset-0 h-[100dvh] w-full overflow-hidden bg-card">
+      <img
+        src={welcomeCover.url}
+        alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
+        className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
+      />
+      <div
+        className="absolute inset-x-0 z-10 mx-auto w-[78%] max-w-[22rem]"
+        style={{ top: "min(calc(50% + 0.25 * max(100dvh, 100vw * 2.184)), calc(100% - env(safe-area-inset-bottom) - 4.5rem))" }}
+      >
+        <button
+          onClick={start}
+          style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
+          className="btn-turquoise-3d block w-full rounded-full px-3 py-3 text-center font-display text-lg font-bold tracking-wide select-none"
+        >
+          ابدأ المتابعة
+        </button>
       </div>
     </main>
   );
