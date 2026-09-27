@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 
 import welcomeCover from "@/assets/welcome-cover-2.jpg.asset.json";
+import { readUserName } from "@/hooks/useUserName";
 
 export const WELCOME_KEY = "wird:welcomed";
 
@@ -51,7 +52,7 @@ function Welcome() {
     } catch {
       /* تجاهل */
     }
-    navigate({ to: "/" });
+    navigate({ to: readUserName() ? "/" : "/name" });
   };
 
   return (
