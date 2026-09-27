@@ -29,7 +29,7 @@ function NamePage() {
   return (
     <main className="bg-gradient-calm pattern-emerald fixed inset-0 flex h-[100dvh] w-full items-center justify-center px-6 text-on-emerald">
       <form onSubmit={submit} className="w-full max-w-[22rem] space-y-6 text-center">
-        <h1 className="font-display text-4xl font-bold text-gold-soft">ما اسمك؟</h1>
+        <h1 className="font-display text-3xl font-bold leading-snug text-gold-soft">مرحبًا بك في متابعة الوِرد اليومي</h1>
         <p className="text-sm opacity-90">سيظهر اسمك في أعلى صفحة المتابعة</p>
         <input
           autoFocus
