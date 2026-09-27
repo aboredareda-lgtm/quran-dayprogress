@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 
-import welcomeCover from "@/assets/welcome-cover.png.asset.json";
+import welcomeCover from "@/assets/welcome-cover-2.jpg.asset.json";
 
 export const WELCOME_KEY = "wird:welcomed";
 
@@ -55,24 +55,23 @@ function Welcome() {
   };
 
   return (
-    <main className="bg-gradient-calm fixed inset-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden">
-      <div className="relative inline-block">
-        <img
-          src={welcomeCover.url}
-          alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-          className="pointer-events-none block h-auto max-h-[100dvh] w-auto max-w-[100vw] select-none"
-        />
-
-        <div className="absolute inset-x-0 bottom-[4%] z-10 w-full px-5">
-
-          <button
-            onClick={start}
-            style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
-            className="shadow-soft mx-auto block w-[68%] rounded-full border-2 border-gold/70 bg-primary px-4 py-3 text-center font-display text-lg font-bold tracking-wide text-primary-foreground select-none active:scale-[0.98]"
-          >
-            ابدأ المتابعة
-          </button>
-        </div>
+    <main className="fixed inset-0 h-[100dvh] w-full overflow-hidden bg-card">
+      <img
+        src={welcomeCover.url}
+        alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
+        className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-top"
+      />
+      <div
+        className="absolute inset-x-0 z-10 mx-auto w-full max-w-[26rem] px-8"
+        style={{ bottom: "calc(env(safe-area-inset-bottom) + 12%)" }}
+      >
+        <button
+          onClick={start}
+          style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
+          className="btn-turquoise-3d block w-full rounded-full px-4 py-4 text-center font-display text-xl font-bold tracking-wide select-none"
+        >
+          ابدأ المتابعة
+        </button>
       </div>
     </main>
   );
