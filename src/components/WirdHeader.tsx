@@ -1,8 +1,10 @@
 import logoMark from "@/assets/logo-mark.png";
 import mushafMark from "@/assets/mushaf-mark.png";
+import { useUserName } from "@/hooks/useUserName";
 
 /** ترويسة الوِرد اليومي: قوس مسجد بزخرفة ذهبية + بسملة + العنوان */
 export function WirdHeader() {
+  const { name } = useUserName();
   return (
     <header className="bg-gradient-calm pattern-emerald safe-top relative min-h-[6rem] overflow-hidden px-4 pb-8 tall:min-h-[8.5rem] tall:pb-11 text-center text-on-emerald sm:px-5">
       {/* قوس المحراب */}
@@ -46,6 +48,11 @@ export function WirdHeader() {
       <h1 className="font-display mt-1 text-[1.3rem] font-bold leading-none drop-shadow-[0_2px_6px_oklch(0.15_0.03_160/0.6)] tall:mt-1.5 tall:text-[1.75rem]">
         الوِرد اليومي
       </h1>
+      {name && (
+        <p className="relative mt-1.5 text-sm font-bold text-gold-soft tall:text-base">
+          أهلًا يا {name}
+        </p>
+      )}
     </header>
   );
 }
