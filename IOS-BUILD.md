@@ -25,4 +25,4 @@ open ios/App/App.xcodeproj
 
 في Xcode اختر Team الصحيح من Signing & Capabilities، ثم `Any iOS Device` و`Product > Archive`. ارفع الأرشيف من Organizer أو صدّره كـ IPA وارفعه بـ Transporter أو أداة Apple الرسمية. لا تضع مفاتيح API أو الشهادات أو ملفات IPA في Git.
 
-رابط سياسة الخصوصية المقترح لـ App Store Connect بعد نشر تغييرات الويب: `https://quran-dayprogress.lovable.app/privacy`. تحقق من فتحه علنًا قبل إرسال التطبيق للمراجعة.
+رابط سياسة الخصوصية المقترح لـ App Store Connect بعد نشر تغييرات الويب: `https://quran-dayprogress.lovable.app/privacy.html`. الصفحة الثابتة مصدرها `public/privacy.html`. تحقق من استجابة 200 وظهور النص علنًا قبل إرسال التطبيق للمراجعة.

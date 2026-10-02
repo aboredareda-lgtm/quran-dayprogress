@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 
 import welcomeCover from "@/assets/welcome-cover.png";
+import welcomeCoverIpad from "@/assets/welcome-cover-ipad.png";
 
 export const WELCOME_KEY = "wird:welcomed";
 
@@ -23,25 +23,8 @@ export const Route = createFileRoute("/welcome")({
   component: Welcome,
 });
 
-const POS_KEY = "wird:welcome-btn-pos";
-
 function Welcome() {
   const navigate = useNavigate();
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(POS_KEY);
-      if (raw) {
-        const p = JSON.parse(raw) as { x: number; y: number };
-        if (typeof p?.x === "number" && typeof p?.y === "number") {
-          setPos(p);
-        }
-      }
-    } catch {
-      /* تجاهل */
-    }
-  }, []);
 
   const start = () => {
     try {
@@ -54,23 +37,24 @@ function Welcome() {
   };
 
   return (
-    <main className="bg-gradient-calm fixed inset-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden">
-      <div className="relative inline-block">
-        <img
-          src={welcomeCover}
-          alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-          className="pointer-events-none block h-auto max-h-[100dvh] w-auto max-w-[100vw] select-none"
-        />
-
-        <div className="absolute inset-x-0 bottom-[4%] z-10 w-full px-5">
-          <button
-            onClick={start}
-            style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
-            className="shadow-soft mx-auto block w-[68%] rounded-full border-2 border-gold/70 bg-primary px-4 py-3 text-center font-display text-lg font-bold tracking-wide text-primary-foreground select-none active:scale-[0.98]"
-          >
-            ابدأ المتابعة
-          </button>
-        </div>
+    <main className="fixed inset-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-[#e9e6de]">
+      <div className="relative h-full w-full max-w-[56.28dvh] shrink-0 min-[700px]:max-w-[75dvh]">
+        <picture className="block h-full w-full">
+          <source media="(min-width: 700px)" srcSet={welcomeCoverIpad} />
+          <img
+            src={welcomeCover}
+            alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
+            className="pointer-events-none block h-full w-full object-cover object-center select-none"
+          />
+        </picture>
+        <button
+          type="button"
+          onClick={start}
+          aria-label="ابدأ القراءة"
+          className="absolute inset-x-[10%] bottom-[4%] z-10 h-[8%] appearance-none rounded-full border-0 bg-transparent p-0 shadow-none focus-visible:outline-4 focus-visible:outline-gold"
+        >
+          <span className="sr-only">ابدأ القراءة</span>
+        </button>
       </div>
     </main>
   );

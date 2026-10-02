@@ -81,11 +81,11 @@ function Index() {
   };
 
   return (
-    <main className="pattern-cream screen-fill mx-auto flex flex-col overflow-x-hidden sm:max-w-[26rem]">
+    <main className="pattern-cream screen-fill mx-auto flex flex-col overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
       <WirdHeader />
 
-      <section className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col justify-between px-3 pb-2 min-[380px]:px-4 tall:-mt-8">
-        <div className="shadow-raised pattern-cream translate-y-0 rounded-[1.75rem] border-2 border-gold/55 p-2 text-center text-card-foreground transition-transform tall:rounded-[2rem] tall:p-3">
+      <section className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col justify-between px-3 pb-2 min-[380px]:px-4 tall:-mt-8 min-[700px]:mx-auto min-[700px]:w-full min-[700px]:max-w-5xl min-[700px]:gap-5 min-[700px]:px-8 min-[700px]:pb-12">
+        <div className="shadow-raised pattern-cream translate-y-0 rounded-[1.75rem] border-2 border-gold/55 p-2 text-center text-card-foreground transition-transform tall:rounded-[2rem] tall:p-3 min-[700px]:mx-auto min-[700px]:flex min-[700px]:min-h-52 min-[700px]:w-full min-[700px]:flex-col min-[700px]:justify-center min-[700px]:p-6">
           <div className="hidden tall:block">
             <OrnamentDivider />
           </div>
@@ -138,49 +138,55 @@ function Index() {
           </button>
         </div>
 
-        <div className="pattern-cream mt-1 grid grid-cols-3 divide-x divide-gold/30 rounded-2xl border border-gold/40 text-center tall:mt-2 tall:rounded-3xl">
-          {[
-            { value: daysTracked, label: "أيام المتابعة" },
-            { value: entries.length, label: "مرات التسجيل" },
-            { value: khatmahCount, label: "الخَتمات" },
-          ].map((s) => (
-            <div key={s.label} className="px-1.5 py-1 tall:py-1.5">
-              <p className="text-2xl font-bold text-primary tall:text-3xl">{s.value}</p>
-              <p className="text-[0.68rem] text-muted-foreground tall:mt-1 tall:text-sm">
-                {s.label}
-              </p>
-            </div>
-          ))}
-        </div>
+        <div className="contents min-[700px]:grid min-[700px]:min-h-[38dvh] min-[700px]:w-full min-[700px]:grid-cols-2 min-[700px]:grid-rows-[repeat(4,minmax(auto,1fr))] min-[700px]:gap-5">
+          <div className="pattern-cream mt-1 grid grid-cols-3 divide-x divide-gold/30 rounded-2xl border border-gold/40 text-center tall:mt-2 tall:rounded-3xl min-[700px]:col-start-2 min-[700px]:row-start-1 min-[700px]:h-full min-[700px]:w-full min-[700px]:items-center min-[700px]:py-3">
+            {[
+              { value: daysTracked, label: "أيام المتابعة" },
+              { value: entries.length, label: "مرات التسجيل" },
+              { value: khatmahCount, label: "الخَتمات" },
+            ].map((s) => (
+              <div key={s.label} className="px-1.5 py-1 tall:py-1.5">
+                <p className="text-2xl font-bold text-primary tall:text-3xl">{s.value}</p>
+                <p className="text-[0.68rem] text-muted-foreground tall:mt-1 tall:text-sm">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
 
-        {loaded && <ProgressPanel entries={entries} last={last} />}
+          <div className="contents min-[700px]:col-start-1 min-[700px]:row-span-4 min-[700px]:row-start-1 min-[700px]:block min-[700px]:min-w-0">
+            {loaded && <ProgressPanel entries={entries} last={last} />}
+          </div>
 
-        <ReminderCard />
+          <div className="contents min-[700px]:col-start-2 min-[700px]:row-start-2 min-[700px]:block min-[700px]:min-w-0">
+            <ReminderCard />
+          </div>
 
-        <div className="mt-1 grid grid-cols-2 gap-1 tall:mt-2 tall:gap-2">
+          <div className="mt-1 grid grid-cols-2 gap-1 tall:mt-2 tall:gap-2 min-[700px]:col-start-2 min-[700px]:row-start-3 min-[700px]:h-full min-[700px]:mt-0 min-[700px]:gap-3">
+            <Link
+              to="/history"
+              className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
+            >
+              <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
+              سجل القراءة
+            </Link>
+            <Link
+              to="/settings"
+              className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
+            >
+              <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
+              الإعدادات
+            </Link>
+          </div>
+
           <Link
-            to="/history"
-            className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
+            to="/contact"
+            className="pattern-cream mt-1 flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base min-[700px]:col-start-2 min-[700px]:row-start-4 min-[700px]:h-full min-[700px]:mt-0 min-[700px]:min-h-14"
           >
             <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
-            سجل القراءة
-          </Link>
-          <Link
-            to="/settings"
-            className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
-          >
-            <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
-            الإعدادات
+            تواصل مع الإدارة
           </Link>
         </div>
-
-        <Link
-          to="/contact"
-          className="pattern-cream mt-1 flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base"
-        >
-          <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
-          تواصل مع الإدارة
-        </Link>
 
         <button
           onClick={() => {
@@ -191,7 +197,7 @@ function Index() {
             }
             navigate({ to: "/welcome", replace: true });
           }}
-          className="mt-1 flex w-full items-center justify-center gap-1.5 rounded-2xl border border-destructive/40 bg-destructive-soft px-2 py-1 text-[0.8rem] font-bold text-destructive-soft-foreground tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base"
+          className="mt-1 flex w-full items-center justify-center gap-1.5 rounded-2xl border border-destructive/40 bg-destructive-soft px-2 py-1 text-[0.8rem] font-bold text-destructive-soft-foreground tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base min-[700px]:mx-auto min-[700px]:max-w-lg"
         >
           <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
           صفحة الترحيب
@@ -205,7 +211,7 @@ function Index() {
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 px-3 pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)] min-[380px]:px-4">
-          <div className="pattern-cream max-h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1.5rem)] w-full max-w-[26rem] overflow-y-auto rounded-[2rem] border-2 border-gold/50 p-5 text-card-foreground min-[380px]:p-6">
+          <div className="pattern-cream max-h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1.5rem)] w-full max-w-[26rem] overflow-y-auto rounded-[2rem] border-2 border-gold/50 p-5 text-card-foreground min-[380px]:p-6 min-[700px]:max-w-xl">
             <OrnamentDivider />
             <h2 className="mt-3 text-center text-lg font-bold text-primary">حدد للمتابعة</h2>
 

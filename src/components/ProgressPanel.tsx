@@ -2,12 +2,7 @@ import { useState } from "react";
 import { Ornament } from "@/components/Ornament";
 import { GOAL_OPTIONS, useDailyGoal } from "@/hooks/useDailyGoal";
 import type { ReadingEntry } from "@/hooks/useReadingLog";
-import {
-  ayahsReadToday,
-  currentStreak,
-  daysToFinish,
-  mushafPercent,
-} from "@/lib/progress";
+import { ayahsReadToday, currentStreak, daysToFinish, mushafPercent } from "@/lib/progress";
 
 function Bar({ percent }: { percent: number }) {
   return (
@@ -37,7 +32,7 @@ export function ProgressPanel({
   const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : 0;
 
   return (
-    <div className="pattern-cream mt-1 rounded-2xl border border-gold/40 p-1.5 text-card-foreground tall:mt-2 tall:rounded-3xl tall:p-2.5">
+    <div className="pattern-cream mt-1 rounded-2xl border border-gold/40 p-1.5 text-card-foreground tall:mt-2 tall:rounded-3xl tall:p-2.5 min-[700px]:flex min-[700px]:h-full min-[700px]:flex-col min-[700px]:justify-between min-[700px]:p-6">
       {/* الهدف اليومي */}
       <div className="flex items-center justify-between gap-2">
         <span className="flex min-w-0 items-center gap-2 text-sm font-bold text-primary tall:text-base">
@@ -55,7 +50,8 @@ export function ProgressPanel({
       <Bar percent={goalPercent} />
 
       <p className="mt-1 text-[0.85rem] tall:mt-2 tall:text-base">
-        قرأت <span className="text-[1.05rem] font-bold text-primary tall:text-xl">{today}</span> آية من {goal}
+        قرأت <span className="text-[1.05rem] font-bold text-primary tall:text-xl">{today}</span> آية
+        من {goal}
         {today >= goal && <span className="mr-2 font-bold text-primary">— أحسنت!</span>}
       </p>
 

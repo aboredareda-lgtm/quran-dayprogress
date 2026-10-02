@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/privacy")({ component: Privacy });
 function Privacy() {
   return (
-    <main className="pattern-cream screen-fill mx-auto max-w-xl p-5 text-card-foreground">
+    <main className="pattern-cream screen-fill mx-auto max-w-xl p-5 text-card-foreground min-[700px]:max-w-4xl min-[700px]:px-12 min-[700px]:py-10">
       <Link to="/settings" className="text-primary">
         → الإعدادات
       </Link>
