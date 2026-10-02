@@ -80,6 +80,14 @@ function Index() {
     setSaved(true);
   };
 
+  const startNewKhatmah = () => {
+    if (!window.confirm("هل تريد بدء ختمة جديدة من سورة الفاتحة؟ سيبقى سجلك السابق محفوظًا.")) return;
+    addEntry(1, 1, "بداية ختمة جديدة");
+    setKhatmahSaved(false);
+    setEditing(false);
+    setSaved(true);
+  };
+
   return (
     <main className="pattern-cream screen-fill mx-auto flex flex-col overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
       <WirdHeader />
@@ -135,6 +143,13 @@ function Index() {
           >
             <Ornament className="h-4 w-4 text-gold-soft tall:h-6 tall:w-6" />
             حدد للمتابعة
+          </button>
+
+          <button
+            onClick={startNewKhatmah}
+            className="btn-turquoise-3d mt-1.5 w-full rounded-full px-4 py-1 text-xs font-bold tall:mt-2 tall:py-1.5 tall:text-sm"
+          >
+            ابدأ ختمة جديدة
           </button>
         </div>
 

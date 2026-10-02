@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
-import welcomeCover from "@/assets/welcome-cover.png";
-import welcomeCoverIpad from "@/assets/welcome-cover-ipad.png";
+import welcomeCover from "@/assets/welcome-cover-2.jpg.asset.json";
+import { readUserName } from "@/hooks/useUserName";
 
 export const WELCOME_KEY = "wird:welcomed";
 
@@ -33,27 +33,26 @@ function Welcome() {
     } catch {
       /* تجاهل */
     }
-    navigate({ to: "/" });
+    navigate({ to: readUserName() ? "/" : "/name" });
   };
 
   return (
-    <main className="fixed inset-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-[#e9e6de]">
-      <div className="relative h-full w-full max-w-[56.28dvh] shrink-0 min-[700px]:max-w-[75dvh]">
-        <picture className="block h-full w-full">
-          <source media="(min-width: 700px)" srcSet={welcomeCoverIpad} />
-          <img
-            src={welcomeCover}
-            alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-            className="pointer-events-none block h-full w-full object-cover object-center select-none"
-          />
-        </picture>
+    <main className="fixed inset-0 h-[100dvh] w-full overflow-hidden bg-card">
+      <img
+        src={welcomeCover.url}
+        alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
+        className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
+      />
+      <div
+        className="absolute inset-x-0 z-10 mx-auto w-[78%] max-w-[22rem]"
+        style={{ top: "min(calc(50% + 0.25 * max(100dvh, 100vw * 2.184)), calc(100% - env(safe-area-inset-bottom) - 4.5rem))" }}
+      >
         <button
           type="button"
           onClick={start}
-          aria-label="ابدأ القراءة"
-          className="absolute inset-x-[10%] bottom-[4%] z-10 h-[8%] appearance-none rounded-full border-0 bg-transparent p-0 shadow-none focus-visible:outline-4 focus-visible:outline-gold"
+          className="btn-turquoise-3d block w-full rounded-full px-3 py-3 text-center font-display text-lg font-bold tracking-wide select-none"
         >
-          <span className="sr-only">ابدأ القراءة</span>
+          ابدأ المتابعة
         </button>
       </div>
     </main>
