@@ -1,6 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
-import welcomeCover from "@/assets/welcome-cover-2.jpg.asset.json";
+// Bundled locally (not the Lovable asset URL) so the cover also loads in the
+// offline iOS app, where /__l5e/ asset paths are not served.
+import welcomeCover from "@/assets/welcome-cover-2.jpg";
 import { readUserName } from "@/hooks/useUserName";
 
 export const WELCOME_KEY = "wird:welcomed";
@@ -39,7 +41,7 @@ function Welcome() {
   return (
     <main className="fixed inset-0 h-[100dvh] w-full overflow-hidden bg-card">
       <img
-        src={welcomeCover.url}
+        src={welcomeCover}
         alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
         className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
       />
