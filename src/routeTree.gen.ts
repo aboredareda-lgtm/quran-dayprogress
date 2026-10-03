@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as NameRouteImport } from './routes/name'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 
@@ -36,6 +37,11 @@ const NameRoute = NameRouteImport.update({
   path: '/name',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/history': typeof HistoryRoute
   '/name': typeof NameRoute
+  '/privacy': typeof PrivacyRoute
   '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/history': typeof HistoryRoute
   '/name': typeof NameRoute
+  '/privacy': typeof PrivacyRoute
   '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -69,20 +77,36 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/history': typeof HistoryRoute
   '/name': typeof NameRoute
+  '/privacy': typeof PrivacyRoute
   '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/history' | '/name' | '/settings' | '/welcome'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/history'
+    | '/name'
+    | '/privacy'
+    | '/settings'
+    | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/history' | '/name' | '/settings' | '/welcome'
+  to:
+    | '/'
+    | '/contact'
+    | '/history'
+    | '/name'
+    | '/privacy'
+    | '/settings'
+    | '/welcome'
   id:
     | '__root__'
     | '/'
     | '/contact'
     | '/history'
     | '/name'
+    | '/privacy'
     | '/settings'
     | '/welcome'
   fileRoutesById: FileRoutesById
@@ -92,6 +116,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   HistoryRoute: typeof HistoryRoute
   NameRoute: typeof NameRoute
+  PrivacyRoute: typeof PrivacyRoute
   SettingsRoute: typeof SettingsRoute
   WelcomeRoute: typeof WelcomeRoute
 }
@@ -126,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -148,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   HistoryRoute: HistoryRoute,
   NameRoute: NameRoute,
+  PrivacyRoute: PrivacyRoute,
   SettingsRoute: SettingsRoute,
   WelcomeRoute: WelcomeRoute,
 }

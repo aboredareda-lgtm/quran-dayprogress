@@ -1,3 +1,4 @@
+import { localDayKey } from "./local-date";
 import { SURAHS, getSurah } from "./surahs";
 import type { ReadingEntry } from "@/hooks/useReadingLog";
 
@@ -21,13 +22,11 @@ export function mushafPercent(surah: number, ayah: number): number {
 }
 
 function dayKey(iso: string) {
-  return iso.slice(0, 10);
+  return localDayKey(iso);
 }
 
 function todayKey(now = new Date()) {
-  return new Date(now.getTime() - now.getTimezoneOffset() * 60000)
-    .toISOString()
-    .slice(0, 10);
+  return new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 }
 
 function shiftDay(key: string, days: number) {
@@ -61,19 +60,13 @@ export function ayahsReadToday(entries: ReadingEntry[]): number {
 
   const latestToday = Math.max(...todays.map((e) => ayahIndex(e.surah, e.ayah)));
   const before = entries.filter((e) => dayKey(e.at) < today);
-  const baseline = before.length
-    ? ayahIndex(before[0]!.surah, before[0]!.ayah)
-    : 0;
+  const baseline = before.length ? ayahIndex(before[0]!.surah, before[0]!.ayah) : 0;
 
   return Math.max(latestToday - baseline, 0);
 }
 
 /** الأيام المتبقّية تقديريًا لإتمام الختمة بناءً على الهدف اليومي */
-export function daysToFinish(
-  surah: number,
-  ayah: number,
-  goalAyahs: number,
-): number {
+export function daysToFinish(surah: number, ayah: number, goalAyahs: number): number {
   const remaining = TOTAL_AYAHS - ayahIndex(surah, ayah);
   if (goalAyahs <= 0) return 0;
   return Math.ceil(remaining / goalAyahs);
@@ -127,4 +120,3 @@ export function monthlyStats(entries: ReadingEntry[], now = new Date()): Monthly
 export function formatArabicDate(d: Date) {
   return new Intl.DateTimeFormat("ar", { dateStyle: "long" }).format(d);
 }
-

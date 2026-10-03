@@ -1,8 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
 
-
-import welcomeCover from "@/assets/welcome-cover-2.jpg.asset.json";
+// Bundled locally (not the Lovable asset URL) so the cover also loads in the
+// offline iOS app, where /__l5e/ asset paths are not served.
+import welcomeCover from "@/assets/welcome-cover-2.jpg";
 import { readUserName } from "@/hooks/useUserName";
 
 export const WELCOME_KEY = "wird:welcomed";
@@ -25,25 +25,8 @@ export const Route = createFileRoute("/welcome")({
   component: Welcome,
 });
 
-const POS_KEY = "wird:welcome-btn-pos";
-
 function Welcome() {
   const navigate = useNavigate();
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(POS_KEY);
-      if (raw) {
-        const p = JSON.parse(raw) as { x: number; y: number };
-        if (typeof p?.x === "number" && typeof p?.y === "number") {
-          setPos(p);
-        }
-      }
-    } catch {
-      /* تجاهل */
-    }
-  }, []);
 
   const start = () => {
     try {
@@ -58,7 +41,7 @@ function Welcome() {
   return (
     <main className="fixed inset-0 h-[100dvh] w-full overflow-hidden bg-card">
       <img
-        src={welcomeCover.url}
+        src={welcomeCover}
         alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
         className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
       />
@@ -67,8 +50,8 @@ function Welcome() {
         style={{ top: "min(calc(50% + 0.25 * max(100dvh, 100vw * 2.184)), calc(100% - env(safe-area-inset-bottom) - 4.5rem))" }}
       >
         <button
+          type="button"
           onClick={start}
-          style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
           className="btn-turquoise-3d block w-full rounded-full px-3 py-3 text-center font-display text-lg font-bold tracking-wide select-none"
         >
           ابدأ المتابعة
@@ -77,5 +60,3 @@ function Welcome() {
     </main>
   );
 }
-
-

@@ -1,3 +1,5 @@
+import { localDayKey } from "@/lib/local-date";
+import { readingEntriesSchema } from "@/lib/backup-schema";
 import { useCallback, useEffect, useState } from "react";
 
 export type ReadingEntry = {
@@ -6,7 +8,7 @@ export type ReadingEntry = {
   ayah: number;
   at: string; // ISO timestamp
   /** ملاحظة قصيرة اختيارية */
-  note?: string;
+  note?: string | undefined;
 };
 
 const STORAGE_KEY = "quran-reading-log-v1";
@@ -16,7 +18,8 @@ function read(): ReadingEntry[] {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as ReadingEntry[]) : [];
+    const result = readingEntriesSchema.safeParse(parsed);
+    return result.success ? result.data : [];
   } catch {
     return [];
   }
@@ -71,7 +74,6 @@ export function useReadingLog() {
           return next;
         }),
       );
-
     },
     [persist],
   );
@@ -86,7 +88,7 @@ export function useReadingLog() {
   const clearAll = useCallback(() => persist([]), [persist]);
 
   const last = entries[0] ?? null;
-  const daysTracked = new Set(entries.map((e) => e.at.slice(0, 10))).size;
+  const daysTracked = new Set(entries.map((e) => localDayKey(e.at))).size;
 
   return {
     entries,
