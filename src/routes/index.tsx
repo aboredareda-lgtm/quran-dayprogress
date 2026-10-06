@@ -268,7 +268,7 @@ function Index() {
               maxLength={120}
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              placeholder="تدبّر، أو: مع التفسير"
+              placeholder="اكتب ملاحظة"
               className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-center text-base"
             />
 
