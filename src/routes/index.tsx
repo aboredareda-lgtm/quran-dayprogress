@@ -107,7 +107,7 @@ function Index() {
             <div className="mt-2 h-12 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display text-[2.2rem] font-bold leading-tight text-primary tall:text-[2.8rem]">
+              <p className="font-display mx-auto mt-0.5 w-fit max-w-full rounded-[2rem] border border-gold/60 bg-card px-5 text-[2.1rem] font-bold leading-tight text-primary shadow-[inset_0_0_0_3px_var(--card),inset_0_0_0_4px_color-mix(in_oklab,var(--gold)_35%,transparent)] tall:px-7 tall:text-[2.7rem]">
                 سورة {getSurah(last.surah).name}
               </p>
               <p className="text-[1.7rem] font-bold leading-tight text-primary tall:text-[2.1rem]">
@@ -117,7 +117,7 @@ function Index() {
                 </span>
               </p>
               <OrnamentDivider className="my-0.5" />
-              <p className="inline-block rounded-full border-2 border-gold/60 bg-secondary px-5 py-0.5 text-[1.1rem] font-bold text-secondary-foreground tall:px-7 tall:py-1 tall:text-2xl">
+              <p className="inline-block rounded-full border-2 border-gold/60 bg-sage px-5 py-0.5 text-[1.1rem] text-primary font-bold text-secondary-foreground tall:px-7 tall:py-1 tall:text-2xl">
                 الجزء {getJuz(last.surah, last.ayah)}
               </p>
 
