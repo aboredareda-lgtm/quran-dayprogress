@@ -1,5 +1,3 @@
-import logoMark from "@/assets/logo-mark.png";
-import mushafMark from "@/assets/mushaf-mark.png";
 import { useUserName } from "@/hooks/useUserName";
 
 /** ترويسة الوِرد اليومي: قوس مسجد بزخرفة ذهبية + بسملة + العنوان */
@@ -27,19 +25,6 @@ export function WirdHeader() {
         />
       </svg>
 
-      {/* لوجو المصحف على الطرف الأيسر */}
-      <img
-        src={mushafMark}
-        alt="لوجو المصحف"
-        className="absolute left-2 top-3 h-8 w-10 shrink-0 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.55)] min-[380px]:left-3 tall:h-11 tall:w-14"
-      />
-
-      {/* اللوجو على الطرف الأيمن */}
-      <img
-        src={logoMark}
-        alt="لوجو التطبيق"
-        className="absolute right-2 top-2 h-10 w-8 shrink-0 object-contain drop-shadow-[0_2px_8px_oklch(0.15_0.03_160/0.5)] min-[380px]:right-3 tall:h-14 tall:w-11"
-      />
 
       <p className="font-display mx-auto mt-0.5 max-w-[8rem] text-[0.8rem] leading-tight text-gold-soft drop-shadow-sm min-[380px]:max-w-[13rem] tall:mt-1 tall:text-[1.05rem]">
         بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
