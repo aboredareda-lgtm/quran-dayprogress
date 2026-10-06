@@ -93,12 +93,13 @@ function Index() {
       <WirdHeader />
 
       <section className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col justify-between px-3 pb-2 min-[380px]:px-4 tall:-mt-8 min-[700px]:mx-auto min-[700px]:w-full min-[700px]:max-w-5xl min-[700px]:gap-5 min-[700px]:px-8 min-[700px]:pb-12">
-        <div className="shadow-raised pattern-cream translate-y-0 rounded-[1.75rem] border-2 border-gold/55 p-2 text-center text-card-foreground transition-transform tall:rounded-[2rem] tall:p-3 min-[700px]:mx-auto min-[700px]:flex min-[700px]:min-h-52 min-[700px]:w-full min-[700px]:flex-col min-[700px]:justify-center min-[700px]:p-6">
-          <div className="hidden tall:block">
-            <OrnamentDivider />
-          </div>
+        <div className="shadow-raised pattern-cream relative translate-y-0 rounded-[1.75rem] border-2 border-gold/55 px-3 py-2 text-center text-card-foreground transition-transform tall:rounded-[2rem] tall:p-3 min-[700px]:mx-auto min-[700px]:flex min-[700px]:min-h-52 min-[700px]:w-full min-[700px]:flex-col min-[700px]:justify-center min-[700px]:p-6">
+          {["top-1.5 right-1.5","top-1.5 left-1.5","bottom-1.5 right-1.5","bottom-1.5 left-1.5"].map((pos) => (
+            <Ornament key={pos} className={`pointer-events-none absolute ${pos} h-4 w-4 text-gold/70 tall:h-5 tall:w-5`} />
+          ))}
+          <OrnamentDivider />
 
-          <p className="hidden text-xs font-bold text-primary tall:mt-1 tall:block tall:text-sm">
+          <p className="mt-0.5 text-xs font-bold text-muted-foreground tall:mt-1 tall:text-sm">
             آخر ما وصلت إليه
           </p>
 
@@ -106,20 +107,21 @@ function Index() {
             <div className="mt-2 h-12 animate-pulse rounded-2xl bg-muted" />
           ) : last ? (
             <>
-              <p className="font-display text-[2.35rem] font-bold leading-tight text-primary tall:mt-1 tall:text-[2.9rem]">
+              <p className="font-display text-[2.2rem] font-bold leading-tight text-primary tall:text-[2.8rem]">
                 سورة {getSurah(last.surah).name}
               </p>
-              <p className="mt-0.5 text-[1.85rem] font-bold tall:mt-1 tall:text-[2.3rem]">
-                الآية <span className="text-[2.35rem] tall:text-[3rem]">{last.ayah}</span>
+              <p className="text-[1.7rem] font-bold leading-tight text-primary tall:text-[2.1rem]">
+                الآية <span className="text-[2.5rem] tall:text-[3.2rem]">{last.ayah}</span>
                 <span className="mr-2 text-[1rem] font-medium text-muted-foreground tall:text-lg">
                   من {getSurah(last.surah).ayahs}
                 </span>
               </p>
-              <p className="mt-1 inline-block rounded-full border-2 border-gold/60 bg-secondary px-3.5 py-0.5 text-[1.15rem] font-bold text-secondary-foreground tall:mt-1 tall:px-5 tall:py-1 tall:text-2xl">
+              <OrnamentDivider className="my-0.5" />
+              <p className="inline-block rounded-full border-2 border-gold/60 bg-secondary px-5 py-0.5 text-[1.1rem] font-bold text-secondary-foreground tall:px-7 tall:py-1 tall:text-2xl">
                 الجزء {getJuz(last.surah, last.ayah)}
               </p>
 
-              <p className="mt-1 hidden text-[0.65rem] text-muted-foreground tall:mt-2 tall:block tall:text-xs">
+              <p className="mt-1 text-[0.65rem] text-muted-foreground tall:text-xs">
                 {formatDate(last.at)}
               </p>
             </>
