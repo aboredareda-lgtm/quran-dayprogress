@@ -34,6 +34,7 @@
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-on-emerald: var(--on-emerald);
+  --color-sage: var(--sage);
 
   --shadow-soft: 0 10px 30px -12px oklch(0.42 0.07 155 / 0.28);
   --shadow-raised:
@@ -90,6 +91,7 @@
   --background: oklch(0.965 0.012 92);
   --foreground: oklch(0.24 0.03 158);
   --on-emerald: oklch(0.97 0.015 92);
+  --sage: oklch(0.88 0.035 140);
 
   --surface: oklch(0.955 0.016 92);
   --card: oklch(0.968 0.014 92);
@@ -134,6 +136,7 @@
   --background: oklch(0.17 0.028 160);
   --foreground: oklch(0.94 0.015 92);
   --on-emerald: oklch(0.95 0.02 92);
+  --sage: oklch(0.25 0.035 155);
   --surface: oklch(0.21 0.03 160);
   --card: oklch(0.215 0.032 160);
   --card-foreground: oklch(0.94 0.015 92);
