@@ -144,13 +144,6 @@ function Index() {
             <Ornament className="h-4 w-4 text-gold-soft tall:h-6 tall:w-6" />
             حدد للمتابعة
           </button>
-
-          <button
-            onClick={startNewKhatmah}
-            className="btn-turquoise-3d mt-1.5 w-full rounded-full px-4 py-1 text-xs font-bold tall:mt-2 tall:py-1.5 tall:text-sm"
-          >
-            ابدأ ختمة جديدة
-          </button>
         </div>
 
         <div className="contents min-[700px]:grid min-[700px]:min-h-[38dvh] min-[700px]:w-full min-[700px]:grid-cols-2 min-[700px]:grid-rows-[repeat(4,minmax(auto,1fr))] min-[700px]:gap-5">
@@ -291,6 +284,15 @@ function Index() {
                 className="rounded-full border border-border px-6 py-3 font-medium"
               >
                 إلغاء
+              </button>
+            </div>
+
+            <div className="mt-5 border-t border-gold/30 pt-4">
+              <button
+                onClick={startNewKhatmah}
+                className="btn-turquoise-3d w-full rounded-full px-4 py-2.5 text-sm font-bold"
+              >
+                ابدأ ختمة جديدة
               </button>
             </div>
           </div>
