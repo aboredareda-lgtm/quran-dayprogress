@@ -110,10 +110,10 @@ function Mushaf() {
     if (scroller.current) scroller.current.scrollTop = 0;
   };
 
-  const save = () => {
-    if (surah === null || selected === null) return;
-    addEntry(surah, selected, "من المصحف");
-    setSelected(null);
+  const save = (n: number) => {
+    if (surah === null) return;
+    addEntry(surah, n, "من المصحف");
+    setSelected(n);
     setSavedMsg(true);
     setTimeout(() => setSavedMsg(false), 2500);
   };
@@ -174,7 +174,7 @@ function Mushaf() {
                 <span
                   key={i}
                   id={`ayah-${i + 1}`}
-                  onClick={() => setSelected(i + 1)}
+                  onClick={() => save(i + 1)}
                   className={`cursor-pointer rounded-md ${selected === i + 1 ? "bg-gold/30" : ""}`}
                 >
                   {t} <span className="text-gold">﴿{toAr(i + 1)}﴾</span>{" "}
@@ -191,18 +191,11 @@ function Mushaf() {
         )}
       </div>
 
-      {(selected !== null || savedMsg) && (
-        <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-center gap-2 border-t border-gold/40 bg-card p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-          {savedMsg ? (
-            <p className="font-bold text-primary">تم حفظ الموضع، بارك الله فيك.</p>
-          ) : (
-            <>
-              <button onClick={save} className="btn-turquoise-3d rounded-full px-5 py-2 font-bold">
-                حفظ هذا الموضع (آية {toAr(selected!)})
-              </button>
-              <button className={btn} onClick={() => setSelected(null)}>إلغاء</button>
-            </>
-          )}
+      {savedMsg && selected !== null && (
+        <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-center border-t border-gold/40 bg-card p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <p className="font-bold text-primary">
+            ✓ حُفظ الموضع: سورة {getSurah(surah!).name}، الآية {toAr(selected)}
+          </p>
         </div>
       )}
     </div>
