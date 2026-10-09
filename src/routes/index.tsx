@@ -103,7 +103,7 @@ function Index() {
 
           {loaded && streak > 0 && (
             <p className="mx-auto mt-0.5 w-fit rounded-full border border-gold/50 bg-secondary px-3 text-[0.7rem] font-bold text-primary tall:text-xs">
-              🔥 {streak} {streak === 1 ? "يوم" : streak === 2 ? "يومان" : streak <= 10 ? "أيام" : "يومًا"} متتالية
+              📖 {streak} {streak === 1 ? "يوم" : streak === 2 ? "يومان" : streak <= 10 ? "أيام" : "يومًا"} متتالية
             </p>
           )}
 
