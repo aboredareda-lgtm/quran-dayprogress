@@ -308,3 +308,18 @@
       0 5px 10px -4px oklch(0 0 0 / 0.5) !important;
   }
 }
+
+/* شاشة البداية على الشاشات العريضة: الصورة كاملة بطول الشاشة في المنتصف */
+@media (min-aspect-ratio: 3/4) {
+  .welcome-frame {
+    position: relative;
+    inset: auto;
+    margin-inline: auto;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1 / 2.184;
+  }
+  .welcome-btn {
+    top: 75% !important;
+  }
+}

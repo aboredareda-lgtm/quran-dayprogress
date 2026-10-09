@@ -41,14 +41,14 @@ function Welcome() {
   return (
     <main className="fixed inset-0 h-[100dvh] w-full overflow-hidden bg-card">
       {/* الجوال: الصورة تملأ الشاشة. الشاشات العريضة: الصورة كاملة بطول الشاشة في المنتصف. */}
-      <div className="absolute inset-0 [@media(min-aspect-ratio:3/4)]:relative [@media(min-aspect-ratio:3/4)]:mx-auto [@media(min-aspect-ratio:3/4)]:h-full [@media(min-aspect-ratio:3/4)]:aspect-[1/2.184]">
+      <div className="welcome-frame absolute inset-0">
         <img
           src={welcomeCover}
           alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
           className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
         />
         <div
-          className="absolute inset-x-0 z-10 mx-auto w-[78%] max-w-[22rem] [@media(min-aspect-ratio:3/4)]:top-[75%]!"
+          className="welcome-btn absolute inset-x-0 z-10 mx-auto w-[78%] max-w-[22rem]"
           style={{ top: "min(calc(50% + 0.25 * max(100dvh, 100vw * 2.184)), calc(100% - env(safe-area-inset-bottom) - 4.5rem))" }}
         >
           <button
