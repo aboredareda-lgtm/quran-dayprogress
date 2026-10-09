@@ -23,7 +23,8 @@ export default defineConfig({
         devOptions: { enabled: false },
         manifest: false,
         workbox: {
-          globPatterns: ["**/*.{js,css,html,png,svg,woff2}"],
+          globPatterns: ["**/*.{js,css,html,png,svg,woff2,json}"],
+          maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
           navigateFallback: "/",
           navigateFallbackDenylist: [/^\/~oauth/, /^\/api\//],
           runtimeCaching: [
