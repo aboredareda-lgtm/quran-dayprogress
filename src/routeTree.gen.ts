@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HistoryRouteImport } from './routes/history'
+import { Route as MushafRouteImport } from './routes/mushaf'
 import { Route as NameRouteImport } from './routes/name'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -30,6 +31,11 @@ const ContactRoute = ContactRouteImport.update({
 const HistoryRoute = HistoryRouteImport.update({
   id: '/history',
   path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MushafRoute = MushafRouteImport.update({
+  id: '/mushaf',
+  path: '/mushaf',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NameRoute = NameRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/history': typeof HistoryRoute
+  '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/privacy': typeof PrivacyRoute
   '/settings': typeof SettingsRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/history': typeof HistoryRoute
+  '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/privacy': typeof PrivacyRoute
   '/settings': typeof SettingsRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/history': typeof HistoryRoute
+  '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/privacy': typeof PrivacyRoute
   '/settings': typeof SettingsRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/history'
+    | '/mushaf'
     | '/name'
     | '/privacy'
     | '/settings'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/history'
+    | '/mushaf'
     | '/name'
     | '/privacy'
     | '/settings'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/history'
+    | '/mushaf'
     | '/name'
     | '/privacy'
     | '/settings'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   HistoryRoute: typeof HistoryRoute
+  MushafRoute: typeof MushafRoute
   NameRoute: typeof NameRoute
   PrivacyRoute: typeof PrivacyRoute
   SettingsRoute: typeof SettingsRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/history'
       fullPath: '/history'
       preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mushaf': {
+      id: '/mushaf'
+      path: '/mushaf'
+      fullPath: '/mushaf'
+      preLoaderRoute: typeof MushafRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/name': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   HistoryRoute: HistoryRoute,
+  MushafRoute: MushafRoute,
   NameRoute: NameRoute,
   PrivacyRoute: PrivacyRoute,
   SettingsRoute: SettingsRoute,

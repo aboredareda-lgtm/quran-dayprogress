@@ -181,10 +181,10 @@ function Mushaf() {
                 </span>
               ))}
             </p>
-            {(atEnd || true) && surah! < 114 && (
+            {(
               <div className="mt-6 flex justify-between gap-2">
                 {surah! > 1 ? <button className={btn} onClick={() => goSurah(surah! - 1)}>السورة السابقة</button> : <span />}
-                <button className={btn} onClick={() => goSurah(surah! + 1)}>السورة التالية</button>
+                {surah! < 114 && <button className={btn} onClick={() => goSurah(surah! + 1)}>{atEnd ? "◀ " : ""}السورة التالية</button>}
               </div>
             )}
           </div>
