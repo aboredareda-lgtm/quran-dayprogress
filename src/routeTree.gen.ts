@@ -15,6 +15,7 @@ import { Route as HistoryRouteImport } from './routes/history'
 import { Route as MushafRouteImport } from './routes/mushaf'
 import { Route as NameRouteImport } from './routes/name'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as QiblaRouteImport } from './routes/qibla'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 
@@ -48,6 +49,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QiblaRoute = QiblaRouteImport.update({
+  id: '/qibla',
+  path: '/qibla',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/privacy': typeof PrivacyRoute
+  '/qibla': typeof QiblaRoute
   '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/privacy': typeof PrivacyRoute
+  '/qibla': typeof QiblaRoute
   '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/privacy': typeof PrivacyRoute
+  '/qibla': typeof QiblaRoute
   '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/mushaf'
     | '/name'
     | '/privacy'
+    | '/qibla'
     | '/settings'
     | '/welcome'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/mushaf'
     | '/name'
     | '/privacy'
+    | '/qibla'
     | '/settings'
     | '/welcome'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/mushaf'
     | '/name'
     | '/privacy'
+    | '/qibla'
     | '/settings'
     | '/welcome'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   MushafRoute: typeof MushafRoute
   NameRoute: typeof NameRoute
   PrivacyRoute: typeof PrivacyRoute
+  QiblaRoute: typeof QiblaRoute
   SettingsRoute: typeof SettingsRoute
   WelcomeRoute: typeof WelcomeRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/qibla': {
+      id: '/qibla'
+      path: '/qibla'
+      fullPath: '/qibla'
+      preLoaderRoute: typeof QiblaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   MushafRoute: MushafRoute,
   NameRoute: NameRoute,
   PrivacyRoute: PrivacyRoute,
+  QiblaRoute: QiblaRoute,
   SettingsRoute: SettingsRoute,
   WelcomeRoute: WelcomeRoute,
 }
