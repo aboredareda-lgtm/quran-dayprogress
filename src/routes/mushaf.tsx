@@ -4,7 +4,7 @@ import { SURAHS, getSurah } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 
 export const Route = createFileRoute("/mushaf")({
-  validateSearch: (s: Record<string, unknown>): { s?: number; a?: number } => ({
+  validateSearch: (s: Record<string, unknown>): { s?: number | undefined; a?: number | undefined } => ({
     s: Math.min(114, Math.max(1, Number(s["s"]) || 0)) || undefined,
     a: Number(s["a"]) || undefined,
   }),
