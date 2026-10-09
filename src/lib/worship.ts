@@ -66,6 +66,7 @@ export function normalizeArabic(text: string): string {
     .replace(/ة/g, "ه")
     .replace(/ؤ/g, "و")
     .replace(/ئ/g, "ي")
+    .replace(/ا/g, "") // الألف الخنجرية في الرسم العثماني تُكتب ألفًا عند البحث
     .replace(/\s+/g, " ")
     .trim();
 }
