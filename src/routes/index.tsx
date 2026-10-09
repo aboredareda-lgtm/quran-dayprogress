@@ -178,7 +178,13 @@ function Index() {
             <ReminderCard />
           </div>
 
-          <div className="mt-1 grid grid-cols-2 gap-1 tall:mt-2 tall:gap-2 min-[700px]:col-start-2 min-[700px]:row-start-3 min-[700px]:h-full min-[700px]:mt-0 min-[700px]:gap-3">
+          <div className="mt-1 grid grid-cols-3 gap-1 tall:mt-2 tall:gap-2 min-[700px]:col-start-2 min-[700px]:row-start-3 min-[700px]:h-full min-[700px]:mt-0 min-[700px]:gap-3">
+            <Link
+              to="/qibla"
+              className="pattern-cream flex items-center justify-center gap-1 rounded-2xl border border-gold/40 px-1 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
+            >
+              🕋 القبلة
+            </Link>
             <Link
               to="/history"
               className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
