@@ -22,6 +22,8 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>نستخدم موقعك لحساب اتجاه القبلة وأوقات الصلاة فقط، ولا يُرسل إلى أي جهة.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>
