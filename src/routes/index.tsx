@@ -7,7 +7,6 @@ import { Ornament, OrnamentDivider } from "@/components/Ornament";
 import { WirdHeader } from "@/components/WirdHeader";
 import { ProgressPanel } from "@/components/ProgressPanel";
 import { ReminderCard } from "@/components/ReminderCard";
-import { readingStreak } from "@/lib/worship";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -50,7 +49,6 @@ function Index() {
     }
   }, [navigate]);
 
-  const streak = useMemo(() => readingStreak(entries.map((e) => e.at)), [entries]);
   const [editing, setEditing] = useState(false);
   const [surah, setSurah] = useState(1);
   const [ayah, setAyah] = useState(1);
@@ -101,11 +99,6 @@ function Index() {
           ))}
           <OrnamentDivider />
 
-          {loaded && streak > 0 && (
-            <p className="mx-auto mt-0.5 w-fit rounded-full border border-gold/50 bg-secondary px-3 text-[0.7rem] font-bold text-primary tall:text-xs">
-              📖 {streak} {streak === 1 ? "يوم" : streak === 2 ? "يومان" : streak <= 10 ? "أيام" : "يومًا"} متتالية
-            </p>
-          )}
 
           <p className="mt-0.5 text-xs font-bold text-muted-foreground tall:mt-1 tall:text-sm">
             آخر ما وصلت إليه
