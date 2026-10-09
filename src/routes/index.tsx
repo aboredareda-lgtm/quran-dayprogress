@@ -146,6 +146,12 @@ function Index() {
             <Ornament className="h-4 w-4 text-gold-soft tall:h-6 tall:w-6" />
             حدد للمتابعة
           </button>
+          <Link
+            to="/mushaf"
+            className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-full border-2 border-primary/50 bg-card px-4 py-1.5 text-sm font-bold text-primary tall:mt-2 tall:py-2 tall:text-base"
+          >
+            📖 اقرأ من المصحف
+          </Link>
         </div>
 
         <div className="contents min-[700px]:grid min-[700px]:min-h-[38dvh] min-[700px]:w-full min-[700px]:grid-cols-2 min-[700px]:grid-rows-[repeat(4,minmax(auto,1fr))] min-[700px]:gap-5">
