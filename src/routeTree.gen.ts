@@ -11,9 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as HistoryRouteImport } from './routes/history'
+import { Route as MoreRouteImport } from './routes/more'
 import { Route as MushafRouteImport } from './routes/mushaf'
 import { Route as NameRouteImport } from './routes/name'
+import { Route as PlanRouteImport } from './routes/plan'
+import { Route as PrayerRouteImport } from './routes/prayer'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QiblaRouteImport } from './routes/qibla'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -29,9 +33,19 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HistoryRoute = HistoryRouteImport.update({
   id: '/history',
   path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MoreRoute = MoreRouteImport.update({
+  id: '/more',
+  path: '/more',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MushafRoute = MushafRouteImport.update({
@@ -42,6 +56,16 @@ const MushafRoute = MushafRouteImport.update({
 const NameRoute = NameRouteImport.update({
   id: '/name',
   path: '/name',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrayerRoute = PrayerRouteImport.update({
+  id: '/prayer',
+  path: '/prayer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -68,9 +92,13 @@ const WelcomeRoute = WelcomeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
+  '/more': typeof MoreRoute
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
+  '/plan': typeof PlanRoute
+  '/prayer': typeof PrayerRoute
   '/privacy': typeof PrivacyRoute
   '/qibla': typeof QiblaRoute
   '/settings': typeof SettingsRoute
@@ -79,9 +107,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
+  '/more': typeof MoreRoute
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
+  '/plan': typeof PlanRoute
+  '/prayer': typeof PrayerRoute
   '/privacy': typeof PrivacyRoute
   '/qibla': typeof QiblaRoute
   '/settings': typeof SettingsRoute
@@ -91,9 +123,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
+  '/more': typeof MoreRoute
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
+  '/plan': typeof PlanRoute
+  '/prayer': typeof PrayerRoute
   '/privacy': typeof PrivacyRoute
   '/qibla': typeof QiblaRoute
   '/settings': typeof SettingsRoute
@@ -104,9 +140,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/contact'
+    | '/favorites'
     | '/history'
+    | '/more'
     | '/mushaf'
     | '/name'
+    | '/plan'
+    | '/prayer'
     | '/privacy'
     | '/qibla'
     | '/settings'
@@ -115,9 +155,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/contact'
+    | '/favorites'
     | '/history'
+    | '/more'
     | '/mushaf'
     | '/name'
+    | '/plan'
+    | '/prayer'
     | '/privacy'
     | '/qibla'
     | '/settings'
@@ -126,9 +170,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/contact'
+    | '/favorites'
     | '/history'
+    | '/more'
     | '/mushaf'
     | '/name'
+    | '/plan'
+    | '/prayer'
     | '/privacy'
     | '/qibla'
     | '/settings'
@@ -138,9 +186,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  FavoritesRoute: typeof FavoritesRoute
   HistoryRoute: typeof HistoryRoute
+  MoreRoute: typeof MoreRoute
   MushafRoute: typeof MushafRoute
   NameRoute: typeof NameRoute
+  PlanRoute: typeof PlanRoute
+  PrayerRoute: typeof PrayerRoute
   PrivacyRoute: typeof PrivacyRoute
   QiblaRoute: typeof QiblaRoute
   SettingsRoute: typeof SettingsRoute
@@ -163,11 +215,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/history': {
       id: '/history'
       path: '/history'
       fullPath: '/history'
       preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/more': {
+      id: '/more'
+      path: '/more'
+      fullPath: '/more'
+      preLoaderRoute: typeof MoreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mushaf': {
@@ -182,6 +248,20 @@ declare module '@tanstack/react-router' {
       path: '/name'
       fullPath: '/name'
       preLoaderRoute: typeof NameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prayer': {
+      id: '/prayer'
+      path: '/prayer'
+      fullPath: '/prayer'
+      preLoaderRoute: typeof PrayerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -218,9 +298,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  FavoritesRoute: FavoritesRoute,
   HistoryRoute: HistoryRoute,
+  MoreRoute: MoreRoute,
   MushafRoute: MushafRoute,
   NameRoute: NameRoute,
+  PlanRoute: PlanRoute,
+  PrayerRoute: PrayerRoute,
   PrivacyRoute: PrivacyRoute,
   QiblaRoute: QiblaRoute,
   SettingsRoute: SettingsRoute,
