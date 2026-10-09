@@ -5,7 +5,7 @@ import { useReadingLog } from "@/hooks/useReadingLog";
 
 export const Route = createFileRoute("/mushaf")({
   validateSearch: (s: Record<string, unknown>): { s?: number | undefined; a?: number | undefined } => ({
-    s: Math.min(114, Math.max(1, Number(s["s"]) || 0)) || undefined,
+    s: Number(s["s"]) >= 1 && Number(s["s"]) <= 114 ? Number(s["s"]) : undefined,
     a: Number(s["a"]) || undefined,
   }),
   head: () => ({
