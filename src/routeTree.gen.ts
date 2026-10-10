@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as HistoryRouteImport } from './routes/history'
-import { Route as MoreRouteImport } from './routes/more'
 import { Route as MushafRouteImport } from './routes/mushaf'
 import { Route as NameRouteImport } from './routes/name'
 import { Route as PlanRouteImport } from './routes/plan'
@@ -41,11 +40,6 @@ const FavoritesRoute = FavoritesRouteImport.update({
 const HistoryRoute = HistoryRouteImport.update({
   id: '/history',
   path: '/history',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MoreRoute = MoreRouteImport.update({
-  id: '/more',
-  path: '/more',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MushafRoute = MushafRouteImport.update({
@@ -94,7 +88,6 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
-  '/more': typeof MoreRoute
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/plan': typeof PlanRoute
@@ -109,7 +102,6 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
-  '/more': typeof MoreRoute
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/plan': typeof PlanRoute
@@ -125,7 +117,6 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
-  '/more': typeof MoreRoute
   '/mushaf': typeof MushafRoute
   '/name': typeof NameRoute
   '/plan': typeof PlanRoute
@@ -142,7 +133,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/favorites'
     | '/history'
-    | '/more'
     | '/mushaf'
     | '/name'
     | '/plan'
@@ -157,7 +147,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/favorites'
     | '/history'
-    | '/more'
     | '/mushaf'
     | '/name'
     | '/plan'
@@ -172,7 +161,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/favorites'
     | '/history'
-    | '/more'
     | '/mushaf'
     | '/name'
     | '/plan'
@@ -188,7 +176,6 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FavoritesRoute: typeof FavoritesRoute
   HistoryRoute: typeof HistoryRoute
-  MoreRoute: typeof MoreRoute
   MushafRoute: typeof MushafRoute
   NameRoute: typeof NameRoute
   PlanRoute: typeof PlanRoute
@@ -227,13 +214,6 @@ declare module '@tanstack/react-router' {
       path: '/history'
       fullPath: '/history'
       preLoaderRoute: typeof HistoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/more': {
-      id: '/more'
-      path: '/more'
-      fullPath: '/more'
-      preLoaderRoute: typeof MoreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mushaf': {
@@ -300,7 +280,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FavoritesRoute: FavoritesRoute,
   HistoryRoute: HistoryRoute,
-  MoreRoute: MoreRoute,
   MushafRoute: MushafRoute,
   NameRoute: NameRoute,
   PlanRoute: PlanRoute,

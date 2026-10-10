@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Ornament } from "@/components/Ornament";
 import { GOAL_OPTIONS, useDailyGoal } from "@/hooks/useDailyGoal";
 import type { ReadingEntry } from "@/hooks/useReadingLog";
-import { ayahsReadToday, currentStreak, daysToFinish, mushafPercent } from "@/lib/progress";
+import { ayahsReadToday, daysToFinish, mushafPercent } from "@/lib/progress";
 
 function Bar({ percent }: { percent: number }) {
   return (
@@ -25,7 +25,7 @@ export function ProgressPanel({
   const { goal, updateGoal } = useDailyGoal();
   const [pickerOpen, setPickerOpen] = useState(false);
 
-  const streak = currentStreak(entries);
+  
   const today = ayahsReadToday(entries);
   const goalPercent = Math.round((today / goal) * 100);
   const overall = last ? mushafPercent(last.surah, last.ayah) : 0;
@@ -89,16 +89,11 @@ export function ProgressPanel({
 
       <Bar percent={overall} />
 
-      <div className="mt-1.5 flex items-center justify-between gap-2 tall:mt-2">
-        <p className="min-w-0 text-[0.68rem] leading-4 text-muted-foreground tall:text-xs">
-          {last
-            ? `ختمتك بعد نحو ${remainingDays} يومًا بإذن الله.`
-            : "سجّل موضعك ليبدأ حساب تقدّمك."}
-        </p>
-        <span className="shrink-0 rounded-full border border-gold/40 bg-secondary px-2.5 py-0.5 text-[0.8rem] font-bold text-secondary-foreground tall:text-sm">
-          {streak} أيام متواصلة
-        </span>
-      </div>
+      <p className="mt-2 rounded-xl bg-secondary px-3 py-1.5 text-center text-sm font-bold text-secondary-foreground">
+        {last
+          ? `⏳ ختمتك بعد نحو ${remainingDays} يومًا بإذن الله`
+          : "سجّل موضعك ليبدأ حساب تقدّمك."}
+      </p>
     </div>
   );
 }

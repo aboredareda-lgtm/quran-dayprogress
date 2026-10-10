@@ -29,7 +29,7 @@ function Favorites() {
   return (
     <main className="pattern-cream min-h-dvh px-4 pb-10 pt-[max(1rem,env(safe-area-inset-top))]" dir="rtl">
       <div className="mx-auto max-w-xl">
-        <Link to="/more" className="inline-block rounded-full border border-gold/50 bg-card px-4 py-1.5 text-sm font-bold text-primary">
+        <Link to="/" className="inline-block rounded-full border border-gold/50 bg-card px-4 py-1.5 text-sm font-bold text-primary">
           رجوع
         </Link>
         <h1 className="mt-4 text-center text-2xl font-bold text-primary">⭐ آياتي المفضلة</h1>
