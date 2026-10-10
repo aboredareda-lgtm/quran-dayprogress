@@ -89,145 +89,129 @@ function Index() {
   };
 
   return (
-    <main className="pattern-cream screen-fill mx-auto flex flex-col overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
+    <main className="pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden sm:max-w-[26rem]">
       <WirdHeader />
 
-      <section className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col justify-between px-3 pb-2 min-[380px]:px-4 tall:-mt-8 min-[700px]:mx-auto min-[700px]:w-full min-[700px]:max-w-5xl min-[700px]:gap-5 min-[700px]:px-8 min-[700px]:pb-12">
-        <div className="shadow-raised pattern-cream relative translate-y-0 rounded-[1.75rem] border-2 border-gold/55 px-3 py-2 text-center text-card-foreground transition-transform tall:rounded-[2rem] tall:p-3 min-[700px]:mx-auto min-[700px]:flex min-[700px]:min-h-52 min-[700px]:w-full min-[700px]:flex-col min-[700px]:justify-center min-[700px]:p-6">
-          {["top-1.5 right-1.5","top-1.5 left-1.5","bottom-1.5 right-1.5","bottom-1.5 left-1.5"].map((pos) => (
-            <Ornament key={pos} className={`pointer-events-none absolute ${pos} h-4 w-4 text-gold/70 tall:h-5 tall:w-5`} />
-          ))}
-          <OrnamentDivider />
-
-
-          <p className="mt-0.5 text-xs font-bold text-muted-foreground tall:mt-1 tall:text-sm">
-            آخر ما وصلت إليه
-          </p>
-
-          {!loaded ? (
-            <div className="mt-2 h-12 animate-pulse rounded-2xl bg-muted" />
-          ) : last ? (
-            <>
-              <p className="font-display mx-auto mt-0.5 w-fit max-w-full rounded-[2rem] border border-gold/60 bg-card px-5 text-[2.1rem] font-bold leading-tight text-primary shadow-[inset_0_0_0_3px_var(--card),inset_0_0_0_4px_color-mix(in_oklab,var(--gold)_35%,transparent)] tall:px-7 tall:text-[2.7rem]">
-                سورة {getSurah(last.surah).name}
+      <section className="relative z-10 -mt-14 flex flex-col gap-2.5 px-3 pb-[calc(env(safe-area-inset-bottom)+1rem)] min-[380px]:px-4 tall:-mt-20">
+        {/* آخر ما وصلت إليه */}
+        <div className="shadow-raised relative rounded-[1.75rem] border-2 border-gold/55 bg-card p-3 text-card-foreground">
+          <div className="flex gap-2">
+            <div className="flex w-[22%] shrink-0 flex-col items-center justify-center">
+              <img src={mushafImg} alt="" width={240} height={240} className="w-full" />
+            </div>
+            <div className="min-w-0 flex-1 text-center">
+              <p className="mx-auto w-fit rounded-full bg-secondary px-3 py-0.5 text-xs font-bold text-secondary-foreground tall:text-sm">
+                📖 آخر ما وصلت إليه
               </p>
-              <p className="text-[1.7rem] font-bold leading-tight text-primary tall:text-[2.1rem]">
-                الآية <span className="text-[2.5rem] tall:text-[3.2rem]">{last.ayah}</span>
-                <span className="mr-2 text-[1rem] font-medium text-muted-foreground tall:text-lg">
-                  من {getSurah(last.surah).ayahs}
-                </span>
-              </p>
-              <OrnamentDivider className="my-0.5" />
-              <p className="inline-block rounded-full border-2 border-gold/60 bg-sage px-5 py-0.5 text-[1.1rem] text-primary font-bold text-secondary-foreground tall:px-7 tall:py-1 tall:text-2xl">
-                الجزء {getJuz(last.surah, last.ayah)}
-              </p>
-
-              <p className="mt-1 text-[0.65rem] text-muted-foreground tall:text-xs">
-                {formatDate(last.at)}
-              </p>
-            </>
-          ) : (
-            <p className="mt-2 text-sm font-medium leading-relaxed tall:text-xl">
-              لم تسجّل موضعك بعد — ابدأ الآن وسجّل أول موضع.
-            </p>
-          )}
+              {!loaded ? (
+                <div className="mt-2 h-24 animate-pulse rounded-2xl bg-muted" />
+              ) : last ? (
+                <>
+                  <p className="font-display mx-auto mt-1.5 w-fit max-w-full rounded-[2rem] border-2 border-gold/60 bg-card px-4 text-[2.4rem] font-bold leading-tight text-primary shadow-[inset_0_0_0_3px_var(--card),inset_0_0_0_4px_color-mix(in_oklab,var(--gold)_35%,transparent)] tall:text-[2.9rem]">
+                    سورة {getSurah(last.surah).name}
+                  </p>
+                  <p className="mt-1 text-[1.9rem] font-extrabold leading-tight text-primary tall:text-[2.3rem]">
+                    الآية {last.ayah}
+                    <span className="mr-2 text-[1.2rem] font-bold text-muted-foreground tall:text-xl">
+                      من {getSurah(last.surah).ayahs}
+                    </span>
+                  </p>
+                  <p className="mx-auto mt-1 w-fit rounded-full border-2 border-gold/60 bg-primary px-7 py-1 text-[1.5rem] font-bold text-primary-foreground tall:text-[1.75rem]">
+                    الجزء {getJuz(last.surah, last.ayah)}
+                  </p>
+                  <p className="mt-1 text-[0.7rem] text-muted-foreground tall:text-xs">
+                    {formatDate(last.at)}
+                  </p>
+                </>
+              ) : (
+                <p className="mt-3 text-base font-medium leading-relaxed">
+                  لم تسجّل موضعك بعد — ابدأ الآن وسجّل أول موضع.
+                </p>
+              )}
+            </div>
+          </div>
 
           {saved && (
-            <p className="mt-2 rounded-xl border border-gold/40 bg-secondary px-3 py-1 text-[0.7rem] text-secondary-foreground tall:text-sm">
+            <p className="mt-2 rounded-xl border border-gold/40 bg-secondary px-3 py-1 text-center text-xs text-secondary-foreground">
               {khatmahSaved
                 ? "تمت الختمة، تقبّل الله منك — سُجّلت في عدّاد الختمات."
                 : "تم حفظ الموضع، بارك الله فيك."}
             </p>
           )}
 
-          <button
-            onClick={openEditor}
-            className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-full border-2 border-gold/60 bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground transition-transform active:scale-[0.98] tall:mt-2 tall:gap-3 tall:py-2 tall:text-base"
-          >
-            <Ornament className="h-4 w-4 text-gold-soft tall:h-6 tall:w-6" />
-            حدد للمتابعة
-          </button>
-          <Link
-            to="/mushaf"
-            className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-full border-2 border-primary/50 bg-card px-4 py-1.5 text-sm font-bold text-primary tall:mt-2 tall:py-2 tall:text-base"
-          >
-            📖 اقرأ من المصحف
-          </Link>
+          <div className="mt-2.5 grid grid-cols-2 gap-2">
+            <button
+              onClick={openEditor}
+              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-gold/60 bg-primary px-2 py-2.5 text-sm font-bold text-primary-foreground tall:text-base"
+            >
+              ▶ حدد للمتابعة
+            </button>
+            <Link
+              to="/mushaf"
+              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-primary/50 bg-card px-2 py-2.5 text-sm font-bold text-primary tall:text-base"
+            >
+              📖 اقرأ من المصحف
+            </Link>
+          </div>
         </div>
 
-        <div className="contents min-[700px]:grid min-[700px]:min-h-[38dvh] min-[700px]:w-full min-[700px]:grid-cols-2 min-[700px]:grid-rows-[repeat(4,minmax(auto,1fr))] min-[700px]:gap-5">
-          <div className="pattern-cream mt-1 grid grid-cols-3 divide-x divide-gold/30 rounded-2xl border border-gold/40 text-center tall:mt-2 tall:rounded-3xl min-[700px]:col-start-2 min-[700px]:row-start-1 min-[700px]:h-full min-[700px]:w-full min-[700px]:items-center min-[700px]:py-3">
-            {[
-              { value: daysTracked, label: "أيام المتابعة" },
-              { value: entries.length, label: "مرات التسجيل" },
-              { value: khatmahCount, label: "الخَتمات" },
-            ].map((s) => (
-              <div key={s.label} className="px-1.5 py-1 tall:py-1.5">
-                <p className="text-2xl font-bold text-primary tall:text-3xl">{s.value}</p>
-                <p className="text-[0.68rem] text-muted-foreground tall:mt-1 tall:text-sm">
-                  {s.label}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="contents min-[700px]:col-start-1 min-[700px]:row-span-4 min-[700px]:row-start-1 min-[700px]:block min-[700px]:min-w-0">
-            {loaded && <ProgressPanel entries={entries} last={last} />}
-          </div>
-
-          <div className="contents min-[700px]:col-start-2 min-[700px]:row-start-2 min-[700px]:block min-[700px]:min-w-0">
-            <ReminderCard />
-          </div>
-
-          <div className="mt-1 grid grid-cols-3 gap-1 tall:mt-2 tall:gap-2 min-[700px]:col-start-2 min-[700px]:row-start-3 min-[700px]:h-full min-[700px]:mt-0 min-[700px]:gap-3">
-            <Link
-              to="/more"
-              className="pattern-cream flex items-center justify-center gap-1 rounded-2xl border border-gold/40 px-1 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
-            >
-              ✨ المزيد
-            </Link>
-            <Link
-              to="/history"
-              className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
-            >
-              <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
-              سجل القراءة
-            </Link>
-            <Link
-              to="/settings"
-              className="pattern-cream flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:rounded-3xl tall:py-2 tall:text-base"
-            >
-              <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
-              الإعدادات
-            </Link>
-          </div>
-
-          <Link
-            to="/contact"
-            className="pattern-cream mt-1 flex items-center justify-center gap-1.5 rounded-2xl border border-gold/40 px-2 py-1 text-[0.8rem] font-bold text-primary tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base min-[700px]:col-start-2 min-[700px]:row-start-4 min-[700px]:h-full min-[700px]:mt-0 min-[700px]:min-h-14"
-          >
-            <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
-            تواصل مع الإدارة
-          </Link>
+        {/* الأرقام */}
+        <div className="grid grid-cols-3 gap-2 text-center">
+          {[
+            { icon: "📅", value: daysTracked, label: "أيام المتابعة" },
+            { icon: "📊", value: entries.length, label: "مرات التسجيل" },
+            { icon: "⭐", value: khatmahCount, label: "الخَتمات" },
+          ].map((s) => (
+            <div key={s.label} className="rounded-2xl border border-gold/40 bg-card px-1 py-2">
+              <p className="text-lg">{s.icon}</p>
+              <p className="text-2xl font-bold text-primary">{s.value}</p>
+              <p className="text-[0.72rem] text-muted-foreground tall:text-sm">{s.label}</p>
+            </div>
+          ))}
         </div>
 
-        <button
-          onClick={() => {
-            try {
-              window.sessionStorage.removeItem("wird:welcomed-session");
-            } catch {
-              /* تجاهل */
+        {loaded && <ProgressPanel entries={entries} last={last} />}
+
+        {/* الاختصارات */}
+        <div className="grid grid-cols-4 gap-2">
+          {tiles.map((t) => {
+            const cls = "flex flex-col items-center justify-center gap-1 rounded-2xl border border-gold/30 px-1 py-2.5 text-center text-[0.72rem] font-bold leading-tight text-primary tall:text-xs";
+            const inner = (
+              <>
+                <span className="text-2xl">{t.icon}</span>
+                {t.label}
+              </>
+            );
+            if ("to" in t) {
+              return (
+                <Link key={t.label} to={t.to} className={`${cls} ${t.bg}`}>
+                  {inner}
+                </Link>
+              );
             }
-            navigate({ to: "/welcome", replace: true });
-          }}
-          className="mt-1 flex w-full items-center justify-center gap-1.5 rounded-2xl border border-destructive/40 bg-destructive-soft px-2 py-1 text-[0.8rem] font-bold text-destructive-soft-foreground tall:mt-2 tall:rounded-3xl tall:py-2 tall:text-base min-[700px]:mx-auto min-[700px]:max-w-lg"
-        >
-          <Ornament className="h-4 w-4 text-gold tall:h-5 tall:w-5" />
-          صفحة الترحيب
-        </button>
+            return (
+              <button
+                key={t.label}
+                onClick={t.label === "تذكير الورد" ? () => setShowReminder((v) => !v) : goWelcome}
+                className={`${cls} ${t.bg}`}
+              >
+                {inner}
+              </button>
+            );
+          })}
+        </div>
 
-        <p className="mt-1 flex items-center justify-center gap-2 text-center text-[0.6rem] leading-3.5 text-muted-foreground tall:mt-3 tall:text-xs">
-          <Ornament className="h-3.5 w-3.5 shrink-0 text-gold tall:h-4 tall:w-4" />
+        {showReminder && <ReminderCard />}
+
+        <Link
+          to="/contact"
+          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-gold/60 bg-primary px-3 py-3 text-base font-bold text-primary-foreground"
+        >
+          💬 تواصل مع الإدارة
+        </Link>
+
+        <p className="flex items-center justify-center gap-2 text-center text-[0.65rem] leading-4 text-muted-foreground tall:text-xs">
+          <Ornament className="h-3.5 w-3.5 shrink-0 text-gold" />
           بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
         </p>
       </section>

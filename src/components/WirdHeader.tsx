@@ -22,7 +22,7 @@ export function WirdHeader() {
         الوِرد اليومي
       </h1>
       {name && (
-        <p className="relative text-base font-bold text-gold-deep tall:text-lg">أهلًا يا {name}</p>
+        <p className="relative text-base font-bold text-primary/80 tall:text-lg">أهلًا يا {name}</p>
       )}
     </header>
   );
