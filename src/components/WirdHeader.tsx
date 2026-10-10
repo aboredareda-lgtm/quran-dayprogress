@@ -7,7 +7,7 @@ export function WirdHeader() {
   const { name } = useUserName();
   return (
     <header
-      className="safe-top relative overflow-hidden bg-cover bg-bottom px-4 pb-11 text-center text-primary tall:pb-16 sm:px-5"
+      className="safe-top relative overflow-hidden bg-cover bg-bottom px-4 pb-7 text-center text-primary tall:pb-9 sm:px-5"
       style={{ backgroundImage: `url(${headerImg})` }}
     >
       <div className="relative mt-1 flex items-center justify-center gap-2 tall:mt-2">
@@ -22,7 +22,7 @@ export function WirdHeader() {
         الوِرد اليومي
       </h1>
       {name && (
-        <p className="relative text-base font-bold text-primary/80 tall:text-lg">أهلًا يا {name}</p>
+        <p className="relative mx-auto w-fit rounded-full bg-card/80 px-3 text-base font-bold text-primary tall:text-lg">أهلًا يا {name}</p>
       )}
     </header>
   );

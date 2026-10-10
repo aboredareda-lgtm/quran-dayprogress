@@ -32,7 +32,7 @@ export function ProgressPanel({
   const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : 0;
 
   return (
-    <div className="rounded-2xl border border-gold/40 bg-card px-3 py-1.5 text-card-foreground">
+    <div className="rounded-2xl border border-gold/40 bg-card px-3 py-1 text-card-foreground">
       <div className="flex items-center justify-between gap-2">
         <span className="flex min-w-0 items-center gap-1.5 text-sm font-bold text-primary">
           <Ornament className="h-4 w-4 shrink-0 text-gold" />
@@ -69,7 +69,7 @@ export function ProgressPanel({
         </div>
       )}
 
-      <div className="mt-1.5 flex items-center justify-between gap-2 text-sm font-bold text-primary">
+      <div className="mt-1 flex items-center justify-between gap-2 text-sm font-bold text-primary">
         <span className="min-w-0 truncate">
           تقدّمك في المصحف
           {last && (
