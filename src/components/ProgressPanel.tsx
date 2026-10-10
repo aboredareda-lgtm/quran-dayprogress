@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Ornament } from "@/components/Ornament";
 import { GOAL_OPTIONS, useDailyGoal } from "@/hooks/useDailyGoal";
 import type { ReadingEntry } from "@/hooks/useReadingLog";
-import { ayahsReadToday, currentStreak, daysToFinish, mushafPercent } from "@/lib/progress";
+import { ayahsReadToday, daysToFinish, mushafPercent } from "@/lib/progress";
 
 function Bar({ percent }: { percent: number }) {
   return (
@@ -25,7 +25,7 @@ export function ProgressPanel({
   const { goal, updateGoal } = useDailyGoal();
   const [pickerOpen, setPickerOpen] = useState(false);
 
-  const streak = currentStreak(entries);
+  
   const today = ayahsReadToday(entries);
   const goalPercent = Math.round((today / goal) * 100);
   const overall = last ? mushafPercent(last.surah, last.ayah) : 0;
