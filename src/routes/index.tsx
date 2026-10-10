@@ -115,7 +115,7 @@ function Index() {
     <main className="pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden sm:max-w-[26rem]">
       <WirdHeader />
 
-      <section className="relative z-10 -mt-8 flex flex-col gap-1.5 px-3 pb-[calc(env(safe-area-inset-bottom)+1rem)] min-[380px]:px-4 tall:-mt-10">
+      <section className="relative z-10 -mt-5 flex flex-col gap-1.5 px-3 pb-[calc(env(safe-area-inset-bottom)+1rem)] min-[380px]:px-4 tall:-mt-8">
         {/* آخر ما وصلت إليه */}
         <div className="shadow-raised relative rounded-[1.75rem] border-2 border-gold/55 bg-card p-3 text-card-foreground">
           <div className="flex gap-2">
@@ -164,16 +164,16 @@ function Index() {
             </p>
           )}
 
-          <div className="mt-2.5 grid grid-cols-2 gap-2">
+          <div className="mt-2 grid grid-cols-2 gap-2">
             <button
               onClick={openEditor}
-              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-gold/60 bg-primary px-2 py-2.5 text-sm font-bold text-primary-foreground tall:text-base"
+              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-gold/60 bg-primary px-2 py-2 text-sm font-bold text-primary-foreground tall:text-base"
             >
               ▶ حدد للمتابعة
             </button>
             <Link
               to="/mushaf"
-              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-primary/50 bg-card px-2 py-2.5 text-sm font-bold text-primary tall:text-base"
+              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-primary/50 bg-card px-2 py-2 text-sm font-bold text-primary tall:text-base"
             >
               📖 اقرأ من المصحف
             </Link>
@@ -189,8 +189,10 @@ function Index() {
           ].map((s) => (
             <div key={s.label} className="rounded-2xl border border-gold/40 bg-card px-1 py-1">
               
-              <p className="text-xl font-bold leading-tight text-primary">{s.value}</p>
-              <p className="text-[0.72rem] text-muted-foreground tall:text-sm">{s.label}</p>
+              <p className="text-[0.75rem] text-muted-foreground tall:text-sm">
+                <span className="ml-1 text-lg font-bold text-primary">{s.value}</span>
+                {s.label}
+              </p>
             </div>
           ))}
         </div>
@@ -198,9 +200,9 @@ function Index() {
         {loaded && <ProgressPanel entries={entries} last={last} />}
 
         {/* الاختصارات */}
-        <div className="grid grid-cols-2 gap-1.5">
+        <div className="grid grid-cols-4 gap-1.5">
           {tiles.map((t) => {
-            const cls = "flex items-center justify-center gap-1 rounded-xl border border-gold/30 px-1 py-1.5 text-center text-[0.7rem] font-bold leading-tight text-primary tall:text-xs";
+            const cls = "flex flex-col items-center justify-center gap-0.5 rounded-xl border border-gold/30 px-0.5 py-1 text-center text-[0.7rem] font-bold leading-tight text-primary tall:text-xs";
             const inner = (
               <>
                 <span className="text-base leading-none">{t.icon}</span>
