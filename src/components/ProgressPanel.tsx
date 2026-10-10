@@ -32,31 +32,24 @@ export function ProgressPanel({
   const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : 0;
 
   return (
-    <div className="pattern-cream mt-1 rounded-2xl border border-gold/40 p-1.5 text-card-foreground tall:mt-2 tall:rounded-3xl tall:p-2.5 min-[700px]:flex min-[700px]:h-full min-[700px]:flex-col min-[700px]:justify-between min-[700px]:p-6">
-      {/* الهدف اليومي */}
+    <div className="rounded-2xl border border-gold/40 bg-card px-3 py-1.5 text-card-foreground">
       <div className="flex items-center justify-between gap-2">
-        <span className="flex min-w-0 items-center gap-2 text-sm font-bold text-primary tall:text-base">
-          <Ornament className="h-4 w-4 shrink-0 text-gold tall:h-5 tall:w-5" />
-          وِردك اليوم
+        <span className="flex min-w-0 items-center gap-1.5 text-sm font-bold text-primary">
+          <Ornament className="h-4 w-4 shrink-0 text-gold" />
+          وِردك اليوم: {today} من {goal} آية
+          {today >= goal && <span className="text-primary">— أحسنت!</span>}
         </span>
         <button
           onClick={() => setPickerOpen((v) => !v)}
-          className="shrink-0 rounded-full border border-gold/50 bg-secondary px-2.5 py-1 text-[0.7rem] font-bold text-secondary-foreground tall:px-3 tall:text-xs"
+          className="shrink-0 rounded-full border border-gold/50 bg-secondary px-2 py-0.5 text-[0.68rem] font-bold text-secondary-foreground"
         >
-          الهدف: {goal} آية
+          الهدف
         </button>
       </div>
-
       <Bar percent={goalPercent} />
 
-      <p className="mt-1 text-[0.85rem] tall:mt-2 tall:text-base">
-        قرأت <span className="text-[1.05rem] font-bold text-primary tall:text-xl">{today}</span> آية
-        من {goal}
-        {today >= goal && <span className="mr-2 font-bold text-primary">— أحسنت!</span>}
-      </p>
-
       {pickerOpen && (
-        <div className="mt-2 flex flex-wrap gap-1.5 tall:mt-2 tall:gap-2">
+        <div className="mt-1.5 flex flex-wrap gap-1.5">
           {GOAL_OPTIONS.map((o) => (
             <button
               key={o.value}
@@ -64,7 +57,7 @@ export function ProgressPanel({
                 updateGoal(o.value);
                 setPickerOpen(false);
               }}
-              className={`rounded-full border px-2.5 py-1 text-[0.7rem] font-bold tall:px-3 tall:py-1.5 tall:text-xs ${
+              className={`rounded-full border px-2.5 py-1 text-[0.7rem] font-bold ${
                 o.value === goal
                   ? "border-gold/70 bg-primary text-primary-foreground"
                   : "border-border text-card-foreground"
@@ -76,24 +69,18 @@ export function ProgressPanel({
         </div>
       )}
 
-      <div className="mt-2 h-px w-full bg-gold/30 tall:mt-2" />
-
-      {/* التقدّم في المصحف */}
-      <div className="mt-1.5 flex items-center justify-between gap-2 text-sm font-bold text-primary tall:mt-3 tall:text-base">
-        <span className="flex min-w-0 items-center gap-2">
-          <Ornament className="h-4 w-4 shrink-0 text-gold tall:h-5 tall:w-5" />
+      <div className="mt-1.5 flex items-center justify-between gap-2 text-sm font-bold text-primary">
+        <span className="min-w-0 truncate">
           تقدّمك في المصحف
+          {last && (
+            <span className="mr-1 text-[0.7rem] font-medium text-muted-foreground">
+              · الختمة بعد نحو {remainingDays} يومًا
+            </span>
+          )}
         </span>
-        <span className="shrink-0 text-xl tall:text-2xl">{overall}%</span>
+        <span className="shrink-0">{overall}%</span>
       </div>
-
       <Bar percent={overall} />
-
-      <p className="mt-2 rounded-xl bg-secondary px-3 py-1.5 text-center text-sm font-bold text-secondary-foreground">
-        {last
-          ? `⏳ ختمتك بعد نحو ${remainingDays} يومًا بإذن الله`
-          : "سجّل موضعك ليبدأ حساب تقدّمك."}
-      </p>
     </div>
   );
 }
