@@ -36,8 +36,8 @@ export function ProgressPanel({
       <div className="flex items-center justify-between gap-2">
         <span className="flex min-w-0 items-center gap-1.5 text-sm font-bold text-primary">
           <Ornament className="h-4 w-4 shrink-0 text-gold" />
-          وِردك اليوم: {today} من {goal} آية
-          {today >= goal && <span className="text-primary">— أحسنت!</span>}
+          وِردك اليوم: {today} / {goal} آية
+          
         </span>
         <button
           onClick={() => setPickerOpen((v) => !v)}
