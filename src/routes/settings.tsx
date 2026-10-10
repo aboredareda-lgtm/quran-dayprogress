@@ -201,6 +201,9 @@ function Settings() {
             {message}
           </p>
         )}
+        <p className="text-center text-xs text-muted-foreground min-[700px]:col-span-2">
+          بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
+        </p>
       </section>
     </main>
   );
