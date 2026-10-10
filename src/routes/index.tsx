@@ -7,6 +7,19 @@ import { Ornament, OrnamentDivider } from "@/components/Ornament";
 import { WirdHeader } from "@/components/WirdHeader";
 import { ProgressPanel } from "@/components/ProgressPanel";
 import { ReminderCard } from "@/components/ReminderCard";
+import mushafImg from "@/assets/home-mushaf.webp";
+
+const tiles = [
+  { icon: "🕌", label: "أوقات الصلاة", to: "/prayer", bg: "bg-secondary" },
+  { icon: "🧭", label: "اتجاه القبلة", to: "/qibla", bg: "bg-muted" },
+  { icon: "📋", label: "خطة الختمة", to: "/plan", bg: "bg-secondary" },
+  { icon: "❤️", label: "آياتي المفضلة", to: "/favorites", bg: "bg-destructive-soft" },
+  { icon: "🏠", label: "صفحة الترحيب", bg: "bg-secondary" },
+  { icon: "⚙️", label: "الإعدادات", to: "/settings", bg: "bg-muted" },
+  { icon: "🔔", label: "تذكير الورد", bg: "bg-sage" },
+  { icon: "📚", label: "سجل القراءة", to: "/history", bg: "bg-muted" },
+] as const;
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,6 +68,16 @@ function Index() {
   const [note, setNote] = useState("");
   const [saved, setSaved] = useState(false);
   const [khatmahSaved, setKhatmahSaved] = useState(false);
+  const [showReminder, setShowReminder] = useState(false);
+
+  const goWelcome = () => {
+    try {
+      window.sessionStorage.removeItem("wird:welcomed-session");
+    } catch {
+      /* تجاهل */
+    }
+    navigate({ to: "/welcome", replace: true });
+  };
 
   const ayahCount = useMemo(() => getSurah(surah).ayahs, [surah]);
 
