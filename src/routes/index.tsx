@@ -115,7 +115,7 @@ function Index() {
     <main className="pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden sm:max-w-[26rem]">
       <WirdHeader />
 
-      <section className="relative z-10 -mt-14 flex flex-col gap-2.5 px-3 pb-[calc(env(safe-area-inset-bottom)+1rem)] min-[380px]:px-4 tall:-mt-20">
+      <section className="relative z-10 -mt-10 flex flex-col gap-2 px-3 pb-[calc(env(safe-area-inset-bottom)+1rem)] min-[380px]:px-4 tall:-mt-14">
         {/* آخر ما وصلت إليه */}
         <div className="shadow-raised relative rounded-[1.75rem] border-2 border-gold/55 bg-card p-3 text-card-foreground">
           <div className="flex gap-2">
@@ -185,9 +185,9 @@ function Index() {
             { icon: "📊", value: entries.length, label: "مرات التسجيل" },
             { icon: "⭐", value: khatmahCount, label: "الخَتمات" },
           ].map((s) => (
-            <div key={s.label} className="rounded-2xl border border-gold/40 bg-card px-1 py-2">
-              <p className="text-lg">{s.icon}</p>
-              <p className="text-2xl font-bold text-primary">{s.value}</p>
+            <div key={s.label} className="rounded-2xl border border-gold/40 bg-card px-1 py-1">
+              
+              <p className="text-xl font-bold leading-tight text-primary">{s.value}</p>
               <p className="text-[0.72rem] text-muted-foreground tall:text-sm">{s.label}</p>
             </div>
           ))}
@@ -196,12 +196,12 @@ function Index() {
         {loaded && <ProgressPanel entries={entries} last={last} />}
 
         {/* الاختصارات */}
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-1.5">
           {tiles.map((t) => {
-            const cls = "flex flex-col items-center justify-center gap-1 rounded-2xl border border-gold/30 px-1 py-2.5 text-center text-[0.72rem] font-bold leading-tight text-primary tall:text-xs";
+            const cls = "flex flex-col items-center justify-center gap-1 rounded-2xl border border-gold/30 px-1 py-1.5 text-center text-[0.7rem] font-bold leading-tight text-primary tall:text-xs";
             const inner = (
               <>
-                <span className="text-2xl">{t.icon}</span>
+                <span className="text-xl leading-none">{t.icon}</span>
                 {t.label}
               </>
             );
@@ -228,15 +228,11 @@ function Index() {
 
         <Link
           to="/contact"
-          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-gold/60 bg-primary px-3 py-3 text-base font-bold text-primary-foreground"
+          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-gold/60 bg-primary px-3 py-2 text-base font-bold text-primary-foreground"
         >
           💬 تواصل مع الإدارة
         </Link>
 
-        <p className="flex items-center justify-center gap-2 text-center text-[0.65rem] leading-4 text-muted-foreground tall:text-xs">
-          <Ornament className="h-3.5 w-3.5 shrink-0 text-gold" />
-          بياناتك محفوظة على هذا الجهاز فقط، فلا تتداخل مع قراءة أي شخص آخر.
-        </p>
       </section>
 
       {editing && (

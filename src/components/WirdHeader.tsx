@@ -7,7 +7,7 @@ export function WirdHeader() {
   const { name } = useUserName();
   return (
     <header
-      className="safe-top relative overflow-hidden bg-cover bg-bottom px-4 pb-24 text-center text-primary tall:pb-32 sm:px-5"
+      className="safe-top relative overflow-hidden bg-cover bg-bottom px-4 pb-16 text-center text-primary tall:pb-24 sm:px-5"
       style={{ backgroundImage: `url(${headerImg})` }}
     >
       <div className="relative mt-1 flex items-center justify-center gap-2 tall:mt-2">
