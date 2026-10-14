@@ -48,7 +48,7 @@ function formatDate(iso: string) {
 
 function Index() {
   const navigate = useNavigate();
-  const { last, daysTracked, entries, loaded, addEntry } = useReadingLog();
+  const { last, daysTracked, entries, loaded, addEntry, updateEntry } = useReadingLog();
   const { count: khatmahCount, addKhatmah } = useKhatmahs();
 
   // عند كل فتح للبرنامج → صفحة الترحيب
