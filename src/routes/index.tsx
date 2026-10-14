@@ -156,6 +156,22 @@ function Index() {
                   <p className="mt-1 text-[0.7rem] text-muted-foreground tall:text-xs">
                     {formatDate(last.at)}
                   </p>
+                  {last.note && (
+                    <div className="mt-1 flex items-center gap-2 rounded-xl border border-gold/30 bg-secondary px-2 py-1 text-xs text-secondary-foreground">
+                      <p className="min-w-0 flex-1">📝 {last.note}</p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (window.confirm("هل تريد حذف هذه الملاحظة؟ سيبقى الموضع محفوظًا.")) {
+                            updateEntry(last.id, { note: "" });
+                          }
+                        }}
+                        className="shrink-0 rounded-full bg-destructive-soft px-2 py-0.5 text-[0.65rem] font-bold text-destructive"
+                      >
+                        ✕ حذف الملاحظة
+                      </button>
+                    </div>
+                  )}
                 </>
               ) : (
                 <p className="mt-3 text-base font-medium leading-relaxed">
