@@ -91,9 +91,20 @@ function History() {
                       </p>
                       <p className="mt-1 text-xs text-muted-foreground">{formatDate(e.at)}</p>
                       {e.note && (
-                        <p className="mt-2 rounded-xl border border-gold/30 bg-secondary px-3 py-1.5 text-xs text-secondary-foreground">
-                          {e.note}
-                        </p>
+                        <div className="mt-2 flex items-start gap-2 rounded-xl border border-gold/30 bg-secondary px-3 py-1.5 text-xs text-secondary-foreground">
+                          <p className="min-w-0 flex-1">{e.note}</p>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (window.confirm("هل تريد حذف هذه الملاحظة؟ سيبقى الموضع محفوظًا.")) {
+                                updateEntry(e.id, { note: "" });
+                              }
+                            }}
+                            className="shrink-0 rounded-full bg-destructive-soft px-2 py-0.5 text-[0.65rem] font-bold text-destructive"
+                          >
+                            ✕ حذف الملاحظة
+                          </button>
+                        </div>
                       )}
                     </div>
                     <div className="flex shrink-0 flex-col gap-2">
