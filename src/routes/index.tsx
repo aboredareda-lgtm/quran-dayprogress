@@ -119,9 +119,18 @@ function Index() {
         {/* آخر ما وصلت إليه */}
         <div className="shadow-raised relative rounded-[1.75rem] border-2 border-gold/55 bg-card p-3 text-card-foreground">
           <div className="flex gap-2">
-            <div className="flex w-[22%] shrink-0 flex-col items-center justify-center">
-              <img src={mushafImg} alt="" width={240} height={240} className="w-full" />
-            </div>
+            <Link
+              to="/mushaf"
+              aria-label="اقرأ من المصحف"
+              className="group flex w-[22%] shrink-0 flex-col items-center justify-center gap-1"
+            >
+              <span className="block w-full rounded-full border-2 border-gold/50 p-1 transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_0_14px_4px_color-mix(in_oklab,var(--gold)_70%,transparent)] group-active:border-gold group-active:shadow-[0_0_14px_4px_color-mix(in_oklab,var(--gold)_70%,transparent)]">
+                <img src={mushafImg} alt="" width={240} height={240} className="w-full rounded-full transition-transform duration-300 group-hover:scale-105" />
+              </span>
+              <span className="text-center text-[0.6rem] font-bold leading-tight text-muted-foreground transition-colors group-hover:text-primary">
+                اقرأ من المصحف
+              </span>
+            </Link>
             <div className="min-w-0 flex-1 text-center">
               <p className="mx-auto w-fit rounded-full bg-secondary px-3 py-0.5 text-xs font-bold text-secondary-foreground tall:text-sm">
                 📖 آخر ما وصلت إليه
