@@ -54,7 +54,7 @@ function Welcome() {
           <button
             type="button"
             onClick={start}
-            className="btn-turquoise-3d block w-full rounded-full px-3 py-3 text-center font-display text-lg font-bold tracking-wide select-none"
+            className="btn-turquoise-3d block w-full rounded-full px-3 py-3 text-center font-display text-2xl font-bold tracking-wide select-none"
           >
             ابدأ المتابعة
           </button>
