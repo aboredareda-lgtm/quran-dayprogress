@@ -79,7 +79,7 @@ export function LayoutProvider({ ids, children }: { ids: string[]; children: Rea
 export function Block({ id, label, children }: { id: string; label: string; children: ReactNode }) {
   const ctx = useContext(LayoutCtx);
   if (!ctx) return <>{children}</>;
-  const item = ctx.layout[id];
+  const item = ctx.layout[id] ?? { order: 0, scale: 1, hidden: false };
   if (item.hidden && !ctx.editing) return null;
   const btn = "rounded-full bg-card px-2 py-0.5 text-sm font-bold text-primary border border-gold/50";
   return (
