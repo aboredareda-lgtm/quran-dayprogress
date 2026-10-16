@@ -8,6 +8,7 @@ import { WirdHeader } from "@/components/WirdHeader";
 import { ProgressPanel } from "@/components/ProgressPanel";
 import { ReminderCard } from "@/components/ReminderCard";
 import mushafImg from "@/assets/home-mushaf.webp";
+import { LayoutProvider, Block } from "@/components/LayoutEditor";
 
 const tiles = [
   { icon: "🕌", label: "أوقات الصلاة", to: "/prayer", bg: "bg-secondary" },
@@ -115,8 +116,10 @@ function Index() {
     <main className="pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden sm:max-w-[26rem]">
       <WirdHeader />
 
+      <LayoutProvider ids={["card", "stats", "progress", "tiles", "contact"]}>
       <section className="relative z-10 -mt-3 flex flex-col gap-1.5 px-3 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] min-[380px]:px-4 tall:-mt-4">
         {/* آخر ما وصلت إليه */}
+        <Block id="card" label="آخر ما وصلت إليه">
         <div className="shadow-raised relative rounded-[1.75rem] border-2 border-gold/55 bg-card p-3 text-card-foreground">
           <p className="mx-auto mb-1 w-fit rounded-full bg-secondary px-3 py-0.5 text-xs font-bold text-secondary-foreground tall:text-sm">
             📖 آخر ما وصلت إليه
@@ -204,8 +207,10 @@ function Index() {
             </Link>
           </div>
         </div>
+        </Block>
 
         {/* الأرقام */}
+        <Block id="stats" label="الأرقام">
         <div className="grid grid-cols-3 gap-2 text-center">
           {[
             { icon: "📅", value: daysTracked, label: "أيام المتابعة" },
@@ -221,10 +226,14 @@ function Index() {
             </div>
           ))}
         </div>
+        </Block>
 
+        <Block id="progress" label="وردك اليوم">
         {loaded && <ProgressPanel entries={entries} last={last} />}
+        </Block>
 
         {/* الاختصارات */}
+        <Block id="tiles" label="الاختصارات">
         <div className="grid grid-cols-4 gap-1.5">
           {tiles.map((t) => {
             const cls = "flex flex-col items-center justify-center gap-0.5 rounded-xl border border-gold/30 px-0.5 py-1 text-center text-[0.7rem] font-bold leading-tight text-primary tall:text-xs";
@@ -252,17 +261,21 @@ function Index() {
             );
           })}
         </div>
+        {showReminder && <div className="mt-1.5"><ReminderCard /></div>}
 
-        {showReminder && <ReminderCard />}
+        </Block>
 
+        <Block id="contact" label="تواصل">
         <Link
           to="/contact"
           className="flex items-center justify-center gap-2 rounded-2xl border-2 border-gold/60 bg-primary px-3 py-2 text-base font-bold text-primary-foreground"
         >
           💬 تواصل مع الإدارة
         </Link>
+        </Block>
 
       </section>
+      </LayoutProvider>
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 px-3 pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)] min-[380px]:px-4">
