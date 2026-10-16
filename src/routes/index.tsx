@@ -118,6 +118,9 @@ function Index() {
       <section className="relative z-10 -mt-3 flex flex-col gap-1.5 px-3 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] min-[380px]:px-4 tall:-mt-4">
         {/* آخر ما وصلت إليه */}
         <div className="shadow-raised relative rounded-[1.75rem] border-2 border-gold/55 bg-card p-3 text-card-foreground">
+          <p className="mx-auto mb-1 w-fit rounded-full bg-secondary px-3 py-0.5 text-xs font-bold text-secondary-foreground tall:text-sm">
+            📖 آخر ما وصلت إليه
+          </p>
           <div className="flex gap-2">
             <Link
               to="/mushaf"
@@ -132,9 +135,6 @@ function Index() {
               </span>
             </Link>
             <div className="min-w-0 flex-1 text-center">
-              <p className="mx-auto w-fit rounded-full bg-secondary px-3 py-0.5 text-xs font-bold text-secondary-foreground tall:text-sm">
-                📖 آخر ما وصلت إليه
-              </p>
               {!loaded ? (
                 <div className="mt-2 h-24 animate-pulse rounded-2xl bg-muted" />
               ) : last ? (
