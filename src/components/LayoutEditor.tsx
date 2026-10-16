@@ -39,15 +39,17 @@ export function LayoutProvider({ ids, children }: { ids: string[]; children: Rea
     }
   };
   const update = (id: string, patch: Partial<Item>) =>
-    save({ ...layout, [id]: { ...layout[id], ...patch } });
+    save({ ...layout, [id]: { ...(layout[id] as Item), ...patch } });
   const move = (id: string, dir: -1 | 1) => {
-    const sorted = [...ids].sort((a, b) => layout[a].order - layout[b].order);
+    const sorted = [...ids].sort((a, b) => (layout[a]?.order ?? 0) - (layout[b]?.order ?? 0));
     const i = sorted.indexOf(id);
     const j = i + dir;
     if (j < 0 || j >= sorted.length) return;
-    [sorted[i], sorted[j]] = [sorted[j], sorted[i]];
+    const tmp = sorted[i] as string;
+    sorted[i] = sorted[j] as string;
+    sorted[j] = tmp;
     const next = { ...layout };
-    sorted.forEach((k, n) => (next[k] = { ...next[k], order: n }));
+    sorted.forEach((k, n) => (next[k] = { ...(next[k] as Item), order: n }));
     save(next);
   };
 
