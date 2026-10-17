@@ -56,7 +56,7 @@ function Welcome() {
         />
         <div
           className="welcome-btn absolute inset-x-0 z-10 mx-auto w-[78%] max-w-[22rem]"
-          style={{ top: "min(calc(50% + 0.36 * max(100dvh, 100vw * 2.1875)), calc(100% - env(safe-area-inset-bottom) - 5rem))" }}
+          style={{ top: "min(calc(50% + 0.36 * max(100dvh, 100vw * 2.1875) + 1rem), calc(100% - env(safe-area-inset-bottom) - 4rem))" }}
         >
           <Button
             type="button"
