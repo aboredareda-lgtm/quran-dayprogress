@@ -320,6 +320,6 @@
     aspect-ratio: 1 / 2.1875;
   }
   .welcome-btn {
-    top: min(86%, calc(100% - env(safe-area-inset-bottom) - 5rem)) !important;
+    top: min(calc(86% + 1rem), calc(100% - env(safe-area-inset-bottom) - 4rem)) !important;
   }
 }
