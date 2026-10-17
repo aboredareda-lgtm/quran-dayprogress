@@ -18,8 +18,7 @@ export function LayoutProvider({ ids, children }: { ids: string[]; children: Rea
   const initial = (): Layout =>
     Object.fromEntries(ids.map((id, i) => [id, { order: i, scale: 1, hidden: false }]));
   const [layout, setLayout] = useState<Layout>(initial);
-  const [editing, setEditing] = useState(false);
-  const [snapshot, setSnapshot] = useState<Layout | null>(null);
+  const editing = false;
 
   useEffect(() => {
     try {
@@ -57,36 +56,6 @@ export function LayoutProvider({ ids, children }: { ids: string[]; children: Rea
   return (
     <LayoutCtx.Provider value={{ editing, layout, ids, update, move }}>
       {children}
-      <div className="fixed bottom-3 left-3 z-[60] flex flex-col gap-2">
-        {editing && (
-          <button
-            onClick={() => {
-              if (snapshot) save(snapshot);
-              setEditing(false);
-            }}
-            className="rounded-full border-2 border-destructive/50 bg-destructive-soft px-3 py-2 text-xs font-bold text-destructive"
-          >
-            ✕ إلغاء التغييرات
-          </button>
-        )}
-        {editing && (
-          <button
-            onClick={() => window.confirm("استرجاع التصميم الأصلي؟") && save(initial())}
-            className="rounded-full border-2 border-gold/60 bg-card px-3 py-2 text-xs font-bold text-primary"
-          >
-            ↺ الأصلي
-          </button>
-        )}
-        <button
-          onClick={() => {
-            if (!editing) setSnapshot(layout);
-            setEditing((v) => !v);
-          }}
-          className="rounded-full border-2 border-gold/60 bg-primary px-4 py-2 text-sm font-bold text-primary-foreground"
-        >
-          {editing ? "✓ تم" : "✏️ ترتيب الصفحة"}
-        </button>
-      </div>
     </LayoutCtx.Provider>
   );
 }
