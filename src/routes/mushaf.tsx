@@ -179,7 +179,8 @@ function Mushaf() {
           <select
             value={surah ?? 1}
             onChange={(e) => goSurah(Number(e.target.value))}
-            className="min-w-0 flex-1 rounded-full border-2 border-gold/60 bg-background px-3 py-1.5 text-sm font-bold text-primary outline-none focus:border-gold focus:ring-2 focus:ring-gold/40 focus-visible:outline-none"
+            style={{ textAlignLast: "center" }}
+            className="min-w-0 flex-1 rounded-full border-2 border-gold/60 bg-background px-3 py-2 text-center text-xl font-bold text-primary outline-none focus:border-gold focus:ring-2 focus:ring-gold/40 focus-visible:outline-none"
           >
             {SURAHS.map((s) => (
               <option key={s.number} value={s.number}>{toAr(s.number)}. {s.name}</option>
