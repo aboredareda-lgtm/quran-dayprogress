@@ -317,9 +317,9 @@
     margin-inline: auto;
     height: 100%;
     width: auto;
-    aspect-ratio: 1 / 2.184;
+    aspect-ratio: 1 / 2.1875;
   }
   .welcome-btn {
-    top: 75% !important;
+    top: min(86%, calc(100% - env(safe-area-inset-bottom) - 5rem)) !important;
   }
 }
