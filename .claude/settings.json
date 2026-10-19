@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"$CLAUDE_PROJECT_DIR/STATUS.md\" 2>/dev/null; echo; echo '--- live git status ---'; git -C \"$CLAUDE_PROJECT_DIR\" status -sb 2>/dev/null | head -15; true",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
