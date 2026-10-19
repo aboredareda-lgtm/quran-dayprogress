@@ -1,8 +1,10 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import type { SyntheticEvent } from "react";
 
 import welcomeCoverAsset from "@/assets/welcome-cover-new.jpg.asset.json";
 // Capacitor's offline app cannot serve CDN asset paths; keep a bundled fallback.
 import welcomeCoverOffline from "@/assets/welcome-cover-new.jpg";
+import welcomeCoverTablet from "@/assets/welcome-cover-ipad.jpg";
 import { Button } from "@/components/ui/button";
 import { readUserName } from "@/hooks/useUserName";
 
@@ -41,19 +43,24 @@ function Welcome() {
     navigate({ to: readUserName() ? "/" : "/name" });
   };
 
+  const showOfflineCover = (event: SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.onerror = null;
+    event.currentTarget.src = welcomeCoverOffline;
+  };
+
   return (
-    <main className="fixed inset-0 h-[100dvh] w-full overflow-hidden bg-card">
-      {/* الجوال: الصورة تملأ الشاشة. الشاشات العريضة: الصورة كاملة بطول الشاشة في المنتصف. */}
+    <main className="welcome-main fixed inset-0 h-[100dvh] w-full overflow-hidden bg-card">
+      {/* الجوال: الصورة الطولية تملأ الشاشة. الآيباد: نسخة 3:4 من التصميم نفسه تملأ الشاشة. */}
       <div className="welcome-frame absolute inset-0">
-        <img
-          src={welcomeCoverAsset.url}
-          onError={(event) => {
-            event.currentTarget.onerror = null;
-            event.currentTarget.src = welcomeCoverOffline;
-          }}
-          alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
-          className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
-        />
+        <picture>
+          <source media="(min-aspect-ratio: 3/5)" srcSet={welcomeCoverTablet} />
+          <img
+            src={welcomeCoverAsset.url}
+            onError={showOfflineCover}
+            alt="الوِرد اليومي — رفيقك لمتابعة قراءة القرآن الكريم"
+            className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
+          />
+        </picture>
         <div
           className="welcome-btn absolute inset-x-0 z-10 mx-auto w-[78%] max-w-[22rem]"
           style={{ top: "min(calc(50% + 0.36 * max(100dvh, 100vw * 2.1875) + 1rem), calc(100% - env(safe-area-inset-bottom) - 4rem))" }}

@@ -309,17 +309,24 @@
   }
 }
 
-/* شاشة البداية على الشاشات العريضة: الصورة كاملة بطول الشاشة في المنتصف */
-@media (min-aspect-ratio: 3/4) {
+/* شاشة البداية على الآيباد: صورة 3:4 تملأ الشاشة، والزر على أرضية الصورة */
+@media (min-aspect-ratio: 3/5) {
+  .welcome-btn {
+    top: min(calc(86% + 1rem), calc(100% - env(safe-area-inset-bottom) - 4rem)) !important;
+  }
+}
+
+/* الشاشات الأعرض (الآيباد أفقيًا والحاسوب): صورة 3:4 كاملة بطول الشاشة في المنتصف */
+@media (min-aspect-ratio: 1/1) {
+  .welcome-main {
+    background: #0c241b;
+  }
   .welcome-frame {
     position: relative;
     inset: auto;
     margin-inline: auto;
     height: 100%;
     width: auto;
-    aspect-ratio: 1 / 2.1875;
-  }
-  .welcome-btn {
-    top: min(calc(86% + 1rem), calc(100% - env(safe-area-inset-bottom) - 4rem)) !important;
+    aspect-ratio: 3 / 4;
   }
 }

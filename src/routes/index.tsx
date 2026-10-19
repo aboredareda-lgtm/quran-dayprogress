@@ -113,27 +113,27 @@ function Index() {
   };
 
   return (
-    <main className="pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden sm:max-w-[26rem]">
+    <main className="pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
       <WirdHeader />
 
       <LayoutProvider ids={["card", "stats", "progress", "tiles", "contact"]}>
-      <section className="relative z-10 -mt-3 flex flex-col gap-1.5 px-3 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] min-[380px]:px-4 tall:-mt-4">
+      <section className="relative z-10 -mt-3 flex flex-col gap-1.5 px-3 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] min-[380px]:px-4 tall:-mt-4 min-[700px]:-mt-8 min-[700px]:flex-1 min-[700px]:gap-[min(0.75rem,0.9dvh)] min-[700px]:px-10 min-[700px]:pb-[calc(env(safe-area-inset-bottom)+1rem)]">
         {/* آخر ما وصلت إليه */}
         <Block id="card" label="آخر ما وصلت إليه">
-        <div className="shadow-raised relative rounded-[1.75rem] border-2 border-gold/55 bg-card p-3 text-card-foreground">
-          <p className="mx-auto mb-1 w-fit rounded-full bg-secondary px-3 py-0.5 text-xs font-bold text-secondary-foreground tall:text-sm">
+        <div className="shadow-raised relative rounded-[1.75rem] border-2 border-gold/55 bg-card p-3 text-card-foreground min-[700px]:rounded-[2.5rem] min-[700px]:px-8 min-[700px]:py-[min(1.25rem,1.45dvh)]">
+          <p className="mx-auto mb-1 w-fit rounded-full bg-secondary px-3 py-0.5 text-xs font-bold text-secondary-foreground tall:text-sm min-[700px]:mb-3 min-[700px]:px-5 min-[700px]:py-1 min-[700px]:text-lg!">
             📖 آخر ما وصلت إليه
           </p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 min-[700px]:items-center min-[700px]:gap-6">
             <Link
               to="/mushaf"
               aria-label="اقرأ من المصحف"
-              className="group flex w-[22%] shrink-0 flex-col items-center justify-center gap-1"
+              className="group flex w-[22%] shrink-0 flex-col items-center justify-center gap-1 min-[700px]:gap-2"
             >
               <span className="block w-full rounded-full border-2 border-gold/50 p-1 transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_0_14px_4px_color-mix(in_oklab,var(--gold)_70%,transparent)] group-active:border-gold group-active:shadow-[0_0_14px_4px_color-mix(in_oklab,var(--gold)_70%,transparent)]">
                 <img src={mushafImg} alt="" width={240} height={240} className="w-full rounded-full transition-transform duration-300 group-hover:scale-105" />
               </span>
-              <span className="text-center text-[0.6rem] font-bold leading-tight text-muted-foreground transition-colors group-hover:text-primary">
+              <span className="text-center text-[0.6rem] font-bold leading-tight text-muted-foreground transition-colors group-hover:text-primary min-[700px]:text-base">
                 اقرأ من المصحف
               </span>
             </Link>
@@ -142,25 +142,25 @@ function Index() {
                 <div className="mt-2 h-24 animate-pulse rounded-2xl bg-muted" />
               ) : last ? (
                 <>
-                  <p className="font-display mx-auto mt-1.5 w-fit max-w-full rounded-[2rem] border-2 border-gold/60 bg-card px-4 text-[2.4rem] font-bold leading-tight text-primary shadow-[inset_0_0_0_3px_var(--card),inset_0_0_0_4px_color-mix(in_oklab,var(--gold)_35%,transparent)] tall:text-[2.6rem]">
+                  <p className="font-display mx-auto mt-1.5 w-fit max-w-full rounded-[2rem] border-2 border-gold/60 bg-card px-4 text-[2.4rem] font-bold leading-tight text-primary shadow-[inset_0_0_0_3px_var(--card),inset_0_0_0_4px_color-mix(in_oklab,var(--gold)_35%,transparent)] tall:text-[2.6rem] min-[700px]:px-10 min-[700px]:text-[min(4.2rem,4.9dvh)]!">
                     سورة {getSurah(last.surah).name}
                   </p>
-                  <div className="mt-1 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-                    <p className="text-[1.9rem] font-extrabold leading-tight text-primary tall:text-[2.3rem]">
+                  <div className="mt-1 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 min-[700px]:mt-3 min-[700px]:gap-x-6">
+                    <p className="text-[1.9rem] font-extrabold leading-tight text-primary tall:text-[2.3rem] min-[700px]:text-[min(3.4rem,3.95dvh)]!">
                       الآية {last.ayah}
-                      <span className="mr-1 text-[1.1rem] font-bold text-muted-foreground">
+                      <span className="mr-1 text-[1.1rem] font-bold text-muted-foreground min-[700px]:mr-2 min-[700px]:text-[1.8rem]">
                         من {getSurah(last.surah).ayahs}
                       </span>
                     </p>
-                    <p className="w-fit rounded-full border-2 border-gold/60 bg-primary px-4 py-0.5 text-[1.4rem] font-bold text-primary-foreground tall:text-[1.6rem]">
+                    <p className="w-fit rounded-full border-2 border-gold/60 bg-primary px-4 py-0.5 text-[1.4rem] font-bold text-primary-foreground tall:text-[1.6rem] min-[700px]:px-8 min-[700px]:py-1 min-[700px]:text-[min(2.4rem,2.8dvh)]!">
                       الجزء {getJuz(last.surah, last.ayah)}
                     </p>
                   </div>
-                  <p className="mt-1 text-[0.7rem] text-muted-foreground tall:text-xs">
+                  <p className="mt-1 text-[0.7rem] text-muted-foreground tall:text-xs min-[700px]:mt-3 min-[700px]:text-lg!">
                     {formatDate(last.at)}
                   </p>
                   {last.note && (
-                    <div className="mt-1 flex items-center gap-2 rounded-xl border border-gold/30 bg-secondary px-2 py-1 text-xs text-secondary-foreground">
+                    <div className="mt-1 flex items-center gap-2 rounded-xl border border-gold/30 bg-secondary px-2 py-1 text-xs text-secondary-foreground min-[700px]:mx-auto min-[700px]:mt-3 min-[700px]:max-w-xl min-[700px]:rounded-2xl min-[700px]:px-4 min-[700px]:py-2 min-[700px]:text-lg">
                       <p className="min-w-0 flex-1">📝 {last.note}</p>
                       <button
                         type="button"
@@ -169,7 +169,7 @@ function Index() {
                             updateEntry(last.id, { note: "" });
                           }
                         }}
-                        className="shrink-0 rounded-full bg-destructive-soft px-2 py-0.5 text-[0.65rem] font-bold text-destructive"
+                        className="shrink-0 rounded-full bg-destructive-soft px-2 py-0.5 text-[0.65rem] font-bold text-destructive min-[700px]:px-3 min-[700px]:text-sm"
                       >
                         ✕ حذف الملاحظة
                       </button>
@@ -192,16 +192,16 @@ function Index() {
             </p>
           )}
 
-          <div className="mt-2 grid grid-cols-2 gap-2">
+          <div className="mt-2 grid grid-cols-2 gap-2 min-[700px]:mt-5 min-[700px]:gap-4">
             <button
               onClick={openEditor}
-              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-gold/60 bg-primary px-2 py-2 text-sm font-bold text-primary-foreground tall:text-base"
+              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-gold/60 bg-primary px-2 py-2 text-sm font-bold text-primary-foreground tall:text-base min-[700px]:rounded-3xl min-[700px]:py-[min(1rem,1.15dvh)] min-[700px]:text-2xl!"
             >
               ▶ حدد للمتابعة
             </button>
             <Link
               to="/mushaf"
-              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-primary/50 bg-card px-2 py-2 text-sm font-bold text-primary tall:text-base"
+              className="flex items-center justify-center gap-1.5 rounded-2xl border-2 border-primary/50 bg-card px-2 py-2 text-sm font-bold text-primary tall:text-base min-[700px]:rounded-3xl min-[700px]:py-[min(1rem,1.15dvh)] min-[700px]:text-2xl!"
             >
               📖 اقرأ من المصحف
             </Link>
@@ -211,16 +211,16 @@ function Index() {
 
         {/* الأرقام */}
         <Block id="stats" label="الأرقام">
-        <div className="grid grid-cols-3 gap-2 text-center">
+        <div className="grid grid-cols-3 gap-2 text-center min-[700px]:gap-4">
           {[
             { icon: "📅", value: daysTracked, label: "أيام المتابعة" },
             { icon: "📊", value: entries.length, label: "مرات التسجيل" },
             { icon: "⭐", value: khatmahCount, label: "الخَتمات" },
           ].map((s) => (
-            <div key={s.label} className="rounded-2xl border border-gold/40 bg-card px-1 py-1">
-              
-              <p className="text-[0.75rem] text-muted-foreground tall:text-sm">
-                <span className="ml-1 text-lg font-bold text-primary">{s.value}</span>
+            <div key={s.label} className="rounded-2xl border border-gold/40 bg-card px-1 py-1 min-[700px]:rounded-3xl min-[700px]:py-[min(0.75rem,0.9dvh)]">
+
+              <p className="text-[0.75rem] text-muted-foreground tall:text-sm min-[700px]:text-xl!">
+                <span className="ml-1 text-lg font-bold text-primary min-[700px]:ml-2 min-[700px]:text-[min(2.25rem,2.6dvh)]">{s.value}</span>
                 {s.label}
               </p>
             </div>
@@ -234,12 +234,12 @@ function Index() {
 
         {/* الاختصارات */}
         <Block id="tiles" label="الاختصارات">
-        <div className="grid grid-cols-4 gap-1.5">
+        <div className="grid grid-cols-4 gap-1.5 min-[700px]:gap-4">
           {tiles.map((t) => {
-            const cls = "flex flex-col items-center justify-center gap-0.5 rounded-xl border border-gold/30 px-0.5 py-1 text-center text-[0.7rem] font-bold leading-tight text-primary tall:text-xs";
+            const cls = "flex flex-col items-center justify-center gap-0.5 rounded-xl border border-gold/30 px-0.5 py-1 text-center text-[0.7rem] font-bold leading-tight text-primary tall:text-xs min-[700px]:gap-2 min-[700px]:rounded-3xl min-[700px]:py-[min(1rem,1.15dvh)] min-[700px]:text-xl!";
             const inner = (
               <>
-                <span className="text-base leading-none">{t.icon}</span>
+                <span className="text-base leading-none min-[700px]:text-[min(2.25rem,2.6dvh)]">{t.icon}</span>
                 {t.label}
               </>
             );
@@ -268,7 +268,7 @@ function Index() {
         <Block id="contact" label="تواصل">
         <Link
           to="/contact"
-          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-gold/60 bg-primary px-3 py-2 text-base font-bold text-primary-foreground"
+          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-gold/60 bg-primary px-3 py-2 text-base font-bold text-primary-foreground min-[700px]:rounded-3xl min-[700px]:py-[min(1.25rem,1.45dvh)] min-[700px]:text-2xl"
         >
           💬 تواصل مع الإدارة
         </Link>

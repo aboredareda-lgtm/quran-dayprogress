@@ -6,7 +6,7 @@ import { ayahsReadToday, daysToFinish, mushafPercent } from "@/lib/progress";
 
 function Bar({ percent }: { percent: number }) {
   return (
-    <div className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full border border-gold/40 bg-muted tall:mt-2 tall:h-3">
+    <div className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full border border-gold/40 bg-muted tall:mt-2 tall:h-3 min-[700px]:mt-3! min-[700px]:h-5!">
       <div
         className="h-full rounded-full bg-gradient-calm transition-[width] duration-500"
         style={{ width: `${Math.min(Math.max(percent, 0), 100)}%` }}
@@ -32,16 +32,16 @@ export function ProgressPanel({
   const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : 0;
 
   return (
-    <div className="rounded-2xl border border-gold/40 bg-card px-3 py-1 text-card-foreground">
+    <div className="rounded-2xl border border-gold/40 bg-card px-3 py-1 text-card-foreground min-[700px]:rounded-3xl min-[700px]:px-7 min-[700px]:py-[min(1.25rem,1.45dvh)]">
       <div className="flex items-center justify-between gap-2">
-        <span className="flex min-w-0 items-center gap-1.5 text-sm font-bold text-primary">
-          <Ornament className="h-4 w-4 shrink-0 text-gold" />
+        <span className="flex min-w-0 items-center gap-1.5 text-sm font-bold text-primary min-[700px]:gap-3 min-[700px]:text-2xl">
+          <Ornament className="h-4 w-4 shrink-0 text-gold min-[700px]:h-7 min-[700px]:w-7" />
           وِردك اليوم: {today} / {goal} آية
-          
+
         </span>
         <button
           onClick={() => setPickerOpen((v) => !v)}
-          className="shrink-0 rounded-full border border-gold/50 bg-secondary px-2 py-0.5 text-[0.68rem] font-bold text-secondary-foreground"
+          className="shrink-0 rounded-full border border-gold/50 bg-secondary px-2 py-0.5 text-[0.68rem] font-bold text-secondary-foreground min-[700px]:px-4 min-[700px]:py-1 min-[700px]:text-base"
         >
           الهدف
         </button>
@@ -69,11 +69,11 @@ export function ProgressPanel({
         </div>
       )}
 
-      <div className="mt-1 flex items-center justify-between gap-2 text-sm font-bold text-primary">
+      <div className="mt-1 flex items-center justify-between gap-2 text-sm font-bold text-primary min-[700px]:mt-4 min-[700px]:text-2xl">
         <span className="min-w-0 truncate">
           تقدّمك في المصحف
           {last && (
-            <span className="mr-1 text-[0.7rem] font-medium text-muted-foreground">
+            <span className="mr-1 text-[0.7rem] font-medium text-muted-foreground min-[700px]:mr-2 min-[700px]:text-lg">
               · الختمة بعد نحو {remainingDays} يومًا
             </span>
           )}
