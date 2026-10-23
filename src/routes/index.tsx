@@ -341,7 +341,7 @@ function Index() {
               </button>
               <button
                 onClick={() => setEditing(false)}
-                className="rounded-full border border-border px-6 py-3 font-medium"
+                className="btn-emboss rounded-full px-6 py-3 font-medium"
               >
                 إلغاء
               </button>

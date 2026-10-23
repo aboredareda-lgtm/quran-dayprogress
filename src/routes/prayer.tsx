@@ -108,7 +108,7 @@ function Prayer() {
               ))}
             </ul>
             <p className="mt-3 text-center text-xs text-muted-foreground">طريقة أم القرى — الأوقات تقريبية.</p>
-            <button onClick={locate} className="mt-3 w-full rounded-full border border-border py-2 text-sm">
+            <button onClick={locate} className="mt-3 w-full btn-emboss rounded-full py-2 text-sm">
               تحديث الموقع
             </button>
           </>

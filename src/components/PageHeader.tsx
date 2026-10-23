@@ -15,7 +15,7 @@ export function PageHeader({ title, back = "/", backLabel = "عودة للرئي
         → {backLabel}
       </Link>
       <div className="relative mx-auto mt-2 max-w-xs">
-        <svg viewBox="0 0 300 120" className="absolute inset-0 h-full w-full text-gold" aria-hidden preserveAspectRatio="none">
+        <svg viewBox="0 0 300 120" className="absolute inset-0 h-full w-full text-gold drop-shadow-[0_6px_6px_oklch(0_0_0/0.55)]" aria-hidden preserveAspectRatio="none">
           <path
             d="M6 118V70C6 50 26 42 48 40 78 38 100 26 120 12 135 2 150 0 150 0s15 2 30 12c20 14 42 26 72 28 22 2 42 10 42 30v48"
             fill="oklch(0.2 0.045 160 / 0.55)"
@@ -31,7 +31,7 @@ export function PageHeader({ title, back = "/", backLabel = "عودة للرئي
           />
         </svg>
         <div className="relative px-6 pt-10 pb-3 text-center">
-          <h1 className="font-display text-3xl font-bold text-gold-soft">{title}</h1>
+          <h1 className="font-display text-3xl font-bold text-gold-soft [text-shadow:0_2px_0_oklch(0.4_0.08_70),0_4px_8px_oklch(0_0_0/0.5)]">{title}</h1>
           <OrnamentDivider className="mt-1" />
         </div>
       </div>

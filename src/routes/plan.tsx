@@ -54,7 +54,7 @@ function Plan() {
             </Link>
             <button
               onClick={() => window.confirm("هل تريد إلغاء الخطة؟") && setPlan(null)}
-              className="mt-4 block w-full rounded-full border border-border py-2 text-sm"
+              className="mt-4 block w-full btn-emboss rounded-full py-2 text-sm"
             >
               إلغاء الخطة
             </button>
@@ -67,7 +67,7 @@ function Plan() {
                 <button
                   key={d}
                   onClick={() => setDays(d)}
-                  className={`rounded-xl border-2 py-2 font-bold ${days === d ? "border-primary bg-primary text-primary-foreground" : "border-gold/40 text-primary"}`}
+                  className={`rounded-xl py-2 font-bold ${days === d ? "btn-pressed bg-primary text-primary-foreground" : "btn-emboss text-primary"}`}
                 >
                   {toAr(d)}
                 </button>
@@ -81,7 +81,7 @@ function Plan() {
               max={365}
               value={days}
               onChange={(e) => setDays(Math.min(365, Math.max(1, Number(e.target.value) || 1)))}
-              className="mt-1 w-28 rounded-xl border border-input bg-background px-3 py-2 text-center text-xl font-bold text-primary"
+              className="mt-1 w-28 field-inset rounded-xl border border-gold/50 bg-background px-3 py-2 text-center text-xl font-bold text-primary"
             />
             <p className="mt-3 text-xs text-muted-foreground">تبدأ الخطة من آخر موضع وصلت إليه.</p>
             <button

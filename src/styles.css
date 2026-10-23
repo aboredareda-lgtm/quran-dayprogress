@@ -289,18 +289,53 @@
   background-size: 22px 22px;
 }
 
-/* بطاقة بإطار ذهبي مزدوج ونجوم في الزوايا */
+/* بطاقة بارزة ثلاثية الأبعاد بإطار ذهبي ونقاط في الزوايا */
 @utility islamic-card {
   position: relative;
   border-radius: 1.5rem;
-  border: 2px solid color-mix(in oklab, var(--gold) 60%, transparent);
+  border: 2px solid var(--gold);
   background-color: var(--card);
-  box-shadow: inset 0 0 0 4px var(--card), inset 0 0 0 5px color-mix(in oklab, var(--gold) 35%, transparent), var(--shadow-soft);
+  box-shadow:
+    inset 0 2px 0 oklch(1 0 0 / 0.8),
+    inset 0 0 0 4px var(--card),
+    inset 0 0 0 5px color-mix(in oklab, var(--gold) 40%, transparent),
+    inset 0 -4px 8px oklch(0.42 0.07 155 / 0.1),
+    0 2px 0 var(--gold-soft),
+    0 5px 0 color-mix(in oklab, var(--gold) 80%, black),
+    0 16px 28px -10px oklch(0 0 0 / 0.4) !important;
   background-image:
+    linear-gradient(180deg, oklch(1 0 0 / 0.45), transparent 40%),
     radial-gradient(circle at 12px 12px, var(--gold) 2px, transparent 2.5px),
     radial-gradient(circle at calc(100% - 12px) 12px, var(--gold) 2px, transparent 2.5px),
     radial-gradient(circle at 12px calc(100% - 12px), var(--gold) 2px, transparent 2.5px),
     radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), var(--gold) 2px, transparent 2.5px);
+}
+
+/* زر بارز كريمي بحافة ذهبية، ينضغط عند اللمس */
+@utility btn-emboss {
+  border: 1.5px solid var(--gold);
+  background-image: linear-gradient(180deg, var(--card), var(--secondary));
+  box-shadow:
+    inset 0 2px 0 oklch(1 0 0 / 0.8),
+    0 4px 0 color-mix(in oklab, var(--gold) 75%, black),
+    0 8px 14px -6px oklch(0 0 0 / 0.4) !important;
+  transition: translate 0.1s, box-shadow 0.1s;
+  &:active {
+    translate: 0 3px;
+    box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.25), 0 1px 0 var(--gold) !important;
+  }
+}
+
+/* زر مختار: يبدو منضغطًا */
+@utility btn-pressed {
+  border: 1.5px solid var(--gold);
+  translate: 0 3px;
+  box-shadow: inset 0 3px 6px oklch(0 0 0 / 0.45), 0 1px 0 var(--gold) !important;
+}
+
+/* حقل محفور داخل البطاقة */
+@utility field-inset {
+  box-shadow: inset 0 3px 6px oklch(0.42 0.07 155 / 0.25), 0 1px 0 oklch(1 0 0 / 0.8) !important;
 }
 
 @utility btn-turquoise-3d {

@@ -56,7 +56,7 @@ function Favorites() {
                   >
                     افتح في المصحف
                   </Link>
-                  <button onClick={() => toggle(f.surah, f.ayah)} className="rounded-full border border-border px-4 py-1.5 text-sm">
+                  <button onClick={() => toggle(f.surah, f.ayah)} className="btn-emboss rounded-full px-4 py-1.5 text-sm">
                     حذف
                   </button>
                 </div>
