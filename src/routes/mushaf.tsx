@@ -240,7 +240,6 @@ function Mushaf() {
                 )}
                 <span
                   id={`ayah-${i + 1}`}
-                  id={`ayah-${i + 1}`}
                   onClick={() => save(i + 1)}
                   className={`cursor-pointer rounded-md ${selected === i + 1 ? "bg-gold/30" : ""}`}
                 >
