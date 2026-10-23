@@ -103,32 +103,78 @@ function Qibla() {
 
       <section className="mx-auto flex max-w-md flex-col items-center px-4 pt-6 pb-10 text-center">
         <div
-          className={`relative aspect-square w-full max-w-[18rem] rounded-full border-4 bg-card shadow-raised transition-colors ${
-            isAligned ? "border-primary" : "border-gold/60"
+          className={`relative aspect-square w-full max-w-[19rem] rounded-full p-3 shadow-raised transition-shadow duration-500 ${
+            isAligned ? "ring-4 ring-gold/70 shadow-[0_0_40px_var(--gold)]" : ""
           }`}
+          style={{
+            background:
+              "conic-gradient(from 0deg, var(--gold-soft), var(--gold), var(--gold-soft), var(--gold), var(--gold-soft), var(--gold), var(--gold-soft))",
+          }}
         >
-          <div className="absolute inset-3 rounded-full border border-gold/40" />
-          {["N", "E", "S", "W"].map((d, i) => (
-            <span
-              key={d}
-              className="absolute left-1/2 top-1/2 text-xs font-bold text-muted-foreground"
-              style={{
-                transform: `rotate(${i * 90 - (heading ?? 0)}deg) translateY(-7.4rem) rotate(${-(i * 90 - (heading ?? 0))}deg) translate(-50%,-50%)`,
-              }}
+          {/* حلقة زخرفية */}
+          <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full text-primary/70" aria-hidden>
+            {Array.from({ length: 36 }).map((_, i) => (
+              <g key={i} transform={`rotate(${i * 10} 100 100)`}>
+                <path d="M100 2.5 103.2 6 100 9.5 96.8 6Z" fill="currentColor" />
+                <circle cx="100" cy="6" r="0.9" fill="var(--gold-soft)" />
+              </g>
+            ))}
+          </svg>
+          <div className="bg-gradient-calm relative h-full w-full overflow-hidden rounded-full border-2 border-gold shadow-[inset_0_4px_18px_oklch(0_0_0/0.5)]">
+            {/* القرص: الدرجات والجهات */}
+            <svg
+              viewBox="0 0 200 200"
+              className="absolute inset-0 h-full w-full text-gold transition-transform duration-300"
+              style={{ transform: `rotate(${-(heading ?? 0)}deg)` }}
+              aria-hidden
             >
-              {["ش", "شر", "ج", "غ"][i]}
-            </span>
-          ))}
-          <div
-            className="absolute inset-0 flex items-start justify-center transition-transform duration-300"
-            style={{ transform: `rotate(${rotation}deg)` }}
-          >
-            <div className="mt-6 flex flex-col items-center">
-              <span className="text-4xl">🕋</span>
-              <div className="h-24 w-2 rounded-full bg-primary" />
-            </div>
+              <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" strokeOpacity="0.4" strokeWidth="0.6" />
+              {Array.from({ length: 72 }).map((_, i) => (
+                <line
+                  key={i}
+                  x1="100" y1="9" x2="100" y2={i % 6 === 0 ? 17 : 13}
+                  stroke="currentColor"
+                  strokeWidth={i % 6 === 0 ? 1.4 : 0.6}
+                  strokeOpacity={i % 6 === 0 ? 1 : 0.6}
+                  transform={`rotate(${i * 5} 100 100)`}
+                />
+              ))}
+              {([["ش", 100, 31], ["شر", 169, 100], ["ج", 100, 169], ["غ", 31, 100]] as const).map(([t, x, y]) => (
+                <text
+                  key={t}
+                  x={x} y={y}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize="14"
+                  fontWeight="700"
+                  fill="currentColor"
+                  transform={`rotate(${heading ?? 0} ${x} ${y})`}
+                >
+                  {t}
+                </text>
+              ))}
+            </svg>
+            {/* سهم القبلة */}
+            <svg
+              viewBox="0 0 200 200"
+              className="absolute inset-0 h-full w-full transition-transform duration-300"
+              style={{ transform: `rotate(${rotation}deg)` }}
+              aria-hidden
+            >
+              <path d="M100 70 108 100 100 96 92 100Z" fill="var(--gold)" />
+              <path d="M100 70 100 96 92 100Z" fill="var(--gold-soft)" />
+              <path d="M100 142 106 100 100 104 94 100Z" fill="var(--gold)" fillOpacity="0.45" />
+              {/* الكعبة */}
+              <g transform="translate(100 54)">
+                <circle r="14" fill="var(--gold)" fillOpacity="0.18" />
+                <path d="M-10 -7 0 -11 10 -7 10 8 0 12 -10 8Z" fill="oklch(0.15 0.01 160)" stroke="var(--gold)" strokeWidth="0.8" />
+                <path d="M-10 -7 0 -3 10 -7" fill="none" stroke="var(--gold)" strokeWidth="0.6" />
+                <path d="M0 -3 0 12" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.6" />
+                <path d="M-10 -2 0 2 10 -2" fill="none" stroke="var(--gold)" strokeWidth="1.6" />
+              </g>
+            </svg>
+            <Ornament className="absolute left-1/2 top-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 text-gold drop-shadow" />
           </div>
-          <Ornament className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 text-gold" />
         </div>
 
         {!started ? (
