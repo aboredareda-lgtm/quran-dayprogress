@@ -161,12 +161,12 @@ function Qibla() {
               style={{ transform: `rotate(${rotation}deg)` }}
               aria-hidden
             >
-              <path d="M100 58 108 100 100 96 92 100Z" fill="var(--gold)" />
-              <path d="M100 58 100 96 92 100Z" fill="var(--gold-soft)" />
+              <path d="M100 70 108 100 100 96 92 100Z" fill="var(--gold)" />
+              <path d="M100 70 100 96 92 100Z" fill="var(--gold-soft)" />
               <path d="M100 142 106 100 100 104 94 100Z" fill="var(--gold)" fillOpacity="0.45" />
               {/* الكعبة */}
-              <g transform="translate(100 44)">
-                <circle r="15" fill="var(--gold)" fillOpacity="0.18" />
+              <g transform="translate(100 54)">
+                <circle r="14" fill="var(--gold)" fillOpacity="0.18" />
                 <path d="M-10 -7 0 -11 10 -7 10 8 0 12 -10 8Z" fill="oklch(0.15 0.01 160)" stroke="var(--gold)" strokeWidth="0.8" />
                 <path d="M-10 -7 0 -3 10 -7" fill="none" stroke="var(--gold)" strokeWidth="0.6" />
                 <path d="M0 -3 0 12" stroke="var(--gold)" strokeWidth="0.4" strokeOpacity="0.6" />
