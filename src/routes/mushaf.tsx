@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { SURAHS, getSurah } from "@/lib/surahs";
+import { SURAHS, getSurah, juzStartingAt, juzName } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 import { useFavorites } from "@/hooks/useLocalList";
 import { normalizeArabic } from "@/lib/worship";
@@ -222,9 +222,24 @@ function Mushaf() {
               </p>
             )}
             <p className="text-justify text-foreground" style={{ fontFamily: "'Amiri Quran', serif", fontSize: size, lineHeight: 2.3 }}>
-              {ayahs.map((t, i) => (
+              {ayahs.map((t, i) => {
+                const juz = juzStartingAt(surah!, i + 1);
+                return (
+                <span key={i}>
+                {juz && (
+                  <span role="separator" aria-label={juzName(juz)} className="my-3 flex items-center justify-center" style={{ fontFamily: "var(--font-sans)", lineHeight: 1 }}>
+                    <span className="text-gold" style={{ fontSize: 14 }}>❁</span>
+                    <span
+                      className="mx-1 rounded-full border border-gold px-5 py-1 text-sm font-bold text-gold font-display"
+                      style={{ background: "linear-gradient(180deg, oklch(0.34 0.07 158), oklch(0.24 0.05 160))", boxShadow: "inset 0 0 0 2px oklch(0.24 0.05 160), inset 0 0 0 3px color-mix(in oklab, var(--gold) 50%, transparent)" }}
+                    >
+                      {juzName(juz)}
+                    </span>
+                    <span className="text-gold" style={{ fontSize: 14 }}>❁</span>
+                  </span>
+                )}
                 <span
-                  key={i}
+                  id={`ayah-${i + 1}`}
                   id={`ayah-${i + 1}`}
                   onClick={() => save(i + 1)}
                   className={`cursor-pointer rounded-md ${selected === i + 1 ? "bg-gold/30" : ""}`}
@@ -246,7 +261,9 @@ function Mushaf() {
                     تفسير
                   </button>{" "}
                 </span>
-              ))}
+                </span>
+                );
+              })}
             </p>
             {(
               <div className="mt-6 flex justify-between gap-2">
