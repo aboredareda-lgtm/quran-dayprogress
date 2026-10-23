@@ -1,3 +1,4 @@
+import { PageHeader, VerseCard } from "@/components/PageHeader";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Ornament } from "@/components/Ornament";
@@ -96,10 +97,7 @@ function Qibla() {
 
   return (
     <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
-      <header className="bg-gradient-calm pattern-arch safe-top px-4 pb-8 text-on-emerald min-[380px]:px-5">
-        <Link to="/" className="text-sm text-gold-soft">→ عودة للرئيسية</Link>
-        <h1 className="font-display mt-3 text-3xl font-bold">اتجاه القبلة</h1>
-      </header>
+      <PageHeader title="اتجاه القبلة" />
 
       <section className="mx-auto flex max-w-md flex-col items-center px-4 pt-6 pb-10 text-center">
         <div
