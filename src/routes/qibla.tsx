@@ -139,16 +139,16 @@ function Qibla() {
                   transform={`rotate(${i * 5} 100 100)`}
                 />
               ))}
-              {["ش", "شر", "ج", "غ"].map((t, i) => (
+              {([["ش", 100, 31], ["شر", 169, 100], ["ج", 100, 169], ["غ", 31, 100]] as const).map(([t, x, y]) => (
                 <text
                   key={t}
-                  x="100" y="36"
+                  x={x} y={y}
                   textAnchor="middle"
-                  fontSize="15"
+                  dominantBaseline="central"
+                  fontSize="14"
                   fontWeight="700"
                   fill="currentColor"
-                  className="font-display"
-                  transform={`rotate(${i * 90} 100 100)`}
+                  transform={`rotate(${heading ?? 0} ${x} ${y})`}
                 >
                   {t}
                 </text>
