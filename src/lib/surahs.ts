@@ -164,3 +164,20 @@ export function getJuz(surah: number, ayah: number): number {
   }
   return juz;
 }
+
+/** رقم الجزء إذا كانت هذه الآية أول آية فيه (عدا الجزء الأول)، وإلا null */
+export function juzStartingAt(surah: number, ayah: number): number | null {
+  const hit = JUZ_STARTS.find(([j, s, a]) => j > 1 && s === surah && a === ayah);
+  return hit ? hit[0] : null;
+}
+
+const JUZ_NAMES = [
+  "الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر",
+  "الحادي عشر", "الثاني عشر", "الثالث عشر", "الرابع عشر", "الخامس عشر", "السادس عشر", "السابع عشر",
+  "الثامن عشر", "التاسع عشر", "العشرون", "الحادي والعشرون", "الثاني والعشرون", "الثالث والعشرون",
+  "الرابع والعشرون", "الخامس والعشرون", "السادس والعشرون", "السابع والعشرون", "الثامن والعشرون",
+  "التاسع والعشرون", "الثلاثون",
+];
+export function juzName(juz: number): string {
+  return `الجزء ${JUZ_NAMES[juz - 1] ?? juz}`;
+}
