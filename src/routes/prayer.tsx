@@ -1,5 +1,5 @@
 import { PageHeader, VerseCard } from "@/components/PageHeader";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { prayerTimes, type PrayerTimes } from "@/lib/worship";
 

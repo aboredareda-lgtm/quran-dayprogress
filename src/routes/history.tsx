@@ -1,5 +1,5 @@
-import { PageHeader, VerseCard } from "@/components/PageHeader";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageHeader } from "@/components/PageHeader";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SURAHS, getSurah, getJuz } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";

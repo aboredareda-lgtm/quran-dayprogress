@@ -1,5 +1,5 @@
-import { PageHeader, VerseCard } from "@/components/PageHeader";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageHeader } from "@/components/PageHeader";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Ornament } from "@/components/Ornament";
 
