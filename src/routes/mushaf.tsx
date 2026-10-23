@@ -275,7 +275,7 @@ function Mushaf() {
             <p className="mt-3 text-center text-xs text-muted-foreground">
               المصدر: التفسير الميسّر — مجمع الملك فهد لطباعة المصحف الشريف
             </p>
-            <button onClick={() => setTafsir(null)} className="mt-4 w-full rounded-full border border-border py-2 font-bold">
+            <button onClick={() => setTafsir(null)} className="mt-4 w-full btn-emboss rounded-full py-2 font-bold">
               إغلاق
             </button>
           </div>
