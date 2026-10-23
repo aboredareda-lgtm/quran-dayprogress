@@ -1,3 +1,4 @@
+import { PageHeader, VerseCard } from "@/components/PageHeader";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { getSurah } from "@/lib/surahs";
@@ -30,15 +31,13 @@ function Plan() {
   const portion = plan && loaded ? dailyPortion(plan, last) : null;
 
   return (
-    <main className="pattern-cream min-h-dvh px-4 pb-10 pt-[max(1rem,env(safe-area-inset-top))]" dir="rtl">
-      <div className="mx-auto max-w-md">
-        <Link to="/" className="inline-block rounded-full border border-gold/50 bg-card px-4 py-1.5 text-sm font-bold text-primary">
-          رجوع
-        </Link>
-        <h1 className="mt-4 text-center text-2xl font-bold text-primary">📅 خطة الختمة</h1>
+    <main className="pattern-cream min-h-dvh pb-10" dir="rtl">
+      <PageHeader title="خطة الختمة" />
+      <div className="mx-auto max-w-md px-4">
+        <VerseCard verse="وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا" source="المزمل: ٤" />
 
         {portion && plan ? (
-          <div className="mt-6 rounded-3xl border-2 border-gold/50 bg-card p-5 text-center">
+          <div className="mt-6 islamic-card p-5 text-center">
             <p className="text-sm text-muted-foreground">خطتك: ختمة في {toAr(plan.days)} يومًا</p>
             <p className="mt-3 text-lg font-bold text-primary">وِرد اليوم: {toAr(portion.perDay)} آية</p>
             <p className="mt-3 text-base">من {pos(portion.from)}</p>
@@ -61,7 +60,7 @@ function Plan() {
             </button>
           </div>
         ) : (
-          <div className="mt-6 rounded-3xl border-2 border-gold/50 bg-card p-5 text-center">
+          <div className="mt-6 islamic-card p-5 text-center">
             <p className="font-bold text-primary">في كم يومًا تريد أن تختم؟</p>
             <div className="mt-4 grid grid-cols-4 gap-2">
               {[7, 15, 30, 60].map((d) => (

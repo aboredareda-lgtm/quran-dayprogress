@@ -1,3 +1,4 @@
+import { PageHeader, VerseCard } from "@/components/PageHeader";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { prayerTimes, type PrayerTimes } from "@/lib/worship";
@@ -75,15 +76,13 @@ function Prayer() {
   const mins = next ? Math.max(0, Math.round((next.at.getTime() - now.getTime()) / 60000)) : 0;
 
   return (
-    <main className="pattern-cream min-h-dvh px-4 pb-10 pt-[max(1rem,env(safe-area-inset-top))]" dir="rtl">
-      <div className="mx-auto max-w-md">
-        <Link to="/" className="inline-block rounded-full border border-gold/50 bg-card px-4 py-1.5 text-sm font-bold text-primary">
-          رجوع
-        </Link>
-        <h1 className="mt-4 text-center text-2xl font-bold text-primary">🕌 أوقات الصلاة</h1>
+    <main className="pattern-cream min-h-dvh pb-10" dir="rtl">
+      <PageHeader title="أوقات الصلاة" />
+      <div className="mx-auto max-w-md px-4">
+        <VerseCard verse="إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا" source="النساء: ١٠٣" />
 
         {!times ? (
-          <div className="mt-6 rounded-3xl border-2 border-gold/50 bg-card p-5 text-center">
+          <div className="mt-6 islamic-card p-5 text-center">
             <p className="text-sm text-muted-foreground">نحتاج موقعك لحساب الأوقات. يبقى موقعك على جوالك فقط.</p>
             <button onClick={locate} className="btn-turquoise-3d mt-4 w-full rounded-full py-2.5 font-bold">
               حدد موقعي
@@ -100,7 +99,7 @@ function Prayer() {
                 </p>
               </div>
             )}
-            <ul className="mt-4 divide-y divide-gold/30 rounded-3xl border-2 border-gold/50 bg-card">
+            <ul className="mt-4 divide-y divide-gold/30 islamic-card">
               {NAMES.map(([k, n]) => (
                 <li key={k} className={`flex justify-between px-5 py-3 text-lg ${next?.name === n ? "font-bold text-primary" : ""}`}>
                   <span>{n}</span>
