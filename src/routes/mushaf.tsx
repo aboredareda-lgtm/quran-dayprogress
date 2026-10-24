@@ -58,7 +58,7 @@ function AyahText({ text }: { text: string }) {
           <span className="font-sans text-sm font-bold">سجدة</span>
         </span>
       )}
-      {part}
+      <span className={text.includes("۩") ? "underline decoration-gold decoration-1 underline-offset-8" : undefined}>{part}</span>
     </span>
   ))}</>;
 }
