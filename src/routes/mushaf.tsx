@@ -49,6 +49,20 @@ export const Route = createFileRoute("/mushaf")({
 let cache: string[][] | null = null;
 const toAr = (n: number) => n.toLocaleString("ar-EG");
 
+function AyahText({ text }: { text: string }) {
+  return <>{text.split("۩").map((part, index) => (
+    <span key={index}>
+      {index > 0 && (
+        <span className="mx-1 inline-flex items-center gap-1 whitespace-nowrap align-middle text-gold" aria-label="سجدة تلاوة">
+          <span aria-hidden="true">۩</span>
+          <span className="font-sans text-sm font-bold">سجدة</span>
+        </span>
+      )}
+      {part}
+    </span>
+  ))}</>;
+}
+
 function Mushaf() {
   const search = Route.useSearch();
   const { last, loaded, addEntry } = useReadingLog();
@@ -243,7 +257,7 @@ function Mushaf() {
                   onClick={() => save(i + 1)}
                   className={`cursor-pointer rounded-md ${selected === i + 1 ? "bg-gold/30" : ""}`}
                 >
-                  {t} <span className="text-gold">﴿{toAr(i + 1)}﴾</span>
+                  <AyahText text={t} /> <span className="text-gold">﴿{toAr(i + 1)}﴾</span>
                   <button
                     onClick={(e) => { e.stopPropagation(); toggle(surah!, i + 1); }}
                     aria-label={isFav(surah!, i + 1) ? "إزالة من المفضلة" : "إضافة إلى المفضلة"}
@@ -329,7 +343,7 @@ function Mushaf() {
                 className="mb-2 block w-full rounded-2xl border border-gold/40 bg-card p-3 text-right"
               >
                 <span className="text-xs font-bold text-primary">سورة {getSurah(r.s).name} — الآية {toAr(r.a)}</span>
-                <span className="mt-1 block text-lg leading-loose" style={{ fontFamily: "'Amiri Quran', serif" }}>{r.t}</span>
+                <span className="mt-1 block text-lg leading-loose" style={{ fontFamily: "'Amiri Quran', serif" }}><AyahText text={r.t} /></span>
               </button>
             ))}
           </div>
