@@ -1,4 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { formatWelcomeDate } from "@/lib/welcome-date";
 
 import welcomeCoverAsset from "@/assets/welcome-cover-new.jpg.asset.json";
 // Capacitor's offline app cannot serve CDN asset paths; keep a bundled fallback.
@@ -30,6 +32,18 @@ export const Route = createFileRoute("/welcome")({
 
 function Welcome() {
   const navigate = useNavigate();
+  const [date, setDate] = useState<ReturnType<typeof formatWelcomeDate> | null>(null);
+
+  useEffect(() => {
+    const refresh = () => setDate(formatWelcomeDate(new Date()));
+    refresh();
+    const timer = window.setInterval(refresh, 30_000);
+    window.addEventListener("focus", refresh);
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("focus", refresh);
+    };
+  }, []);
 
   const start = () => {
     try {
@@ -58,6 +72,12 @@ function Welcome() {
           className="welcome-btn absolute inset-x-0 z-10 mx-auto w-[78%] max-w-[22rem]"
           style={{ top: "min(calc(50% + 0.36 * max(100dvh, 100vw * 2.1875) + 1rem), calc(100% - env(safe-area-inset-bottom) - 4rem))" }}
         >
+          {date && (
+            <div className="welcome-date-3d pointer-events-none absolute inset-x-0 bottom-[calc(100%+0.5rem)] text-center font-display font-bold leading-[1.35]" dir="rtl">
+              <p className="text-2xl">{date.day}</p>
+              <p className="text-[1.3125rem]">{date.hijri}</p>
+            </div>
+          )}
           <Button
             type="button"
             onClick={start}

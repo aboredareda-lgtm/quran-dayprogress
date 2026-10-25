@@ -87,6 +87,18 @@
 }
 
 :root {
+  --welcome-date-ink: oklch(0.93 0.078 88);
+  --welcome-date-highlight: oklch(0.97 0.04 90);
+  --welcome-date-edge: oklch(0.69 0.11 80);
+  --welcome-date-depth: oklch(0.44 0.075 75);
+  --welcome-date-shadow: oklch(0.18 0.035 165);
+  --welcome-date-relief: 0 -1px 0 var(--welcome-date-highlight),
+    0 1px 0 var(--welcome-date-edge),
+    0 2px 0 var(--welcome-date-depth),
+    0 3px 0 var(--welcome-date-depth),
+    0 4px 0 var(--welcome-date-shadow),
+    0 6px 5px var(--welcome-date-shadow),
+    0 8px 12px var(--welcome-date-shadow);
   --radius: 1.25rem;
   --background: oklch(0.965 0.012 92);
   --foreground: oklch(0.24 0.03 158);
@@ -359,6 +371,11 @@
 }
 
 /* شاشة البداية على الشاشات العريضة: الصورة كاملة بطول الشاشة في المنتصف */
+.welcome-date-3d {
+  color: var(--welcome-date-ink);
+  text-shadow: var(--welcome-date-relief);
+}
+
 @media (min-aspect-ratio: 3/4) {
   .welcome-frame {
     position: relative;
