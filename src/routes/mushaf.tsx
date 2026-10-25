@@ -5,6 +5,8 @@ import { useReadingLog } from "@/hooks/useReadingLog";
 import { useFavorites } from "@/hooks/useLocalList";
 import { normalizeArabic } from "@/lib/worship";
 import { VoiceSearchButton } from "@/components/VoiceSearchButton";
+import { Mic } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const tafsirCache = new Map<number, Map<number, string>>();
 async function loadTafsir(surah: number): Promise<Map<number, string>> {
@@ -205,6 +207,16 @@ function Mushaf() {
           <button className={btn} onClick={() => setSize((v) => Math.min(44, v + 2))} aria-label="تكبير الخط">أ+</button>
           <button className={btn} onClick={() => setSize((v) => Math.max(18, v - 2))} aria-label="تصغير الخط">أ−</button>
         </div>
+        <div className="mx-auto flex w-full max-w-2xl justify-center">
+          <Button
+            onClick={() => { setPlaying(false); setSearchOpen(true); }}
+            className="h-11 rounded-full border border-gold px-5 text-base font-bold"
+            aria-label="فتح البحث بالصوت"
+          >
+            <Mic aria-hidden="true" />
+            بحث بالصوت
+          </Button>
+        </div>
         <div className="flex items-center justify-center gap-2">
           <button className={btn} onClick={() => setSpeed((v) => Math.max(1, v - 1))}>أبطأ</button>
           <button
@@ -322,10 +334,13 @@ function Mushaf() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="اكتب كلمة للبحث، مثل: الصبر"
-              className="min-w-0 flex-1 rounded-full border border-gold/50 bg-card px-4 py-2 text-base"
+              className="min-w-0 w-full flex-auto rounded-full border border-gold/50 bg-card px-4 py-2 text-base"
             />
             <VoiceSearchButton onTranscript={setQuery} />
             <button className={btn} onClick={() => setSearchOpen(false)}>إغلاق</button>
+            <p className="order-last w-full text-center text-sm leading-relaxed text-muted-foreground">
+              اضغط «بحث بالصوت» هنا، واسمح بالميكروفون، ثم انطق كلمة للبحث في الآيات.
+            </p>
           </div>
           <div className="flex-1 overflow-y-auto px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2">
             {q.length >= 2 && (
