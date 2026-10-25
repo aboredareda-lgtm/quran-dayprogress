@@ -4,6 +4,7 @@ import { SURAHS, getSurah, juzStartingAt, juzName } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 import { useFavorites } from "@/hooks/useLocalList";
 import { normalizeArabic } from "@/lib/worship";
+import { VoiceSearchButton } from "@/components/VoiceSearchButton";
 
 const tafsirCache = new Map<number, Map<number, string>>();
 async function loadTafsir(surah: number): Promise<Map<number, string>> {
@@ -314,14 +315,16 @@ function Mushaf() {
 
       {searchOpen && (
         <div className="fixed inset-0 z-30 flex flex-col bg-background pt-[max(0.75rem,env(safe-area-inset-top))]">
-          <div className="flex gap-2 border-b border-gold/40 px-3 pb-2">
+          <div className="flex flex-wrap items-center gap-2 border-b border-gold/40 px-3 pb-2">
             <input
               autoFocus
+              aria-label="كلمة البحث في القرآن"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="اكتب كلمة للبحث، مثل: الصبر"
               className="min-w-0 flex-1 rounded-full border border-gold/50 bg-card px-4 py-2 text-base"
             />
+            <VoiceSearchButton onTranscript={setQuery} />
             <button className={btn} onClick={() => setSearchOpen(false)}>إغلاق</button>
           </div>
           <div className="flex-1 overflow-y-auto px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2">
