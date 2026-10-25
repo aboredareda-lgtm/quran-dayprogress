@@ -2,6 +2,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Ornament, OrnamentDivider } from "@/components/Ornament";
+import { createContactMailto } from "@/lib/contact-email";
 
 const ADMIN_EMAIL = "aboreda.reda@gmail.com";
 
@@ -19,6 +20,8 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "في حال وجود أي ملاحظة أو اقتراح، تواصل مع إدارة التطبيق.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Contact,
@@ -29,9 +32,7 @@ function Contact() {
   const [body, setBody] = useState("");
   const [copied, setCopied] = useState(false);
 
-  const mailto = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent(
-    subject || "ملاحظة على تطبيق الوِرد",
-  )}&body=${encodeURIComponent(body)}`;
+  const mailto = createContactMailto(ADMIN_EMAIL, subject, body);
 
   const copyEmail = async () => {
     try {
