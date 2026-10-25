@@ -94,14 +94,15 @@ export function VoiceSearchButton({ onTranscript }: { onTranscript: (text: strin
     <>
       <Button
         variant="outline"
-        size="icon"
+        size="default"
         onClick={start}
         aria-label={listening ? "إيقاف البحث بالصوت" : "البحث بالصوت"}
         aria-pressed={listening}
         title={listening ? "إيقاف البحث بالصوت" : "البحث بالصوت"}
-        className={`shrink-0 rounded-full border-gold/50 ${listening ? "bg-primary text-primary-foreground ring-2 ring-gold" : "bg-card text-primary"}`}
+        className={`h-11 shrink-0 rounded-full border-gold/50 px-4 text-base font-bold ${listening ? "bg-primary text-primary-foreground ring-2 ring-gold" : "bg-card text-primary"}`}
       >
         {listening ? <Square aria-hidden="true" /> : <Mic aria-hidden="true" />}
+        <span>{listening ? "إيقاف الاستماع" : "بحث بالصوت"}</span>
       </Button>
       {(listening || message) && (
         <p role="status" className="order-last w-full text-center text-sm text-primary">
