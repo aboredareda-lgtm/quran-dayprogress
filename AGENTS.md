@@ -13,3 +13,4 @@
 - Welcome dates use device-local days and the Umm al-Qura calendar after hydration, refreshing while open so offline use and SSR remain reliable.
 - Mushaf reading and search results share the same ayah-text renderer, deriving sajdah annotations from the bundled text's existing marker so Quran content and locations stay unchanged.
 - Voice search uses the browser SpeechRecognition service with Arabic input and feeds the existing local Quran search; keep typed search available and stop microphone access when the search closes, without adding a server or uploading reading history.
+- Contact email links use a browser-safe formatter to preserve sender input and append app attribution without introducing server-side sending.
