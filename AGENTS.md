@@ -10,5 +10,6 @@
 <!-- LOVABLE:END -->
 
 - Welcome media uses a CDN pointer with a bundled on-error fallback because Capacitor must display the cover offline.
+- Welcome dates use device-local days and the Umm al-Qura calendar after hydration, refreshing while open so offline use and SSR remain reliable.
 - Mushaf reading and search results share the same ayah-text renderer, deriving sajdah annotations from the bundled text's existing marker so Quran content and locations stay unchanged.
 - Voice search uses the browser SpeechRecognition service with Arabic input and feeds the existing local Quran search; keep typed search available and stop microphone access when the search closes, without adding a server or uploading reading history.
