@@ -1,6 +1,7 @@
 import { expect, it } from "bun:test";
 import { ADHKAR, getAdhkar, getDhikrCounterPeriod, incrementDhikr } from "../src/lib/adhkar";
 import quran from "../public/quran.json";
+import { normalizeArabic } from "../src/lib/worship";
 
 it("provides at least ten distinct morning adhkar", () => {
   expect(new Set(getAdhkar("morning").map((item) => item.id)).size).toBeGreaterThanOrEqual(10);
@@ -79,10 +80,11 @@ it("uses resurrection in the morning and return in the evening for Allahumma bik
 });
 
 it("preserves the bundled Quran wording for Ayat al Kursi and all three surahs", () => {
-  expect(ADHKAR.find((item) => item.id === "kursi")?.text).toContain(quran[1][254]);
-  const text = ADHKAR.find((item) => item.id === "quls")?.text ?? "";
+  const words = (t: string) => normalizeArabic(t).replace(/[^\u0621-\u064A ]/g, "").split(/\s+/).filter(Boolean).join(" ");
+  expect(words(ADHKAR.find((item) => item.id === "kursi")?.text ?? "")).toContain(words(quran[1][254]));
+  const text = words(ADHKAR.find((item) => item.id === "quls")?.text ?? "");
   for (const index of [111, 112, 113]) {
-    expect(text).toContain(quran[index].join(" ۝ "));
+    for (const ayah of quran[index]) expect(text).toContain(words(ayah));
   }
 });
 

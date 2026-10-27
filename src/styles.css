@@ -399,19 +399,6 @@
   line-height: inherit;
 }
 
-.quran-ibrahim {
-  font-family: "Scheherazade New", "Amiri Quran", serif;
-  font-size: 1.12em;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-.quran-nabiyyin {
-  font-family: "Scheherazade New", "Amiri Quran", serif;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
 /* شاشة البداية على الشاشات العريضة: الصورة كاملة بطول الشاشة في المنتصف */
 .welcome-date-3d {
   color: var(--welcome-date-ink);
@@ -540,3 +527,11 @@
 .followup-read-paper { height: auto; min-height: 68px; gap: 2px; padding: 5px 3px; overflow: hidden; line-height: 1.25; }
 .followup-read-paper .followup-real-mushaf { width: 40px; flex-shrink: 0; }
 @media (min-width: 600px) { .followup-read-paper { min-height: 90px; } .followup-read-paper .followup-real-mushaf { width: 52px; } }
+
+/* نص مجمع الملك فهد الرسمي وخطه، محفوظ داخل التطبيق ليعمل دون إنترنت */
+@font-face {
+  font-family: "KFGQPC Hafs";
+  src: url("/fonts/kfgqpc-hafs.woff2") format("woff2");
+  font-display: swap;
+}
+:root { --font-quran: "KFGQPC Hafs", "Amiri Quran", serif; }
