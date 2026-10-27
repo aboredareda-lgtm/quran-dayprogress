@@ -15,4 +15,4 @@
 - Quran segmentation keeps source text intact for search/storage; reference-approved spelling adjustments are display-only in the shared renderer so reading, search and favorites remain consistent.
 - Voice search uses the browser SpeechRecognition service with Arabic input and feeds the existing local Quran search; keep typed search available and stop microphone access when the search closes, without adding a server or uploading reading history.
 - Contact email links use a browser-safe formatter to preserve sender input and append app attribution without introducing server-side sending.
-- Adhkar content and reviewed repetition limits live in a browser-safe module with source links; counters are separate for morning and evening within the current page session so no reading data is sent or changed.
+- Adhkar content, period-specific wording and reviewed repetition limits live in a browser-safe module with source links; counters are separate for morning and evening within the current page session so no reading data is sent or changed.
