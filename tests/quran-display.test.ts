@@ -18,3 +18,14 @@ describe("Quran display preserves the Uthmani source", () => {
     }
   });
 });
+describe("Quran text matches the Madinah Mushaf corrections", () => {
+  it("Yusuf 39 and 41 read يَٰصَٰحِبَىِ without the extra ya", () => {
+    expect(quran[11][38].startsWith("يَٰصَٰحِبَىِ ")).toBe(true);
+    expect(quran[11][40].startsWith("يَٰصَٰحِبَىِ ")).toBe(true);
+  });
+  it("بَعْدَ مَا is written as two words in 2:181, 8:6 and 13:37", () => {
+    for (const [s, a] of [[2, 181], [8, 6], [13, 37]]) {
+      expect(quran[s - 1][a - 1]).toContain("بَعْدَ مَا");
+    }
+  });
+});
