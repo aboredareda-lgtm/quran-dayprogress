@@ -11,6 +11,7 @@ import mushafImg from "@/assets/home-mushaf.webp";
 import { LayoutProvider, Block } from "@/components/LayoutEditor";
 import { Button } from "@/components/ui/button";
 import { Sun } from "lucide-react";
+import { FollowupDashboard } from "@/components/FollowupDashboard";
 
 const tiles = [
   { icon: "🕌", label: "أوقات الصلاة", to: "/prayer", bg: "bg-secondary" },
@@ -74,6 +75,14 @@ function Index() {
   const [saved, setSaved] = useState(false);
   const [khatmahSaved, setKhatmahSaved] = useState(false);
   const [showReminder, setShowReminder] = useState(false);
+  const [legacyDesign, setLegacyDesign] = useState(false);
+  useEffect(() => {
+    try { setLegacyDesign(localStorage.getItem("wird:followup-design") === "legacy"); } catch { /* device preference */ }
+  }, []);
+  const changeDesign = (legacy: boolean) => {
+    setLegacyDesign(legacy);
+    try { localStorage.setItem("wird:followup-design", legacy ? "legacy" : "illustrated"); } catch { /* session still works */ }
+  };
 
   const goWelcome = () => {
     try {
@@ -117,7 +126,17 @@ function Index() {
   };
 
   return (
-    <main className="pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden sm:max-w-[26rem]">
+    <main className={`pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden ${legacyDesign ? "sm:max-w-[26rem]" : "max-w-[48rem]"}`}>
+      {!legacyDesign ? <>
+        <FollowupDashboard last={last} entries={entries} daysTracked={daysTracked} khatmahCount={khatmahCount} loaded={loaded} onEdit={openEditor} onDeleteNote={() => {
+          if (last && window.confirm("هل تريد حذف هذه الملاحظة؟ سيبقى الموضع محفوظًا.")) updateEntry(last.id, { note: "" });
+        }} onWelcome={goWelcome} onReminder={() => setShowReminder(value => !value)} onRevert={() => {
+          if (window.confirm("هل تريد العودة إلى شكل صفحة المتابعة السابق؟ ستبقى بياناتك محفوظة.")) changeDesign(true);
+        }} />
+        {saved && <p role="status" className="px-4 py-2 text-center text-sm text-primary">{khatmahSaved ? "تمت الختمة، تقبّل الله منك — سُجّلت في عدّاد الختمات." : "تم حفظ الموضع، بارك الله فيك."}</p>}
+        {showReminder && <div className="px-4 pb-4"><ReminderCard /></div>}
+      </> : <>
+      <Button variant="secondary" className="m-2" onClick={() => changeDesign(false)}>عرض الشكل الجديد</Button>
       <WirdHeader />
 
       <LayoutProvider ids={["card", "stats", "progress", "tiles", "contact"]}>
@@ -283,6 +302,7 @@ function Index() {
 
       </section>
       </LayoutProvider>
+      </>}
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 px-3 pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)] min-[380px]:px-4">
