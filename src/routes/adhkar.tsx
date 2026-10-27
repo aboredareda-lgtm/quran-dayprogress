@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { getAdhkar, getDhikrCounterPeriod, incrementDhikr, type AdhkarPeriod } from "@/lib/adhkar";
 
 export const Route = createFileRoute("/adhkar")({
-  validateSearch: (search: Record<string, unknown>): { period?: "morning" | "evening" } => search.period === "morning" || search.period === "evening" ? { period: search.period } : {},
+  validateSearch: (search: Record<string, unknown>): { period?: "morning" | "evening" } => search["period"] === "morning" || search["period"] === "evening" ? { period: search["period"] } : {},
   head: () => ({ meta: [
     { title: "أذكار الصباح والمساء — الوِرد اليومي" },
     { name: "description", content: "كامل أذكار باب الصباح والمساء من حصن المسلم بنصوص كاملة ومراجعها وعدادات التكرار." },
