@@ -63,7 +63,7 @@ function AyahText({ text }: { text: string }) {
       )}
       <span className={text.includes("۩") ? "underline decoration-gold decoration-1 underline-offset-8" : undefined}>
         {splitQuranDisplayText(part).map((segment, segmentIndex) => (
-          <span key={segmentIndex} className={segment.isIbrahim ? "quran-ibrahim" : undefined}>{segment.display}</span>
+          <span key={segmentIndex} className={segment.isIbrahim ? "quran-ibrahim" : segment.isNabiyyin ? "quran-nabiyyin" : undefined}>{segment.display}</span>
         ))}
       </span>
     </span>

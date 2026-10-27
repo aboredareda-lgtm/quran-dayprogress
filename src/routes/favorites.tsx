@@ -47,7 +47,7 @@ function Favorites() {
                 {quran && (
                   <p className="mt-2 text-xl leading-loose text-foreground" style={{ fontFamily: "'Amiri Quran', serif" }}>
                     {splitQuranDisplayText(quran[f.surah - 1]?.[f.ayah - 1] ?? "").map((part, i) => (
-                      <span key={i} className={part.isIbrahim ? "quran-ibrahim" : undefined}>{part.display}</span>
+                      <span key={i} className={part.isIbrahim ? "quran-ibrahim" : part.isNabiyyin ? "quran-nabiyyin" : undefined}>{part.display}</span>
                     ))}
                   </p>
                 )}
