@@ -12,7 +12,7 @@
 - Welcome media uses a CDN pointer with a bundled on-error fallback because Capacitor must display the cover offline.
 - Welcome dates use device-local days and the Umm al-Qura calendar after hydration, refreshing while open so offline use and SSR remain reliable.
 - Mushaf reading and search results share the same ayah-text renderer, deriving sajdah annotations from the bundled text's existing marker so Quran content and locations stay unchanged.
-- Quran segmentation keeps source text intact for search/storage; reference-approved spelling adjustments are display-only in the shared renderer so reading, search and favorites remain consistent.
+- Quran text is the official King Fahd Complex Hafs edition with its bundled font, stored without embedded ayah numbers and keyed by surah/ayah index, so it works offline and saved positions/favorites stay valid; no manual spelling overrides.
 - Voice search uses the browser SpeechRecognition service with Arabic input and feeds the existing local Quran search; keep typed search available and stop microphone access when the search closes, without adding a server or uploading reading history.
 - Contact email links use a browser-safe formatter to preserve sender input and append app attribution without introducing server-side sending.
 - Adhkar content, period applicability, wording and reviewed repetition limits live in a browser-safe module with source links; morning and evening counters are separate except explicitly daily adhkar use one shared session counter to avoid duplicating daily targets; no reading data is sent or changed.
