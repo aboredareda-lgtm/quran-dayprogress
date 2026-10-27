@@ -2,10 +2,12 @@
 export function splitQuranDisplayText(text: string) {
   return text.split(/(إِبْرَٰهِۦم[^\s]*|وَٱلنَّبِيِّۦنَ)/u).filter(Boolean).map((part) => {
     const isIbrahim = part.startsWith("إِبْرَٰهِۦم");
+    const isNabiyyin = part === "وَٱلنَّبِيِّۦنَ";
     return {
       text: part,
       isIbrahim,
-      display: isIbrahim ? part.replace("هِۦم", "هِـۧم") : part.replace("وَٱلنَّبِيِّۦنَ", "وَالنَّبِيِّنَ"),
+      isNabiyyin,
+      display: isIbrahim ? part.replace("هِۦم", "هِـۧم") : isNabiyyin ? "وَٱلنَّبِيِّـۧنَ" : part,
     };
   });
 }
