@@ -370,6 +370,18 @@
   }
 }
 
+.mushaf-reading-text {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+.mushaf-ayah-number {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1em;
+  line-height: inherit;
+}
+
 .quran-ibrahim {
   font-family: "Scheherazade New", "Amiri Quran", serif;
   font-size: 1.12em;

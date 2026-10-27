@@ -252,7 +252,7 @@ function Mushaf() {
                 بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
               </p>
             )}
-            <p className="text-justify text-foreground" style={{ fontFamily: "'Amiri Quran', serif", fontSize: size, lineHeight: 2.3 }}>
+            <p className="mushaf-reading-text text-justify text-foreground" style={{ fontFamily: "'Amiri Quran', serif", fontSize: size, lineHeight: 2.3 }}>
               {ayahs.map((t, i) => {
                 const juz = juzStartingAt(surah!, i + 1);
                 return (
@@ -274,7 +274,7 @@ function Mushaf() {
                   onClick={() => save(i + 1)}
                   className={`cursor-pointer rounded-md ${selected === i + 1 ? "bg-gold/30" : ""}`}
                 >
-                  <AyahText text={t} /> <span className="text-gold">﴿{toAr(i + 1)}﴾</span>
+                  <AyahText text={t} /> <span className="mushaf-ayah-number text-gold">﴿{toAr(i + 1)}﴾</span>
                   <button
                     onClick={(e) => { e.stopPropagation(); toggle(surah!, i + 1); }}
                     aria-label={isFav(surah!, i + 1) ? "إزالة من المفضلة" : "إضافة إلى المفضلة"}
