@@ -77,7 +77,7 @@ function Index() {
   const [showReminder, setShowReminder] = useState(false);
   const [legacyDesign, setLegacyDesign] = useState(false);
   useEffect(() => {
-    try { setLegacyDesign(localStorage.getItem("wird:followup-design") === "legacy"); } catch { /* device preference */ }
+    try { localStorage.setItem("wird:followup-design", "illustrated"); } catch { /* device preference */ }
   }, []);
   const changeDesign = (legacy: boolean) => {
     setLegacyDesign(legacy);
@@ -136,8 +136,7 @@ function Index() {
         {saved && <p role="status" className="px-4 py-2 text-center text-sm text-primary">{khatmahSaved ? "تمت الختمة، تقبّل الله منك — سُجّلت في عدّاد الختمات." : "تم حفظ الموضع، بارك الله فيك."}</p>}
         {showReminder && <div className="px-4 pb-4"><ReminderCard /></div>}
       </> : <>
-      <Button variant="secondary" className="m-2" onClick={() => changeDesign(false)}>عرض الشكل الجديد</Button>
-      <WirdHeader />
+            <WirdHeader />
 
       <LayoutProvider ids={["card", "stats", "progress", "tiles", "contact"]}>
       <section className="relative z-10 -mt-3 flex flex-col gap-1.5 px-3 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] min-[380px]:px-4 tall:-mt-4">

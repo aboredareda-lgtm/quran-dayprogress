@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { BookOpen, CalendarDays, ChevronLeft, Home, LayoutGrid, Moon, Sun, Target, Trophy, Undo2 } from "lucide-react";
+import { BookOpen, CalendarDays, ChevronLeft, Home, LayoutGrid, Moon, Sun, Target, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUserName } from "@/hooks/useUserName";
 import { useDailyGoal, GOAL_OPTIONS } from "@/hooks/useDailyGoal";
@@ -25,9 +25,9 @@ const shortcuts = [
   { label: "سجل القراءة", icon: "📚", to: "/history", tone: "sky" },
 ] as const;
 
-export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, loaded, onEdit, onDeleteNote, onWelcome, onReminder, onRevert }: {
+export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, loaded, onEdit, onDeleteNote, onWelcome, onReminder }: {
   last: ReadingEntry | null; entries: ReadingEntry[]; daysTracked: number; khatmahCount: number; loaded: boolean;
-  onEdit: () => void; onDeleteNote: () => void; onWelcome: () => void; onReminder: () => void; onRevert: () => void;
+  onEdit: () => void; onDeleteNote: () => void; onWelcome: () => void; onReminder: () => void; onRevert?: () => void;
 }) {
   const { name } = useUserName();
   const { goal, updateGoal } = useDailyGoal();
@@ -89,7 +89,6 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
       <nav className="followup-shortcuts" aria-label="اختصارات التطبيق">{shortcuts.map(item => "to" in item ? <Button asChild variant="ghost" key={item.label} className={`followup-shortcut ${item.tone}`}><Link to={item.to}><span>{item.icon}</span>{item.label}</Link></Button> : <Button variant="ghost" key={item.label} className={`followup-shortcut ${item.tone}`} onClick={item.label === "تذكير الورد" ? onReminder : onWelcome}><span>{item.icon}</span>{item.label}</Button>)}</nav>
       <Button asChild className="followup-contact"><Link to="/contact"><ChevronLeft />💬 تواصل مع الإدارة</Link></Button>
       <nav className="followup-bottom" aria-label="التنقل السفلي"><Button variant="ghost" aria-current="page"><Home />الرئيسية</Button><Button asChild variant="ghost"><Link to="/mushaf"><BookOpen />المصحف</Link></Button><Button asChild variant="ghost"><Link to="/adhkar"><Moon />الأذكار</Link></Button><Button asChild variant="ghost"><Link to="/plan"><Target />الختمة</Link></Button><Button asChild variant="ghost"><Link to="/settings"><LayoutGrid />المزيد</Link></Button></nav>
-      <Button variant="ghost" className="followup-revert" onClick={onRevert}><Undo2 />العودة للشكل السابق</Button>
     </div>
   </div>;
 }
