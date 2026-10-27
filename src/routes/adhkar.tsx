@@ -9,9 +9,9 @@ import { getAdhkar, incrementDhikr, type AdhkarPeriod } from "@/lib/adhkar";
 export const Route = createFileRoute("/adhkar")({
   head: () => ({ meta: [
     { title: "أذكار الصباح والمساء — الوِرد اليومي" },
-    { name: "description", content: "أذكار مختارة من حصن المسلم بنصوص كاملة ومراجعها وعداد للتكرار صباحًا ومساءً." },
+    { name: "description", content: "كامل أذكار باب الصباح والمساء من حصن المسلم بنصوص كاملة ومراجعها وعدادات التكرار." },
     { property: "og:title", content: "أذكار الصباح والمساء — الوِرد اليومي" },
-    { property: "og:description", content: "عشرة أذكار للصباح وعشرة للمساء بنصوص كاملة من حصن المسلم مع التكرارات والمراجع." },
+    { property: "og:description", content: "كامل أذكار باب الصباح والمساء من حصن المسلم، مع صيغ كل فترة والتكرارات والمراجع." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary" },
   ] }),
@@ -22,7 +22,7 @@ const toAr = (value: number) => value.toLocaleString("ar-EG");
 
 function Adhkar() {
   const [period, setPeriod] = useState<AdhkarPeriod>("morning");
-  const [counts, setCounts] = useState<Record<AdhkarPeriod, Record<string, number>>>({ morning: {}, evening: {} });
+  const [counts, setCounts] = useState<Record<AdhkarPeriod | "daily", Record<string, number>>>({ morning: {}, evening: {}, daily: {} });
   const adhkar = getAdhkar(period);
 
   return (
@@ -47,17 +47,19 @@ function Adhkar() {
         </div>
         <div className="space-y-5">
           {adhkar.map((dhikr) => {
-            const count = counts[period][dhikr.id] ?? 0;
+            const counterPeriod = dhikr.daily ? "daily" : period;
+            const count = counts[counterPeriod][dhikr.id] ?? 0;
             const completed = count >= dhikr.repetitions;
             return (
               <article key={dhikr.id} className="islamic-card p-5">
                 <h3 className="text-center font-display text-3xl font-bold text-primary">{dhikr.title}</h3>
                 <OrnamentDivider className="mx-auto my-2 max-w-40" />
                 <p className="whitespace-pre-line font-display text-2xl leading-[2] text-foreground">{dhikr.text}</p>
+                {dhikr.note && <p className="mt-3 text-sm leading-7 text-muted-foreground">{dhikr.note}</p>}
                 <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
                   <a href={dhikr.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground underline decoration-gold underline-offset-4">المصدر: {dhikr.source}</a>
                   <div className="text-center">
-                    <Button disabled={completed} aria-label={`تكرار ${dhikr.title}`} onClick={() => setCounts((previous) => ({ ...previous, [period]: { ...previous[period], [dhikr.id]: incrementDhikr(previous[period][dhikr.id] ?? 0, dhikr.repetitions) } }))} className="btn-emboss h-12 min-w-28 rounded-full text-lg text-primary" variant="secondary">
+                    <Button disabled={completed} aria-label={`تكرار ${dhikr.title}`} onClick={() => setCounts((previous) => ({ ...previous, [counterPeriod]: { ...previous[counterPeriod], [dhikr.id]: incrementDhikr(previous[counterPeriod][dhikr.id] ?? 0, dhikr.repetitions) } }))} className="btn-emboss h-12 min-w-28 rounded-full text-lg text-primary" variant="secondary">
                       {completed && <Check aria-hidden="true" />}
                       <span aria-live="polite" aria-atomic="true"><bdi>{toAr(count)} / {toAr(dhikr.repetitions)}</bdi></span>
                     </Button>
