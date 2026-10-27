@@ -8,7 +8,7 @@ export interface Dhikr {
   eveningTitle?: string;
   periods?: readonly AdhkarPeriod[];
   daily?: boolean;
-  note?: string;
+  note?: string | undefined;
   repetitions: number;
   repetitionLabel: string;
   source: string;
