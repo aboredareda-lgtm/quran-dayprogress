@@ -16,6 +16,8 @@ export const Route = createFileRoute("/settings")({
         content: "الوضع الليلي، عدّاد الخَتمات، والنسخة الاحتياطية لسجل قراءتك في تطبيق الوِرد.",
       },
       { property: "og:title", content: "الإعدادات — وِرد" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         property: "og:description",
         content: "اضبط الوضع الليلي، وسجّل ختماتك، واحفظ نسخة احتياطية من سجلك.",

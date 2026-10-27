@@ -14,6 +14,8 @@ export const Route = createFileRoute("/history")({
         content: "استعرض جميع المواضع التي سجّلتها في قراءتك للقرآن الكريم على هذا الجهاز.",
       },
       { property: "og:title", content: "سجل القراءة — وِرد" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         property: "og:description",
         content: "كل مواضع قراءتك المسجّلة بالتاريخ والوقت.",

@@ -9,6 +9,8 @@ import { ProgressPanel } from "@/components/ProgressPanel";
 import { ReminderCard } from "@/components/ReminderCard";
 import mushafImg from "@/assets/home-mushaf.webp";
 import { LayoutProvider, Block } from "@/components/LayoutEditor";
+import { Button } from "@/components/ui/button";
+import { Sun } from "lucide-react";
 
 const tiles = [
   { icon: "🕌", label: "أوقات الصلاة", to: "/prayer", bg: "bg-secondary" },
@@ -31,6 +33,8 @@ export const Route = createFileRoute("/")({
         content: "سجّل آخر سورة وآية وصلت إليها في قراءتك، والبيانات محفوظة على جوالك وحده.",
       },
       { property: "og:title", content: "الوِرد اليومي — متابعة قراءة القرآن" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         property: "og:description",
         content: "تطبيق بسيط لمتابعة وردك اليومي من القرآن الكريم.",
@@ -261,6 +265,9 @@ function Index() {
             );
           })}
         </div>
+        <Button asChild variant="secondary" className="mt-1.5 h-10 w-full rounded-xl border border-gold/40 font-bold">
+          <Link to="/adhkar"><Sun aria-hidden="true" />أذكار الصباح والمساء</Link>
+        </Button>
         {showReminder && <div className="mt-1.5"><ReminderCard /></div>}
 
         </Block>

@@ -8,6 +8,8 @@ export const Route = createFileRoute("/name")({
       { title: "اكتب اسمك — الوِرد اليومي" },
       { name: "description", content: "اكتب اسمك ليظهر في صفحة متابعة وردك اليومي." },
       { property: "og:title", content: "اكتب اسمك — الوِرد اليومي" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { property: "og:description", content: "خطوة واحدة قبل بدء متابعة وردك اليومي." },
     ],
   }),
