@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { BookOpen, CalendarDays, ChevronLeft, Home, LayoutGrid, Moon, Sun, Target, Trophy, Undo2 } from "lucide-react";
+import { BookOpen, CalendarDays, ChevronLeft, Home, LayoutGrid, Moon, Sun, Target, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUserName } from "@/hooks/useUserName";
 import { useDailyGoal, GOAL_OPTIONS } from "@/hooks/useDailyGoal";
