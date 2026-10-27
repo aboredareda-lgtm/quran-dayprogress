@@ -1,5 +1,5 @@
 import { expect, it } from "bun:test";
-import { ADHKAR, getAdhkar, incrementDhikr } from "../src/lib/adhkar";
+import { ADHKAR, getAdhkar, getDhikrCounterPeriod, incrementDhikr } from "../src/lib/adhkar";
 import quran from "../public/quran.json";
 
 it("provides at least ten distinct morning adhkar", () => {
@@ -8,6 +8,59 @@ it("provides at least ten distinct morning adhkar", () => {
 
 it("provides at least ten distinct evening adhkar", () => {
   expect(new Set(getAdhkar("evening").map((item) => item.id)).size).toBeGreaterThanOrEqual(10);
+});
+
+it("includes every entry from 75 through 98 of the morning and evening chapter", () => {
+  expect(ADHKAR.map((item) => Number(item.hisnUrl.split(":").at(-1)))).toEqual(Array.from({ length: 24 }, (_, index) => 75 + index));
+  expect(new Set(ADHKAR.map((item) => item.id)).size).toBe(24);
+});
+
+for (const [id, repetitions, periods] of [
+  ["witness", 4, ["morning", "evening"]],
+  ["blessings", 1, ["morning", "evening"]],
+  ["trust", 7, ["morning", "evening"]],
+  ["unseen", 1, ["morning", "evening"]],
+  ["living", 1, ["morning", "evening"]],
+  ["day-goodness", 1, ["morning", "evening"]],
+  ["fitrah", 1, ["morning", "evening"]],
+  ["tahlil-ten", 10, ["morning", "evening"]],
+  ["tahlil-hundred", 100, ["morning"]],
+  ["creation-praise", 3, ["morning"]],
+  ["knowledge", 1, ["morning"]],
+  ["daily-istighfar", 100, ["morning", "evening"]],
+  ["perfect-words", 3, ["evening"]],
+  ["salawat", 10, ["morning", "evening"]],
+] as const) {
+  it(`uses reviewed periods and counter limit for ${id}`, () => {
+    for (const period of ["morning", "evening"] as const) {
+      const item = getAdhkar(period).find((dhikr) => dhikr.id === id);
+      if (periods.some((value) => value === period)) {
+        expect(item?.repetitions).toBe(repetitions);
+        expect(incrementDhikr(repetitions, item?.repetitions ?? 0)).toBe(repetitions);
+      } else {
+        expect(item).toBeUndefined();
+      }
+    }
+  });
+}
+
+it("shares the daily hundred istighfar counter instead of requesting a hundred in each period", () => {
+  const daily = ADHKAR.find((item) => item.id === "daily-istighfar");
+  if (!daily) throw new Error("Daily istighfar missing");
+  expect(getDhikrCounterPeriod(daily, "morning")).toBe("daily");
+  expect(getDhikrCounterPeriod(daily, "evening")).toBe("daily");
+  const tasbih = ADHKAR.find((item) => item.id === "tasbih");
+  if (!tasbih) throw new Error("Tasbih missing");
+  expect(getDhikrCounterPeriod(tasbih, "morning")).toBe("morning");
+  expect(getDhikrCounterPeriod(tasbih, "evening")).toBe("evening");
+});
+
+it("uses the evening variants for witnessing, gratitude, day goodness and fitrah", () => {
+  const evening = getAdhkar("evening");
+  expect(evening.find((item) => item.id === "witness")?.text).toContain("إِنِّي أَمْسَيْتُ أُشْهِدُكَ");
+  expect(evening.find((item) => item.id === "blessings")?.text).toContain("مَا أَمْسَى بِي");
+  expect(evening.find((item) => item.id === "day-goodness")?.text).toContain("فَتْحَهَا وَنَصْرَهَا وَنُورَهَا وَبَرَكَتَهَا وَهُدَاهَا");
+  expect(evening.find((item) => item.id === "fitrah")?.text).toContain("أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ");
 });
 
 it("uses the reviewed morning and evening wording for the kingdom supplication", () => {
