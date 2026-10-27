@@ -536,3 +536,4 @@
     top: min(calc(86% + 1rem), calc(100% - env(safe-area-inset-bottom) - 4rem)) !important;
   }
 }
+.followup-real-mushaf { width: 46px; height: auto; filter: drop-shadow(0 2px 3px color-mix(in oklab, var(--foreground) 30%, transparent)); }

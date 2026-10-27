@@ -11,6 +11,7 @@ import { prayerTimes, type PrayerTimes } from "@/lib/worship";
 import mosque from "@/assets/followup-mosque-clean.jpg";
 import morningImage from "@/assets/followup-morning-clean.jpg";
 import eveningImage from "@/assets/followup-evening-clean.jpg";
+import realMushaf from "@/assets/real-mushaf.webp";
 import mushaf from "@/assets/home-mushaf.webp";
 
 const prayers: [keyof PrayerTimes, string, string][] = [["fajr", "الفجر", "🌤️"], ["sunrise", "الشروق", "🌅"], ["dhuhr", "الظهر", "☀️"], ["asr", "العصر", "☀️"], ["maghrib", "المغرب", "🌅"], ["isha", "العشاء", "🌙"]];
@@ -61,7 +62,7 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
       <section className="followup-panel followup-position" aria-label="آخر ما وصلت إليه">
         <div className="followup-position-actions">
           <Button onClick={onEdit} className="followup-read-action"><span className="text-2xl">▶</span>متابعة القراءة</Button>
-          <Button asChild variant="secondary" className="followup-read-action followup-read-paper"><Link to="/mushaf"><BookOpen />اقرأ من المصحف</Link></Button>
+          <Button asChild variant="secondary" className="followup-read-action followup-read-paper"><Link to="/mushaf"><img src={realMushaf} alt="" width={240} height={240} className="followup-real-mushaf" />اقرأ من المصحف</Link></Button>
         </div>
         <div className="followup-position-data">
           {!loaded ? <p>…</p> : last ? <>
