@@ -537,3 +537,6 @@
   }
 }
 .followup-real-mushaf { width: 46px; height: auto; filter: drop-shadow(0 2px 3px color-mix(in oklab, var(--foreground) 30%, transparent)); }
+.followup-read-paper { height: auto; min-height: 68px; gap: 2px; padding: 5px 3px; overflow: hidden; line-height: 1.25; }
+.followup-read-paper .followup-real-mushaf { width: 40px; flex-shrink: 0; }
+@media (min-width: 600px) { .followup-read-paper { min-height: 90px; } .followup-read-paper .followup-real-mushaf { width: 52px; } }
