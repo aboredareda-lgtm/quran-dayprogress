@@ -370,6 +370,13 @@
   }
 }
 
+.quran-ibrahim {
+  font-family: "Scheherazade New", "Amiri Quran", serif;
+  font-size: 1.12em;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 /* شاشة البداية على الشاشات العريضة: الصورة كاملة بطول الشاشة في المنتصف */
 .welcome-date-3d {
   color: var(--welcome-date-ink);

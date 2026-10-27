@@ -7,6 +7,9 @@ import { normalizeArabic } from "@/lib/worship";
 import { VoiceSearchButton } from "@/components/VoiceSearchButton";
 import { Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import "@fontsource/amiri-quran/arabic-400.css";
+import "@fontsource/scheherazade-new/arabic-400.css";
+import { splitQuranDisplayText } from "@/lib/quran-display";
 
 const tafsirCache = new Map<number, Map<number, string>>();
 async function loadTafsir(surah: number): Promise<Map<number, string>> {
@@ -42,9 +45,6 @@ export const Route = createFileRoute("/mushaf")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap" },
-    ],
   }),
   component: Mushaf,
 });
@@ -61,7 +61,11 @@ function AyahText({ text }: { text: string }) {
           <span className="font-sans text-sm font-bold">سجدة</span>
         </span>
       )}
-      <span className={text.includes("۩") ? "underline decoration-gold decoration-1 underline-offset-8" : undefined}>{part}</span>
+      <span className={text.includes("۩") ? "underline decoration-gold decoration-1 underline-offset-8" : undefined}>
+        {splitQuranDisplayText(part).map((segment, segmentIndex) => (
+          <span key={segmentIndex} className={segment.isIbrahim ? "quran-ibrahim" : undefined}>{segment.text}</span>
+        ))}
+      </span>
     </span>
   ))}</>;
 }
