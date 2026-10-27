@@ -1,7 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
 
-export const Route = createFileRoute("/privacy")({ component: Privacy });
+export const Route = createFileRoute("/privacy")({
+  head: () => ({ meta: [
+    { title: "سياسة الخصوصية — الوِرد اليومي" },
+    { name: "description", content: "تعرف على حفظ بيانات القراءة محليًا والأذونات والخدمات المستخدمة في الوِرد اليومي." },
+    { property: "og:title", content: "سياسة الخصوصية — الوِرد اليومي" },
+    { property: "og:description", content: "سياسة بيانات القراءة والأذونات والنسخ الاحتياطية في تطبيق الوِرد اليومي." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
+  component: Privacy,
+});
 function Privacy() {
   return (
     <main className="pattern-cream screen-fill text-card-foreground">
