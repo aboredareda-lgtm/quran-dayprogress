@@ -8,8 +8,7 @@ import type { ReadingEntry } from "@/hooks/useReadingLog";
 import { getSurah, getJuz } from "@/lib/surahs";
 import { ayahsReadToday, mushafPercent, daysToFinish } from "@/lib/progress";
 import { prayerTimes, type PrayerTimes } from "@/lib/worship";
-import mosque from "@/assets/followup-mosque.asset.json";
-import mosqueFallback from "@/assets/followup-mosque-fallback.webp";
+import mosque from "@/assets/followup-mosque-clean.jpg";
 import morningImage from "@/assets/followup-morning-clean.jpg";
 import eveningImage from "@/assets/followup-evening-clean.jpg";
 import mushaf from "@/assets/home-mushaf.webp";
@@ -54,7 +53,7 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
   const progress = last ? mushafPercent(last.surah, last.ayah) : 0;
   return <div className="followup-dashboard" dir="rtl">
     <header className="followup-header">
-      <img src={mosque.url} onError={(event) => { event.currentTarget.src = mosqueFallback; }} alt="المسجد النبوي والنخيل" className="followup-mosque" />
+      <img src={mosque} alt="المسجد النبوي والنخيل" className="followup-mosque" />
       <p className="followup-bismillah font-display">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
       <div className="followup-greeting"><h1>{name ? `أهلًا يا ${name}` : "الوِرد اليومي"}</h1><p>🌿 جعل الله يومك مباركًا بالخير والطاعة</p></div>
     </header>
