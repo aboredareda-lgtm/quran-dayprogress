@@ -8,6 +8,7 @@ describe("Quran display preserves the Uthmani source", () => {
     const parts = splitQuranDisplayText(text);
     expect(parts.map((part) => part.text).join("")).toBe(text);
     expect(parts.find((part) => part.isIbrahim)?.text).toBe("إِبْرَٰهِۦمَ");
+    expect(parts.find((part) => part.isIbrahim)?.display).toBe("إِبْرَٰهِـۧمَ");
   });
   it("preserves all verses and their annotations", () => {
     for (const surah of quran) {
