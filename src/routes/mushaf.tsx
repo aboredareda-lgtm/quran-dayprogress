@@ -8,8 +8,6 @@ import { VoiceSearchButton } from "@/components/VoiceSearchButton";
 import { Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "@fontsource/amiri-quran/arabic-400.css";
-import "@fontsource/scheherazade-new/arabic-400.css";
-import { splitQuranDisplayText } from "@/lib/quran-display";
 
 const tafsirCache = new Map<number, Map<number, string>>();
 async function loadTafsir(surah: number): Promise<Map<number, string>> {
@@ -62,9 +60,7 @@ function AyahText({ text }: { text: string }) {
         </span>
       )}
       <span className={text.includes("۩") ? "underline decoration-gold decoration-1 underline-offset-8" : undefined}>
-        {splitQuranDisplayText(part).map((segment, segmentIndex) => (
-          <span key={segmentIndex} className={segment.isIbrahim ? "quran-ibrahim" : segment.isNabiyyin ? "quran-nabiyyin" : undefined}>{segment.display}</span>
-        ))}
+        {part}
       </span>
     </span>
   ))}</>;
@@ -248,11 +244,11 @@ function Mushaf() {
               سورة {getSurah(surah!).name}
             </h1>
             {surah !== 1 && surah !== 9 && (
-              <p className="mb-3 text-center text-primary" style={{ fontFamily: "'Amiri Quran', serif", fontSize: size }}>
+              <p className="mb-3 text-center text-primary" style={{ fontFamily: "var(--font-quran)", fontSize: size }}>
                 بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
               </p>
             )}
-            <p className="mushaf-reading-text text-justify text-foreground" style={{ fontFamily: "'Amiri Quran', serif", fontSize: size, lineHeight: 2.3 }}>
+            <p className="mushaf-reading-text text-justify text-foreground" style={{ fontFamily: "var(--font-quran)", fontSize: size, lineHeight: 2.3 }}>
               {ayahs.map((t, i) => {
                 const juz = juzStartingAt(surah!, i + 1);
                 return (
@@ -274,7 +270,7 @@ function Mushaf() {
                   onClick={() => save(i + 1)}
                   className={`cursor-pointer rounded-md ${selected === i + 1 ? "bg-gold/30" : ""}`}
                 >
-                  <AyahText text={t} /> <span className="mushaf-ayah-number text-gold">﴿{toAr(i + 1)}﴾</span>
+                  <AyahText text={t} /> <span className="mushaf-ayah-number text-gold">{toAr(i + 1)}</span>
                   <button
                     onClick={(e) => { e.stopPropagation(); toggle(surah!, i + 1); }}
                     aria-label={isFav(surah!, i + 1) ? "إزالة من المفضلة" : "إضافة إلى المفضلة"}
@@ -365,7 +361,7 @@ function Mushaf() {
                 className="mb-2 block w-full rounded-2xl border border-gold/40 bg-card p-3 text-right"
               >
                 <span className="text-xs font-bold text-primary">سورة {getSurah(r.s).name} — الآية {toAr(r.a)}</span>
-                <span className="mt-1 block text-lg leading-loose" style={{ fontFamily: "'Amiri Quran', serif" }}><AyahText text={r.t} /></span>
+                <span className="mt-1 block text-lg leading-loose" style={{ fontFamily: "var(--font-quran)" }}><AyahText text={r.t} /></span>
               </button>
             ))}
           </div>
