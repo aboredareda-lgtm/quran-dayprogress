@@ -8,7 +8,7 @@ describe("Quran display preserves the Uthmani source", () => {
     const parts = splitQuranDisplayText(text);
     expect(parts.map((part) => part.text).join("")).toBe(text);
     expect(parts.find((part) => part.isNabiyyin)?.display).toBe("وَٱلنَّبِيِّـۧنَ");
-    expect(parts.map((part) => part.display).join("")).toBe(text.replace("وَٱلنَّبِيِّۦنَ", "وَٱلنَّبِيِّـۧنَ"));
+    expect(parts.map((part) => part.display).join("")).toBe(parts.map((part) => part.isNabiyyin ? "وَٱلنَّبِيِّـۧنَ" : part.text).join(""));
   });
   it("preserves every character of Al-Baqarah 124 including Ibrahim's small ya", () => {
     const text = quran[1][123];
