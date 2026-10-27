@@ -4,7 +4,7 @@ import { Check, RotateCcw, Sun, Moon } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { OrnamentDivider } from "@/components/Ornament";
 import { Button } from "@/components/ui/button";
-import { getAdhkar, incrementDhikr, type AdhkarPeriod } from "@/lib/adhkar";
+import { getAdhkar, getDhikrCounterPeriod, incrementDhikr, type AdhkarPeriod } from "@/lib/adhkar";
 
 export const Route = createFileRoute("/adhkar")({
   head: () => ({ meta: [
@@ -40,14 +40,14 @@ function Adhkar() {
         <div className="mb-4 flex items-center justify-between gap-3">
           <h2 className="font-display text-xl font-bold text-primary">{toAr(adhkar.length)} أذكار {period === "morning" ? "للصباح" : "للمساء"}</h2>
           <Button variant="ghost" size="icon" title="إعادة عدادات الفترة الحالية" aria-label="إعادة عدادات الفترة الحالية" onClick={() => {
-            if (window.confirm("هل تريد إعادة عدادات هذه الفترة إلى الصفر؟")) {
-              setCounts((previous) => ({ ...previous, [period]: {} }));
+            if (window.confirm("هل تريد إعادة عدادات هذه الفترة وعداد الاستغفار اليومي إلى الصفر؟")) {
+              setCounts((previous) => ({ ...previous, [period]: {}, daily: {} }));
             }
           }}><RotateCcw /></Button>
         </div>
         <div className="space-y-5">
           {adhkar.map((dhikr) => {
-            const counterPeriod = dhikr.daily ? "daily" : period;
+            const counterPeriod = getDhikrCounterPeriod(dhikr, period);
             const count = counts[counterPeriod][dhikr.id] ?? 0;
             const completed = count >= dhikr.repetitions;
             return (

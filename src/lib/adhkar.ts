@@ -283,7 +283,15 @@ export function getAdhkar(period: AdhkarPeriod): readonly Dhikr[] {
     ...dhikr,
     title: period === "evening" ? dhikr.eveningTitle ?? dhikr.title : dhikr.title,
     text: period === "evening" ? dhikr.eveningText ?? dhikr.text : dhikr.text,
+    repetitionLabel: dhikr.repetitions === 1 ? "قراءة واحدة" : dhikr.repetitionLabel,
+    note: dhikr.repetitions === 1
+      ? [dhikr.note, "لم يُذكر عدد تكرار خاص في هذا الموضع من حصن المسلم؛ العداد لتسجيل قراءة واحدة."].filter(Boolean).join(" ")
+      : dhikr.note,
   }));
+}
+
+export function getDhikrCounterPeriod(dhikr: Dhikr, period: AdhkarPeriod): AdhkarPeriod | "daily" {
+  return dhikr.daily ? "daily" : period;
 }
 
 export function incrementDhikr(count: number, repetitions: number) {
