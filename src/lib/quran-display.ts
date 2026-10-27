@@ -7,7 +7,7 @@ export function splitQuranDisplayText(text: string) {
       text: part,
       isIbrahim,
       isNabiyyin,
-      display: isIbrahim ? part.replace("هِۦم", "هِـۧم") : part,
+      display: isIbrahim ? part.replace("هِۦم", "هِـۧم") : isNabiyyin ? "وَٱلنَّبِيِّـۧنَ" : part,
     };
   });
 }

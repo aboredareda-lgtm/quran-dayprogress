@@ -3,12 +3,12 @@ import quran from "../public/quran.json";
 import { splitQuranDisplayText } from "../src/lib/quran-display";
 
 describe("Quran display preserves the Uthmani source", () => {
-  it("preserves Al-Baqarah 177's Madinah small ya in both source and display", () => {
+  it("shows Al-Baqarah 177 with the Madinah small ya and diacritics while preserving the source", () => {
     const text = quran[1][176];
     const parts = splitQuranDisplayText(text);
     expect(parts.map((part) => part.text).join("")).toBe(text);
-    expect(parts.find((part) => part.isNabiyyin)?.display).toBe("وَٱلنَّبِيِّۦنَ");
-    expect(parts.map((part) => part.display).join("")).toBe(text);
+    expect(parts.find((part) => part.isNabiyyin)?.display).toBe("وَٱلنَّبِيِّـۧنَ");
+    expect(parts.map((part) => part.display).join("")).toBe(text.replace("وَٱلنَّبِيِّۦنَ", "وَٱلنَّبِيِّـۧنَ"));
   });
   it("preserves every character of Al-Baqarah 124 including Ibrahim's small ya", () => {
     const text = quran[1][123];
