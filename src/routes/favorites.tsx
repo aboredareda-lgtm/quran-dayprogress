@@ -1,3 +1,4 @@
+import { splitQuranDisplayText } from "@/lib/quran-display";
 import { PageHeader, VerseCard } from "@/components/PageHeader";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
@@ -45,7 +46,9 @@ function Favorites() {
                 </p>
                 {quran && (
                   <p className="mt-2 text-xl leading-loose text-foreground" style={{ fontFamily: "'Amiri Quran', serif" }}>
-                    {quran[f.surah - 1]?.[f.ayah - 1]}
+                    {splitQuranDisplayText(quran[f.surah - 1]?.[f.ayah - 1] ?? "").map((part, i) => (
+                      <span key={i} className={part.isIbrahim ? "quran-ibrahim" : undefined}>{part.display}</span>
+                    ))}
                   </p>
                 )}
                 <div className="mt-3 flex gap-2">
