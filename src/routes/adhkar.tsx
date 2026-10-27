@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { getAdhkar, getDhikrCounterPeriod, incrementDhikr, type AdhkarPeriod } from "@/lib/adhkar";
 
 export const Route = createFileRoute("/adhkar")({
+  validateSearch: (search: Record<string, unknown>): { period?: "morning" | "evening" } => search.period === "morning" || search.period === "evening" ? { period: search.period } : {},
   head: () => ({ meta: [
     { title: "أذكار الصباح والمساء — الوِرد اليومي" },
     { name: "description", content: "كامل أذكار باب الصباح والمساء من حصن المسلم بنصوص كاملة ومراجعها وعدادات التكرار." },
@@ -21,7 +22,8 @@ export const Route = createFileRoute("/adhkar")({
 const toAr = (value: number) => value.toLocaleString("ar-EG");
 
 function Adhkar() {
-  const [period, setPeriod] = useState<AdhkarPeriod>("morning");
+  const search = Route.useSearch();
+  const [period, setPeriod] = useState<AdhkarPeriod>(search.period ?? "morning");
   const [counts, setCounts] = useState<Record<AdhkarPeriod | "daily", Record<string, number>>>({ morning: {}, evening: {}, daily: {} });
   const adhkar = getAdhkar(period);
 
