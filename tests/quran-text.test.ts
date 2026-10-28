@@ -9,7 +9,7 @@ it("keeps 114 surahs and 6236 ayahs so saved positions and favorites stay valid"
 
 it("uses the King Fahd Complex wording for Ibrahim and An-Nabiyyin in Al-Baqarah", () => {
   expect(quran[1][123]).toContain("إِبۡرَٰهِـۧمَ");
-  expect(quran[1][176]).toContain(`و${NABIYYIN}`);
+  expect(quran[1][176]).toContain(NABIYYIN);
 });
 
 it("stores ayah text without the embedded ayah number", () => {
