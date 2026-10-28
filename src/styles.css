@@ -535,3 +535,17 @@
   font-display: swap;
 }
 :root { --font-quran: "KFGQPC Hafs", "Amiri Quran", serif; }
+
+/* Same official glyph outlines; undotted medial yeh for the small-high-yeh word. */
+@font-face {
+  font-family: "KFGQPC Hafs Nabiyyin";
+  src: url("/fonts/kfgqpc-hafs-nabiyyin.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+.quran-nabiyyin {
+  font-family: "KFGQPC Hafs Nabiyyin", var(--font-quran);
+  font-size: inherit;
+  line-height: inherit;
+}
