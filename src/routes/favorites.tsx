@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getSurah } from "@/lib/surahs";
 import { useFavorites } from "@/hooks/useLocalList";
+import { QuranWordText } from "@/components/QuranWordText";
 
 export const Route = createFileRoute("/favorites")({
   head: () => ({
@@ -45,7 +46,7 @@ function Favorites() {
                 </p>
                 {quran && (
                   <p className="mt-2 text-xl leading-loose text-foreground" style={{ fontFamily: "var(--font-quran)" }}>
-                    {quran[f.surah - 1]?.[f.ayah - 1] ?? ""}
+                    <QuranWordText text={quran[f.surah - 1]?.[f.ayah - 1] ?? ""} />
                   </p>
                 )}
                 <div className="mt-3 flex gap-2">

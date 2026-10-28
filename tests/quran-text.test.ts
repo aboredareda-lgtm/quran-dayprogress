@@ -15,3 +15,7 @@ it("uses the King Fahd Complex wording for Ibrahim and An-Nabiyyin in Al-Baqarah
 it("stores ayah text without the embedded ayah number", () => {
   for (const ayah of quran.flat()) expect(/[٠-٩]$/.test(ayah)).toBe(false);
 });
+
+it("preserves the official Nabiyyin text and diacritics in Al-Baqarah 213", () => {
+  expect(quran[1][212].startsWith("كَانَ ٱلنَّاسُ أُمَّةٗ وَٰحِدَةٗ فَبَعَثَ ٱللَّهُ ٱلنَّبِيِّـۧنَ مُبَشِّرِينَ")).toBe(true);
+});

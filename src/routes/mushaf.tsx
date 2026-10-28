@@ -7,6 +7,7 @@ import { normalizeArabic } from "@/lib/worship";
 import { VoiceSearchButton } from "@/components/VoiceSearchButton";
 import { Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { QuranWordText } from "@/components/QuranWordText";
 import "@fontsource/amiri-quran/arabic-400.css";
 
 const tafsirCache = new Map<number, Map<number, string>>();
@@ -60,7 +61,7 @@ function AyahText({ text }: { text: string }) {
         </span>
       )}
       <span className={text.includes("۩") ? "underline decoration-gold decoration-1 underline-offset-8" : undefined}>
-        {part}
+        <QuranWordText text={part} />
       </span>
     </span>
   ))}</>;
