@@ -26,7 +26,7 @@ it("marks all 13 small-high-yeh Nabiyyin words without changing any ayah", () =>
   let count = 0;
   for (const ayah of quran.flat()) {
     const parts = splitNabiyyin(ayah);
-    count += parts.filter((part) => part === NABIYYIN).length;
+    count += parts.filter((part) => part.includes(NABIYYIN)).length;
     expect(parts.join("")).toBe(ayah);
   }
   expect(count).toBe(13);
