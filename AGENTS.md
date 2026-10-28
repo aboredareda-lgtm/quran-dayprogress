@@ -18,3 +18,4 @@
 - Contact email links use a browser-safe formatter to preserve sender input and append app attribution without introducing server-side sending.
 - Adhkar content, period applicability, wording and reviewed repetition limits live in a browser-safe module with source links; morning and evening counters are separate except explicitly daily adhkar use one shared session counter to avoid duplicating daily targets; no reading data is sent or changed.
 - The illustrated followup dashboard is presentation-only over the existing local reading hooks; preserve the legacy layout behind a reversible device preference, use existing prayer calculations only with a saved location, and link adhkar cards through validated period search parameters.
+- The optional App Store update prompt runs only in the native iOS shell and compares the installed version with Apple's lookup API, staying silent offline.

@@ -18,6 +18,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { registerAppServiceWorker } from "../lib/register-sw";
 import { useTheme } from "../hooks/useTheme";
+import { UpdatePrompt } from "../components/UpdatePrompt";
 
 function NotFoundComponent() {
   return (
@@ -137,6 +138,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <UpdatePrompt />
     </QueryClientProvider>
   );
 }
