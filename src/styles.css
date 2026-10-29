@@ -566,3 +566,21 @@
   border: 2px solid var(--gold);
   box-shadow: 0 0 0 4px var(--primary), 0 0 0 5px color-mix(in oklab, var(--gold) 60%, transparent), inset 0 0 18px rgb(0 0 0 / 0.4);
 }
+
+/* مربعات الأذكار والمتابعة أصغر */
+.followup-adhkar { height: 100px; }
+.followup-adhkar > div { padding: 7px 8px; }
+.followup-adhkar-cta { padding: 5px 7px; bottom: 5px; }
+.followup-summary-grid .followup-panel { padding: 9px; }
+.followup-rings { margin-top: 8px; }
+.followup-ring { width: 42px; height: 42px; border-width: 5px; }
+.followup-ring strong { font-size: 15px; }
+@media (min-width: 400px) {
+  .followup-adhkar { height: 112px; }
+  .followup-adhkar h2 { font-size: 19px; }
+  .followup-adhkar p, .followup-adhkar-cta { font-size: 13px; }
+  .followup-ring { width: 56px; height: 56px; }
+  .followup-rings b { font-size: 10px; }
+  .followup-goal > b, .followup-goal > small { font-size: 10px; }
+}
+@media (max-width: 370px) { .followup-ring { width: 36px; height: 36px; border-width: 4px; } }
