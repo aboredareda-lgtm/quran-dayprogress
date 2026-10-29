@@ -1,6 +1,7 @@
 import { PageHeader, VerseCard } from "@/components/PageHeader";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { CityFrame } from "@/components/CityFrame";
 import { prayerTimes, type PrayerTimes } from "@/lib/worship";
 
 export const Route = createFileRoute("/prayer")({
@@ -26,23 +27,49 @@ const NAMES: [keyof PrayerTimes, string][] = [
   ["isha", "العشاء"],
 ];
 const LOC = "wird:prayer-location";
+const CITY = "wird:prayer-city";
+type Place = { city: string | null; country: string | null };
+async function lookupCity(lat: number, lng: number): Promise<Place | null> {
+  try {
+    const r = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=ar`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    return { city: d.city || d.locality || d.principalSubdivision || null, country: d.countryName || null };
+  } catch {
+    return null;
+  }
+}
 const fmt = (d: Date) => new Intl.DateTimeFormat("ar", { hour: "numeric", minute: "2-digit" }).format(d);
 
 function Prayer() {
   const [loc, setLoc] = useState<{ lat: number; lng: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [place, setPlace] = useState<Place | null>(null);
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
     try {
       const v = JSON.parse(localStorage.getItem(LOC) || "null");
       if (v && typeof v.lat === "number") setLoc(v);
+      const c = JSON.parse(localStorage.getItem(CITY) || "null");
+      if (c) setPlace(c);
+      else if (v && typeof v.lat === "number") void lookupCity(v.lat, v.lng).then(savePlace);
     } catch {
       /* */
     }
     const t = setInterval(() => setNow(new Date()), 30000);
     return () => clearInterval(t);
   }, []);
+
+  const savePlace = (p: Place | null) => {
+    if (!p) return;
+    setPlace(p);
+    try {
+      localStorage.setItem(CITY, JSON.stringify(p));
+    } catch {
+      /* */
+    }
+  };
 
   const locate = () => {
     setError(null);
@@ -51,6 +78,7 @@ function Prayer() {
       (p) => {
         const v = { lat: p.coords.latitude, lng: p.coords.longitude };
         setLoc(v);
+        void lookupCity(v.lat, v.lng).then(savePlace);
         try {
           localStorage.setItem(LOC, JSON.stringify(v));
         } catch {
@@ -90,6 +118,7 @@ function Prayer() {
           </div>
         ) : (
           <>
+            <CityFrame city={place?.city ?? null} country={place?.country ?? null} />
             {next && (
               <div className="mt-5 rounded-3xl border-2 border-gold/60 bg-primary p-4 text-center text-primary-foreground">
                 <p className="text-sm">الصلاة القادمة</p>

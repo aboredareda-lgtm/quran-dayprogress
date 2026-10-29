@@ -5,7 +5,7 @@ const Star = ({ className }: { className: string }) => (
 );
 
 const Lantern = ({ side }: { side: string }) => (
-  <svg viewBox="0 0 20 44" className={`absolute top-1/2 h-14 w-6 -translate-y-1/2 text-gold drop-shadow-[0_0_6px_hsl(var(--gold))] ${side}`} aria-hidden="true">
+  <svg viewBox="0 0 20 44" className={`absolute top-1/2 h-14 w-6 -translate-y-1/2 text-gold drop-shadow-[0_0_6px_var(--gold)] ${side}`} aria-hidden="true">
     <line x1="10" y1="0" x2="10" y2="8" stroke="currentColor" strokeWidth="1.5" />
     <path d="M6 8h8l3 6v16l-3 6H6l-3-6V14z" fill="currentColor" opacity=".35" stroke="currentColor" strokeWidth="1.5" />
     <ellipse cx="10" cy="22" rx="3" ry="6" fill="currentColor" opacity=".9" />
@@ -23,7 +23,7 @@ export function CityFrame({ city, country }: { city: string | null; country: str
       <Lantern side="right-1" />
       <Lantern side="left-1" />
       <div className="city-frame-arch px-4 pb-5 pt-10">
-        <p className="font-quran text-4xl font-bold text-gold drop-shadow">{city ?? "مدينتك"}</p>
+        <p className="text-4xl font-bold text-gold drop-shadow">{city ?? "مدينتك"}</p>
         <div className="mx-auto my-2 flex items-center justify-center gap-2 text-gold">
           <span className="h-px w-14 bg-gold/70" />
           <span aria-hidden="true">✦</span>
