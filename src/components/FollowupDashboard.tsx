@@ -26,7 +26,6 @@ const shortcuts = [
   { label: "سجل القراءة", icon: "📚", to: "/history", tone: "sky" },
 ] as const;
 
-}
 export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, loaded, onEdit, onDeleteNote, onWelcome, onReminder }: {
   last: ReadingEntry | null; entries: ReadingEntry[]; daysTracked: number; khatmahCount: number; loaded: boolean;
   onEdit: () => void; onDeleteNote: () => void; onWelcome: () => void; onReminder: () => void; onRevert?: () => void;
