@@ -46,7 +46,7 @@ function Contact() {
 
   return (
     <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
-      <PageHeader title="تواصل مع الإدارة" />
+      <PageHeader title="تواصل معنا" />
 
       <section className="space-y-3 px-3 pt-6 min-[380px]:px-5 min-[700px]:mx-auto min-[700px]:grid min-[700px]:max-w-5xl min-[700px]:grid-cols-2 min-[700px]:items-start min-[700px]:gap-5 min-[700px]:px-8 min-[700px]:pb-12 min-[700px]:space-y-0">
         <div className="pattern-cream shadow-raised rounded-3xl border-2 border-gold/50 p-4 text-center text-card-foreground">
