@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, RotateCcw, Sun, Moon } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
@@ -73,6 +73,10 @@ function Adhkar() {
           })}
         </div>
         <footer className="mt-7 text-center text-xs leading-7 text-muted-foreground">
+          <div className="mb-5 grid grid-cols-2 gap-3 text-sm">
+            <Button variant="secondary" className="h-12 rounded-full font-bold" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>↑ العودة لأعلى الصفحة</Button>
+            <Button asChild className="h-12 rounded-full font-bold"><Link to="/">العودة للصفحة الرئيسية</Link></Button>
+          </div>
           <OrnamentDivider />
           <p>المصدر: حصن المسلم — سعيد بن علي بن وهف القحطاني</p>
         </footer>
