@@ -30,19 +30,8 @@ export const Route = createFileRoute("/contact")({
 function Contact() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
-  const [copied, setCopied] = useState(false);
 
   const mailto = createContactMailto(ADMIN_EMAIL, subject, body);
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(ADMIN_EMAIL);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* تجاهل */
-    }
-  };
 
   return (
     <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
