@@ -479,6 +479,8 @@
 .followup-shortcut.honey { background: var(--followup-honey); }
 .followup-shortcut.sky { background: var(--followup-sky); }
 .followup-contact { height: 48px; border: 2px solid var(--gold); border-radius: 30px; font-size: 20px; font-weight: bold; }
+.followup-contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.followup-contact-row .followup-contact { font-size: 17px; }
 .followup-bottom { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); border-top: 1px solid var(--gold-soft); padding: 8px 0; }
 .followup-bottom > a, .followup-bottom > button { display: flex; flex-direction: column; gap: 3px; font-size: 10px; padding: 0; height: 40px; color: var(--muted-foreground); box-shadow: none; }
 .followup-bottom svg { height: 23px; width: 23px; }

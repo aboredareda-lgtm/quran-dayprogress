@@ -52,17 +52,8 @@ function Contact() {
         <div className="pattern-cream shadow-raised rounded-3xl border-2 border-gold/50 p-4 text-center text-card-foreground">
           <OrnamentDivider />
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
-            في حال وجود أي ملاحظة أو اقتراح، تواصل معنا على البريد:
+            في حال وجود أي ملاحظة أو اقتراح، اكتب لنا رسالتك.
           </p>
-          <p className="mt-2 text-lg font-bold text-primary" dir="ltr">
-            {ADMIN_EMAIL}
-          </p>
-          <button
-            onClick={copyEmail}
-            className="mt-3 rounded-full border-2 border-gold/50 bg-secondary px-5 py-2 text-sm font-bold text-secondary-foreground"
-          >
-            {copied ? "تم نسخ البريد" : "نسخ البريد"}
-          </button>
         </div>
 
         <div className="pattern-cream rounded-3xl border border-gold/40 p-4 text-card-foreground">
