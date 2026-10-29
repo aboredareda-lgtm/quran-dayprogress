@@ -134,7 +134,7 @@ function Index() {
           if (window.confirm("هل تريد العودة إلى شكل صفحة المتابعة السابق؟ ستبقى بياناتك محفوظة.")) changeDesign(true);
         }} />
         {saved && <p role="status" className="px-4 py-2 text-center text-sm text-primary">{khatmahSaved ? "تمت الختمة، تقبّل الله منك — سُجّلت في عدّاد الختمات." : "تم حفظ الموضع، بارك الله فيك."}</p>}
-        {showReminder && <div className="px-4 pb-4"><ReminderCard /></div>}
+        {showReminder && <div role="dialog" aria-label="تذكير الورد" className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4" onClick={() => setShowReminder(false)}><div className="w-full max-w-sm rounded-3xl bg-background p-2" onClick={e => e.stopPropagation()}><ReminderCard defaultOpen /><button onClick={() => setShowReminder(false)} className="mt-2 w-full rounded-full border border-gold/40 bg-secondary py-2 text-sm font-bold text-secondary-foreground">إغلاق</button></div></div>}
       </> : <>
             <WirdHeader />
 
