@@ -26,14 +26,6 @@ const shortcuts = [
   { label: "سجل القراءة", icon: "📚", to: "/history", tone: "sky" },
 ] as const;
 
-const APP_STORE_URL = "https://apps.apple.com/app/id6815520389";
-async function shareApp() {
-  const text = "تطبيق الورد اليومي لمتابعة قراءة القرآن والأذكار";
-  try {
-    if (navigator.share) await navigator.share({ title: "الورد اليومي", text, url: APP_STORE_URL });
-    else { await navigator.clipboard.writeText(`${text}\n${APP_STORE_URL}`); alert("تم نسخ رابط التطبيق"); }
-  } catch { /* أُلغيت المشاركة */ }
-}
 export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, loaded, onEdit, onDeleteNote, onWelcome, onReminder }: {
   last: ReadingEntry | null; entries: ReadingEntry[]; daysTracked: number; khatmahCount: number; loaded: boolean;
   onEdit: () => void; onDeleteNote: () => void; onWelcome: () => void; onReminder: () => void; onRevert?: () => void;
@@ -96,10 +88,7 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
         <section className="followup-panel followup-goal"><Button variant="ghost" onClick={() => setGoalOpen(!goalOpen)} className="followup-goal-title"><Target />وردك اليوم</Button><strong>{today} / {goal} آية</strong><progress max={goal} value={Math.min(today, goal)} /><span>{progress}%</span><b>🌿 تقدمك في المصحف</b><small>{last ? `الختمة بعد نحو ${daysToFinish(last.surah, last.ayah, goal)} يومًا إن شاء الله` : "بارك الله في قراءتك"}</small>{goalOpen && <div className="flex flex-wrap justify-center gap-1">{GOAL_OPTIONS.map(option => <Button key={option.value} size="sm" variant="secondary" onClick={() => { updateGoal(option.value); setGoalOpen(false); }}>{option.label}</Button>)}</div>}</section>
       </div>
       <nav className="followup-shortcuts" aria-label="اختصارات التطبيق">{shortcuts.map(item => "to" in item ? <Button asChild variant="ghost" key={item.label} className={`followup-shortcut ${item.tone}`}><Link to={item.to}><span>{item.icon}</span>{item.label}</Link></Button> : <Button variant="ghost" key={item.label} className={`followup-shortcut ${item.tone}`} onClick={item.label === "تذكير الورد" ? onReminder : onWelcome}><span>{item.icon}</span>{item.label}</Button>)}</nav>
-      <div className="followup-contact-row">
-        <Button className="followup-contact" onClick={shareApp}>📤 مشاركة التطبيق</Button>
-        <Button asChild className="followup-contact"><Link to="/contact"><ChevronLeft />💬 تواصل معنا</Link></Button>
-      </div>
+      <Button asChild className="followup-contact"><Link to="/contact"><ChevronLeft />💬 تواصل معنا</Link></Button>
       <nav className="followup-bottom" aria-label="التنقل السفلي"><Button variant="ghost" aria-current="page"><Home />الرئيسية</Button><Button asChild variant="ghost"><Link to="/mushaf"><BookOpen />المصحف</Link></Button><Button asChild variant="ghost"><Link to="/adhkar"><Moon />الأذكار</Link></Button><Button asChild variant="ghost"><Link to="/plan"><Target />الختمة</Link></Button><Button asChild variant="ghost"><Link to="/settings"><LayoutGrid />المزيد</Link></Button></nav>
     </div>
   </div>;
