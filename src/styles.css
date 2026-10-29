@@ -584,3 +584,8 @@
   .followup-goal > b, .followup-goal > small { font-size: 10px; }
 }
 @media (max-width: 370px) { .followup-ring { width: 36px; height: 36px; border-width: 4px; } }
+
+/* مربع «اقرأ من المصحف» أكبر */
+.followup-read-paper { min-height: 92px; font-size: 13px; }
+.followup-read-paper .followup-real-mushaf { width: 58px; }
+@media (min-width: 600px) { .followup-read-paper { min-height: 115px; font-size: 17px; } .followup-read-paper .followup-real-mushaf { width: 72px; } }
