@@ -59,7 +59,7 @@ function Adhkar() {
                 <p className="whitespace-pre-line font-display text-2xl leading-[2] text-foreground">{dhikr.text}</p>
                 {dhikr.note && <p className="mt-3 text-sm leading-7 text-muted-foreground">{dhikr.note}</p>}
                 <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
-                  <a href={dhikr.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground underline decoration-gold underline-offset-4">المصدر: {dhikr.source}</a>
+                  <p className="text-sm text-muted-foreground">المصدر: {dhikr.source}</p>
                   <div className="text-center">
                     <Button disabled={completed} aria-label={`تكرار ${dhikr.title}`} onClick={() => setCounts((previous) => ({ ...previous, [counterPeriod]: { ...previous[counterPeriod], [dhikr.id]: incrementDhikr(previous[counterPeriod][dhikr.id] ?? 0, dhikr.repetitions) } }))} className="btn-emboss h-12 min-w-28 rounded-full text-lg text-primary" variant="secondary">
                       {completed && <Check aria-hidden="true" />}
@@ -75,9 +75,6 @@ function Adhkar() {
         <footer className="mt-7 text-center text-xs leading-7 text-muted-foreground">
           <OrnamentDivider />
           <p>المصدر: حصن المسلم — سعيد بن علي بن وهف القحطاني</p>
-          <div className="flex flex-wrap justify-center gap-x-4">
-            {adhkar.map((dhikr) => <a key={dhikr.id} href={dhikr.hisnUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-gold underline-offset-4">{dhikr.title} في حصن المسلم</a>)}
-          </div>
         </footer>
       </div>
     </main>
