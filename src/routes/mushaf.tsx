@@ -4,7 +4,6 @@ import { SURAHS, getSurah, juzStartingAt, juzName } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 import { useFavorites } from "@/hooks/useLocalList";
 import { normalizeArabic } from "@/lib/worship";
-import { VoiceSearchButton } from "@/components/VoiceSearchButton";
 import { Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuranWordText } from "@/components/QuranWordText";
@@ -337,7 +336,6 @@ function Mushaf() {
               placeholder="اكتب كلمة للبحث، مثل: الصبر"
               className="min-w-0 w-full flex-auto rounded-full border border-gold/50 bg-card px-4 py-2 text-base"
             />
-            <VoiceSearchButton onTranscript={setQuery} />
             <button className={btn} onClick={() => setSearchOpen(false)}>إغلاق</button>
             <p className="order-last w-full text-center text-sm leading-relaxed text-muted-foreground">
               اضغط «بحث بالصوت» هنا، واسمح بالميكروفون، ثم انطق كلمة للبحث في الآيات.
