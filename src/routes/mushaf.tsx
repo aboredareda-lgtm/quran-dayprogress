@@ -275,7 +275,7 @@ function Mushaf() {
                     onClick={(e) => { e.stopPropagation(); toggle(surah!, i + 1); }}
                     aria-label={isFav(surah!, i + 1) ? "إزالة من المفضلة" : "إضافة إلى المفضلة"}
                     className="mx-0.5 align-middle text-gold"
-                    style={{ fontFamily: "system-ui", fontSize: Math.max(14, size * 0.62) }}
+                    style={{ fontFamily: "system-ui", fontSize: Math.max(14, size * 0.62), textShadow: "none", filter: "none", boxShadow: "none", background: "transparent" }}
                   >
                     {isFav(surah!, i + 1) ? "★" : "☆"}
                   </button>
