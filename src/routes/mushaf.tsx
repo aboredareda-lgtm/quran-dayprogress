@@ -274,15 +274,15 @@ function Mushaf() {
                   <button
                     onClick={(e) => { e.stopPropagation(); toggle(surah!, i + 1); }}
                     aria-label={isFav(surah!, i + 1) ? "إزالة من المفضلة" : "إضافة إلى المفضلة"}
-                    className="mx-0.5 align-middle text-base text-gold"
-                    style={{ fontFamily: "system-ui" }}
+                    className="mx-0.5 align-middle text-gold"
+                    style={{ fontFamily: "system-ui", fontSize: Math.max(14, size * 0.62) }}
                   >
                     {isFav(surah!, i + 1) ? "★" : "☆"}
                   </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); openTafsir(i + 1); }}
-                    className="mx-0.5 rounded-full border border-gold/50 px-1.5 align-middle text-xs text-primary"
-                    style={{ fontFamily: "system-ui", lineHeight: 1.6 }}
+                    className="mx-0.5 rounded-full border border-gold/50 px-1.5 align-middle text-primary"
+                    style={{ fontFamily: "system-ui", lineHeight: 1.6, fontSize: Math.max(11, size * 0.46) }}
                   >
                     تفسير
                   </button>{" "}
