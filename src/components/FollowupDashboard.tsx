@@ -61,7 +61,7 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
     <div className="followup-content">
       <section className="followup-panel followup-position" aria-label="آخر ما وصلت إليه">
         <div className="followup-position-actions">
-          <Button onClick={onEdit} className="followup-read-action"><span className="text-2xl">▶</span>متابعة القراءة</Button>
+          <Button onClick={onEdit} className="followup-read-action followup-resume"><span className="followup-resume-icon" aria-hidden="true">▶</span><span className="followup-resume-label">متابعة القراءة</span></Button>
           <Button asChild variant="secondary" className="followup-read-action followup-read-paper"><Link to="/mushaf"><img src={realMushaf} alt="" width={240} height={240} className="followup-real-mushaf" />اقرأ من المصحف</Link></Button>
         </div>
         <div className="followup-position-data">
