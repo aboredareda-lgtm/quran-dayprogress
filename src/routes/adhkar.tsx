@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { OrnamentDivider } from "@/components/Ornament";
 import { Button } from "@/components/ui/button";
 import { getAdhkar, getDhikrCounterPeriod, incrementDhikr, type AdhkarPeriod } from "@/lib/adhkar";
-import { nextAdhkarPage } from "@/lib/adhkar-book";
+import { nextAdhkarPage, nextManualAdhkarPage } from "@/lib/adhkar-book";
 
 export const Route = createFileRoute("/adhkar")({
   validateSearch: (search: Record<string, unknown>): { period?: "morning" | "evening" } => search["period"] === "morning" || search["period"] === "evening" ? { period: search["period"] } : {},
@@ -37,6 +37,7 @@ function Adhkar() {
   const counterPeriod = dhikr ? getDhikrCounterPeriod(dhikr, period) : period;
   const count = dhikr ? counts[counterPeriod][dhikr.id] ?? 0 : 0;
   const completed = dhikr ? count >= dhikr.repetitions : true;
+  const allCompleted = adhkar.every(item => (counts[getDhikrCounterPeriod(item, period)][item.id] ?? 0) >= item.repetitions);
 
   const turnPage = (target: number) => {
     if (turning) return;
@@ -98,14 +99,14 @@ function Adhkar() {
                 </div>
               </> : <div className="adhkar-book-finished">
                 <span className="adhkar-book-check"><Check aria-hidden="true" /></span>
-                <h3 className="font-display text-3xl font-bold text-primary">أتممت أذكار {period === "morning" ? "الصباح" : "المساء"}</h3>
+                 <h3 className="font-display text-3xl font-bold text-primary">{allCompleted ? "أتممت أذكار" : "نهاية أذكار"} {period === "morning" ? "الصباح" : "المساء"}</h3>
                 <OrnamentDivider />
                 <Button asChild className="h-14 w-full whitespace-normal border border-gold text-sm font-bold"><Link to="/"><Home />العودة للصفحة الرئيسية</Link></Button>
               </div>}
               <nav className="adhkar-book-navigation" aria-label="صفحات الأذكار">
                 <Button variant="ghost" size="icon" aria-label="الذكر السابق" title="الذكر السابق" disabled={page === 0 || turning} onClick={() => setPages(previous => ({ ...previous, [period]: Math.max(0, page - 1) }))}><ChevronRight /></Button>
-                <span aria-live="polite">{dhikr ? `${toAr(page + 1)} / ${toAr(adhkar.length)}` : "اكتملت الأذكار"}</span>
-                <Button variant="ghost" size="icon" aria-label="الذكر التالي" title="الذكر التالي" disabled={!dhikr || !completed || turning} onClick={() => turnPage(Math.min(page + 1, adhkar.length))}><ChevronLeft /></Button>
+                 <span aria-live="polite">{dhikr ? `${toAr(page + 1)} / ${toAr(adhkar.length)}` : allCompleted ? "اكتملت الأذكار" : "نهاية الصفحات"}</span>
+                 <Button variant="ghost" size="icon" aria-label="الذكر التالي" title="الذكر التالي" disabled={!dhikr || turning} onClick={() => turnPage(nextManualAdhkarPage(page, adhkar.length))}><ChevronLeft /></Button>
               </nav>
           </article>
         </div>
