@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { BookOpen, CalendarDays, ChevronLeft, Home, LayoutGrid, Moon, Sun, Target, Trophy } from "lucide-react";
+import { BookOpen, CalendarDays, ChevronLeft, Target, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUserName } from "@/hooks/useUserName";
 import { useDailyGoal, GOAL_OPTIONS } from "@/hooks/useDailyGoal";
@@ -89,7 +89,6 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
       </div>
       <nav className="followup-shortcuts" aria-label="اختصارات التطبيق">{shortcuts.map(item => "to" in item ? <Button asChild variant="ghost" key={item.label} className={`followup-shortcut ${item.tone}`}><Link to={item.to}><span>{item.icon}</span>{item.label}</Link></Button> : <Button variant="ghost" key={item.label} className={`followup-shortcut ${item.tone}`} onClick={item.label === "تذكير الورد" ? onReminder : onWelcome}><span>{item.icon}</span>{item.label}</Button>)}</nav>
       <Button asChild className="followup-contact"><Link to="/contact"><ChevronLeft />💬 تواصل معنا</Link></Button>
-      <nav className="followup-bottom" aria-label="التنقل السفلي"><Button variant="ghost" aria-current="page"><Home />الرئيسية</Button><Button asChild variant="ghost"><Link to="/mushaf"><BookOpen />المصحف</Link></Button><Button asChild variant="ghost"><Link to="/adhkar"><Moon />الأذكار</Link></Button><Button asChild variant="ghost"><Link to="/plan"><Target />الختمة</Link></Button><Button asChild variant="ghost"><Link to="/settings"><LayoutGrid />المزيد</Link></Button></nav>
     </div>
   </div>;
 }

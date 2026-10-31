@@ -449,7 +449,7 @@
 .followup-greeting { position: absolute; bottom: 0; width: 100%; background: color-mix(in oklab, var(--card) 85%, transparent); padding: 7px 16px 15px; }
 .followup-greeting h1 { font-size: 22px; font-weight: 800; overflow-wrap: anywhere; }
 .followup-greeting p { font-size: 12px; margin-top: 3px; }
-.followup-content { padding: 0 12px; display: grid; gap: 12px; }
+.followup-content { padding: 0 12px calc(env(safe-area-inset-bottom) + 14px); display: grid; gap: 10px; }
 .followup-panel { border: 1px solid var(--gold-soft); border-radius: 22px; background: var(--card); box-shadow: var(--followup-panel-shadow); padding: 12px; }
 .followup-position { display: grid; grid-template-columns: 21% minmax(0,1fr) 26%; gap: 7px; min-height: 205px; align-items: center; }
 .followup-position-actions { display: grid; gap: 9px; }
@@ -495,7 +495,7 @@
 .followup-adhkar.evening { color: var(--followup-night-ink); }
 .followup-adhkar-cta { position: absolute; bottom: 7px; inset-inline: 7px; display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 11px; border: 2px solid var(--gold-soft); border-radius: 30px; padding: 7px; background: var(--followup-morning-button); color: var(--foreground); }
 .evening .followup-adhkar-cta { background: var(--followup-night-button); }
-.followup-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.followup-summary-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
 .followup-summary-grid h2 { font-size: 14px; text-align: right; font-weight: bold; }
 .followup-rings { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 4px; margin-top: 14px; text-align: center; }
 .followup-ring { border: 6px solid var(--sage); border-top-color: var(--chart-2); border-radius: 50%; width: 48px; height: 48px; margin: auto; display: flex; align-items: center; justify-content: center; position: relative; }
@@ -522,14 +522,10 @@
 .followup-contact { height: 48px; border: 2px solid var(--gold); border-radius: 30px; font-size: 20px; font-weight: bold; }
 .followup-contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .followup-contact-row .followup-contact { font-size: 17px; }
-.followup-bottom { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); border-top: 1px solid var(--gold-soft); padding: 8px 0; }
-.followup-bottom > a, .followup-bottom > button { display: flex; flex-direction: column; gap: 3px; font-size: 10px; padding: 0; height: 40px; color: var(--muted-foreground); box-shadow: none; }
-.followup-bottom svg { height: 23px; width: 23px; }
-.followup-bottom [aria-current] { color: var(--primary); }
 .followup-revert { font-size: 11px; color: var(--muted-foreground); margin-bottom: calc(env(safe-area-inset-bottom) + 6px); }
 @media (min-width: 600px) {
   .followup-header { min-height: 290px; }
-  .followup-content { padding: 0 20px; gap: 16px; }
+  .followup-content { padding: 0 20px calc(env(safe-area-inset-bottom) + 20px); gap: 16px; }
   .followup-position { min-height: 240px; gap: 15px; }
   .followup-surah { font-size: 42px; }
   .followup-ayah { font-size: 28px; }
@@ -630,3 +626,19 @@
 .followup-read-paper { min-height: 92px; font-size: 13px; }
 .followup-read-paper .followup-real-mushaf { width: 58px; }
 @media (min-width: 600px) { .followup-read-paper { min-height: 115px; font-size: 17px; } .followup-read-paper .followup-real-mushaf { width: 72px; } }
+
+/* Compact the followup screen without shrinking reading controls or adhkar. */
+@media (max-width: 599px) {
+  .followup-header { min-height: 216px; }
+  .followup-greeting { padding-bottom: 10px; }
+  .followup-position { min-height: 195px; padding: 10px; }
+  .followup-shortcuts { gap: 8px; }
+  .followup-shortcut { min-width: 0; height: 60px; line-height: 1.5; }
+  .followup-ring { width: 44px; height: 44px; max-width: 100%; }
+  .followup-summary-grid > section { min-width: 0; }
+  .followup-rings b { font-size: 9px; overflow-wrap: anywhere; }
+  .followup-goal > small { overflow-wrap: anywhere; }
+}
+@media (max-width: 370px) {
+  .followup-ring { width: 36px; height: 36px; }
+}
