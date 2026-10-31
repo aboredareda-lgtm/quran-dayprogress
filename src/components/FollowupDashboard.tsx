@@ -68,7 +68,7 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
           {!loaded ? <p>…</p> : last ? <>
             <h2 className="followup-surah font-display">سورة {getSurah(last.surah).name}</h2>
             <p className="followup-ayah">الآية <strong>{last.ayah}</strong> <small>من {getSurah(last.surah).ayahs}</small></p>
-            <p className="followup-juz">▰ الجزء {getJuz(last.surah, last.ayah)}</p>
+            <p className="followup-juz">الجزء {getJuz(last.surah, last.ayah)}</p>
             <p className="followup-saved-date"><CalendarDays />{new Intl.DateTimeFormat("ar", { dateStyle: "medium", timeStyle: "short" }).format(new Date(last.at))}</p>
             {last.note && <p className="followup-note">📝 {last.note}</p>}
           </> : <><h2 className="followup-surah font-display">آخر ما وصلت إليه</h2><p className="text-sm leading-7">لم تسجّل موضعك بعد</p><Button variant="secondary" onClick={onEdit}>حدد للمتابعة</Button></>}
