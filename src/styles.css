@@ -642,3 +642,50 @@
 @media (max-width: 370px) {
   .followup-ring { width: 36px; height: 36px; }
 }
+
+/* Fit the everyday dashboard to a phone height; retain scrolling for expanded content. */
+@media (max-width: 599px) {
+  .followup-header { min-height: calc(clamp(82px, 100dvh - 710px, 140px) + env(safe-area-inset-top)); }
+  .followup-bismillah { padding-top: 4px; font-size: 24px; line-height: 1.35; }
+  .followup-greeting { padding: 2px 12px 4px; }
+  .followup-greeting h1 { font-size: 18px; line-height: 1.4; }
+  .followup-greeting p { font-size: 10px; margin-top: 0; }
+  .followup-content { gap: 6px; padding: 0 10px calc(env(safe-area-inset-bottom) + 6px); }
+  .followup-panel { padding: 7px; border-radius: 18px; }
+  .followup-position { min-height: 150px; gap: 6px; }
+  .followup-position-actions { gap: 6px; }
+  .followup-read-action { height: 58px; padding: 3px; border-radius: 14px; }
+  .followup-resume-icon { font-size: 17px; }
+  .followup-read-paper { min-height: 76px; font-size: 11px; }
+  .followup-read-paper .followup-real-mushaf { width: 44px; }
+  .followup-surah { line-height: 1.35; }
+  .followup-ayah { margin-top: 2px; font-size: 18px; line-height: 1.35; }
+  .followup-ayah strong { font-size: 28px; }
+  .followup-juz { margin: 2px auto; padding: 1px 14px; }
+  .followup-saved-date { margin-top: 3px; }
+  .followup-adhkar { height: 78px; border-radius: 14px; }
+  .followup-adhkar > div { padding: 3px 7px; }
+  .followup-adhkar h2 { font-size: 15px; line-height: 1.4; }
+  .followup-adhkar p { font-size: 10px; margin-top: 0; }
+  .followup-adhkar-cta { font-size: 11px; padding: 2px 6px; bottom: 4px; }
+  .followup-adhkar-cta svg { width: 18px; height: 18px; }
+  .followup-section-title { font-size: 12px; padding-bottom: 3px; }
+  .followup-prayer { gap: 2px; padding: 3px 1px; border-radius: 10px; }
+  .followup-prayer > span { font-size: 15px; line-height: 1.1; }
+  .followup-calendar { width: 54px; flex-shrink: 0; font-size: 8px; }
+  .followup-calendar strong { font-size: 20px; line-height: 1.1; }
+  .followup-location-link { margin-top: 3px; font-size: 10px; }
+  .followup-summary-grid .followup-panel { padding: 6px; }
+  .followup-summary-grid h2, .followup-goal-title { font-size: 12px; }
+  .followup-goal { gap: 2px; }
+  .followup-goal-title svg { width: 16px; height: 16px; }
+  .followup-goal > strong { font-size: 14px; margin-top: 0; }
+  .followup-goal > b, .followup-goal > small { font-size: 9px; }
+  .followup-rings { margin-top: 5px; gap: 2px; }
+  .followup-ring { width: 36px; height: 36px; border-width: 4px; }
+  .followup-rings b { margin-top: 10px; font-size: 8px; }
+  .followup-shortcuts { gap: 6px; }
+  .followup-shortcut { height: 46px; gap: 2px; padding: 2px; border-radius: 12px; }
+  .followup-shortcut > span { font-size: 19px; }
+  .followup-contact { height: 40px; font-size: 17px; }
+}
