@@ -2,9 +2,9 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { formatWelcomeDate } from "@/lib/welcome-date";
 
-import welcomeCoverAsset from "@/assets/welcome-cover-new.jpg.asset.json";
+import welcomeCoverAsset from "@/assets/welcome-cover-november.jpg.asset.json";
 // Capacitor's offline app cannot serve CDN asset paths; keep a bundled fallback.
-import welcomeCoverOffline from "@/assets/welcome-cover-new.jpg";
+import welcomeCoverOffline from "@/assets/welcome-cover-november.jpg";
 import { Button } from "@/components/ui/button";
 import { readUserName } from "@/hooks/useUserName";
 
