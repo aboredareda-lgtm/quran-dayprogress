@@ -1,13 +1,22 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-export const Route = createFileRoute("/privacy")({ component: Privacy });
+import { createFileRoute } from "@tanstack/react-router";
+import { PageHeader } from "@/components/PageHeader";
+
+export const Route = createFileRoute("/privacy")({
+  head: () => ({ meta: [
+    { title: "سياسة الخصوصية — الوِرد اليومي" },
+    { name: "description", content: "تعرف على حفظ بيانات القراءة محليًا والأذونات والخدمات المستخدمة في الوِرد اليومي." },
+    { property: "og:title", content: "سياسة الخصوصية — الوِرد اليومي" },
+    { property: "og:description", content: "سياسة بيانات القراءة والأذونات والنسخ الاحتياطية في تطبيق الوِرد اليومي." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
+  component: Privacy,
+});
 function Privacy() {
   return (
-    <main className="pattern-cream screen-fill mx-auto max-w-xl p-5 text-card-foreground min-[700px]:max-w-4xl min-[700px]:px-12 min-[700px]:py-10">
-      <Link to="/settings" className="text-primary">
-        → الإعدادات
-      </Link>
-      <h1 className="my-5 text-2xl font-bold">سياسة الخصوصية</h1>
-      <div className="space-y-4 leading-8">
+    <main className="pattern-cream screen-fill text-card-foreground">
+      <PageHeader title="سياسة الخصوصية" back="/settings" backLabel="الإعدادات" />
+      <div className="islamic-card mx-auto mt-5 max-w-xl space-y-4 p-6 leading-8 mx-4 min-[640px]:mx-auto">
         <p>الوِرد تطبيق لمتابعة موضع قراءة القرآن والأهداف والختمات. لا يتطلب إنشاء حساب.</p>
         <p>
           تُحفظ بيانات القراءة والملاحظات والإعدادات محليًا على جهازك. لا نرسل هذه البيانات إلى خادم

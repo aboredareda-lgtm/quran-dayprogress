@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageHeader } from "@/components/PageHeader";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SURAHS, getSurah, getJuz } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
@@ -13,6 +14,8 @@ export const Route = createFileRoute("/history")({
         content: "استعرض جميع المواضع التي سجّلتها في قراءتك للقرآن الكريم على هذا الجهاز.",
       },
       { property: "og:title", content: "سجل القراءة — وِرد" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         property: "og:description",
         content: "كل مواضع قراءتك المسجّلة بالتاريخ والوقت.",
@@ -57,12 +60,7 @@ function History() {
 
   return (
     <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
-      <header className="bg-gradient-calm pattern-arch safe-top px-4 pb-8 text-on-emerald min-[380px]:px-5">
-        <Link to="/" className="text-sm text-gold-soft">
-          → عودة للرئيسية
-        </Link>
-        <h1 className="font-display mt-3 text-3xl font-bold">سجل القراءة</h1>
-      </header>
+      <PageHeader title="سجل القراءة" />
 
       <section className="space-y-3 px-3 pt-6 min-[380px]:px-5 min-[700px]:mx-auto min-[700px]:max-w-5xl min-[700px]:px-8 min-[700px]:pb-12">
         {loaded && <MonthlyStats entries={entries} />}
@@ -196,7 +194,7 @@ function History() {
               </button>
               <button
                 onClick={() => setEditingId(null)}
-                className="rounded-full border border-border px-6 py-3 font-medium"
+                className="btn-emboss rounded-full px-6 py-3 font-medium"
               >
                 إلغاء
               </button>

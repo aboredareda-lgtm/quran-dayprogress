@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdhkarRouteImport } from './routes/adhkar'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as HistoryRouteImport } from './routes/history'
@@ -25,6 +26,11 @@ import { Route as WelcomeRouteImport } from './routes/welcome'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdhkarRoute = AdhkarRouteImport.update({
+  id: '/adhkar',
+  path: '/adhkar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -85,6 +91,7 @@ const WelcomeRoute = WelcomeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/adhkar': typeof AdhkarRoute
   '/contact': typeof ContactRoute
   '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/adhkar': typeof AdhkarRoute
   '/contact': typeof ContactRoute
   '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/adhkar': typeof AdhkarRoute
   '/contact': typeof ContactRoute
   '/favorites': typeof FavoritesRoute
   '/history': typeof HistoryRoute
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/adhkar'
     | '/contact'
     | '/favorites'
     | '/history'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/adhkar'
     | '/contact'
     | '/favorites'
     | '/history'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/adhkar'
     | '/contact'
     | '/favorites'
     | '/history'
@@ -173,6 +185,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdhkarRoute: typeof AdhkarRoute
   ContactRoute: typeof ContactRoute
   FavoritesRoute: typeof FavoritesRoute
   HistoryRoute: typeof HistoryRoute
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/adhkar': {
+      id: '/adhkar'
+      path: '/adhkar'
+      fullPath: '/adhkar'
+      preLoaderRoute: typeof AdhkarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -277,6 +297,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdhkarRoute: AdhkarRoute,
   ContactRoute: ContactRoute,
   FavoritesRoute: FavoritesRoute,
   HistoryRoute: HistoryRoute,

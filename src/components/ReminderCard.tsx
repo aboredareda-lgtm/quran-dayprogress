@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useReminder } from "@/hooks/useReminder";
 import { Ornament } from "@/components/Ornament";
 
-export function ReminderCard() {
+export function ReminderCard({ defaultOpen = false }: { defaultOpen?: boolean } = {}) {
   const { reminder, loaded, permission, enable, disable, setTime, busy, error } = useReminder();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
 
   if (!loaded) return null;
 

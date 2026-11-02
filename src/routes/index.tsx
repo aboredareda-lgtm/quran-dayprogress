@@ -9,6 +9,9 @@ import { ProgressPanel } from "@/components/ProgressPanel";
 import { ReminderCard } from "@/components/ReminderCard";
 import mushafImg from "@/assets/home-mushaf.webp";
 import { LayoutProvider, Block } from "@/components/LayoutEditor";
+import { Button } from "@/components/ui/button";
+import { Sun } from "lucide-react";
+import { FollowupDashboard } from "@/components/FollowupDashboard";
 
 const tiles = [
   { icon: "🕌", label: "أوقات الصلاة", to: "/prayer", bg: "bg-secondary" },
@@ -31,6 +34,8 @@ export const Route = createFileRoute("/")({
         content: "سجّل آخر سورة وآية وصلت إليها في قراءتك، والبيانات محفوظة على جوالك وحده.",
       },
       { property: "og:title", content: "الوِرد اليومي — متابعة قراءة القرآن" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         property: "og:description",
         content: "تطبيق بسيط لمتابعة وردك اليومي من القرآن الكريم.",
@@ -70,6 +75,14 @@ function Index() {
   const [saved, setSaved] = useState(false);
   const [khatmahSaved, setKhatmahSaved] = useState(false);
   const [showReminder, setShowReminder] = useState(false);
+  const [legacyDesign, setLegacyDesign] = useState(false);
+  useEffect(() => {
+    try { localStorage.setItem("wird:followup-design", "illustrated"); } catch { /* device preference */ }
+  }, []);
+  const changeDesign = (legacy: boolean) => {
+    setLegacyDesign(legacy);
+    try { localStorage.setItem("wird:followup-design", legacy ? "legacy" : "illustrated"); } catch { /* session still works */ }
+  };
 
   const goWelcome = () => {
     try {
@@ -113,8 +126,17 @@ function Index() {
   };
 
   return (
-    <main className="pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
-      <WirdHeader />
+    <main className={`pattern-cream mx-auto flex min-h-dvh flex-col overflow-x-hidden ${legacyDesign ? "sm:max-w-[26rem] min-[700px]:max-w-none!" : "max-w-[48rem]"}`}>
+      {!legacyDesign ? <>
+        <FollowupDashboard last={last} entries={entries} daysTracked={daysTracked} khatmahCount={khatmahCount} loaded={loaded} onEdit={openEditor} onDeleteNote={() => {
+          if (last && window.confirm("هل تريد حذف هذه الملاحظة؟ سيبقى الموضع محفوظًا.")) updateEntry(last.id, { note: "" });
+        }} onWelcome={goWelcome} onReminder={() => setShowReminder(value => !value)} onRevert={() => {
+          if (window.confirm("هل تريد العودة إلى شكل صفحة المتابعة السابق؟ ستبقى بياناتك محفوظة.")) changeDesign(true);
+        }} />
+        {saved && <p role="status" className="px-4 py-2 text-center text-sm text-primary">{khatmahSaved ? "تمت الختمة، تقبّل الله منك — سُجّلت في عدّاد الختمات." : "تم حفظ الموضع، بارك الله فيك."}</p>}
+        {showReminder && <div role="dialog" aria-label="تذكير الورد" className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4" onClick={() => setShowReminder(false)}><div className="w-full max-w-sm rounded-3xl bg-background p-2" onClick={e => e.stopPropagation()}><ReminderCard defaultOpen /><button onClick={() => setShowReminder(false)} className="mt-2 w-full rounded-full border border-gold/40 bg-secondary py-2 text-sm font-bold text-secondary-foreground">إغلاق</button></div></div>}
+      </> : <>
+            <WirdHeader />
 
       <LayoutProvider ids={["card", "stats", "progress", "tiles", "contact"]}>
       <section className="relative z-10 -mt-3 flex flex-col gap-1.5 px-3 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] min-[380px]:px-4 tall:-mt-4 min-[700px]:-mt-8 min-[700px]:flex-1 min-[700px]:gap-[min(0.75rem,0.9dvh)] min-[700px]:px-10 min-[700px]:pb-[calc(env(safe-area-inset-bottom)+1rem)]">
@@ -261,6 +283,9 @@ function Index() {
             );
           })}
         </div>
+        <Button asChild variant="secondary" className="mt-1.5 h-10 w-full rounded-xl border border-gold/40 font-bold">
+          <Link to="/adhkar"><Sun aria-hidden="true" />أذكار الصباح والمساء</Link>
+        </Button>
         {showReminder && <div className="mt-1.5"><ReminderCard /></div>}
 
         </Block>
@@ -276,6 +301,7 @@ function Index() {
 
       </section>
       </LayoutProvider>
+      </>}
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 px-3 pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+0.75rem)] min-[380px]:px-4">
@@ -341,7 +367,7 @@ function Index() {
               </button>
               <button
                 onClick={() => setEditing(false)}
-                className="rounded-full border border-border px-6 py-3 font-medium"
+                className="btn-emboss rounded-full px-6 py-3 font-medium"
               >
                 إلغاء
               </button>

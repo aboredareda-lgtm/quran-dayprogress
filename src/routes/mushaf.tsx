@@ -1,9 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { SURAHS, getSurah } from "@/lib/surahs";
+import { SURAHS, getSurah, juzStartingAt, juzName } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 import { useFavorites } from "@/hooks/useLocalList";
 import { normalizeArabic } from "@/lib/worship";
+import { Mic } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { QuranWordText } from "@/components/QuranWordText";
+import "@fontsource/amiri-quran/arabic-400.css";
 
 const tafsirCache = new Map<number, Map<number, string>>();
 async function loadTafsir(surah: number): Promise<Map<number, string>> {
@@ -39,15 +43,28 @@ export const Route = createFileRoute("/mushaf")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap" },
-    ],
   }),
   component: Mushaf,
 });
 
 let cache: string[][] | null = null;
 const toAr = (n: number) => n.toLocaleString("ar-EG");
+
+function AyahText({ text }: { text: string }) {
+  return <>{text.split("۩").map((part, index) => (
+    <span key={index}>
+      {index > 0 && (
+        <span className="mx-1 inline-flex items-center gap-1 whitespace-nowrap align-middle text-gold" aria-label="سجدة تلاوة">
+          <span aria-hidden="true">۩</span>
+          <span className="font-sans text-sm font-bold">سجدة</span>
+        </span>
+      )}
+      <span className={text.includes("۩") ? "underline decoration-gold decoration-1 underline-offset-8" : undefined}>
+        <QuranWordText text={part} />
+      </span>
+    </span>
+  ))}</>;
+}
 
 function Mushaf() {
   const search = Route.useSearch();
@@ -190,6 +207,16 @@ function Mushaf() {
           <button className={btn} onClick={() => setSize((v) => Math.min(44, v + 2))} aria-label="تكبير الخط">أ+</button>
           <button className={btn} onClick={() => setSize((v) => Math.max(18, v - 2))} aria-label="تصغير الخط">أ−</button>
         </div>
+        <div className="mx-auto flex w-full max-w-2xl justify-center">
+          <Button
+            onClick={() => { setPlaying(false); setSearchOpen(true); }}
+            className="h-11 rounded-full border border-gold px-5 text-base font-bold"
+            aria-label="فتح البحث بالصوت"
+          >
+            <Mic aria-hidden="true" />
+            بحث بالصوت
+          </Button>
+        </div>
         <div className="flex items-center justify-center gap-2">
           <button className={btn} onClick={() => setSpeed((v) => Math.max(1, v - 1))}>أبطأ</button>
           <button
@@ -217,36 +244,52 @@ function Mushaf() {
               سورة {getSurah(surah!).name}
             </h1>
             {surah !== 1 && surah !== 9 && (
-              <p className="mb-3 text-center text-primary" style={{ fontFamily: "'Amiri Quran', serif", fontSize: size }}>
+              <p className="mb-3 text-center text-primary" style={{ fontFamily: "var(--font-quran)", fontSize: size }}>
                 بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
               </p>
             )}
-            <p className="text-justify text-foreground" style={{ fontFamily: "'Amiri Quran', serif", fontSize: size, lineHeight: 2.3 }}>
-              {ayahs.map((t, i) => (
+            <p className="mushaf-reading-text text-justify text-foreground" style={{ fontFamily: "var(--font-quran)", fontSize: size, lineHeight: 2.3 }}>
+              {ayahs.map((t, i) => {
+                const juz = juzStartingAt(surah!, i + 1);
+                return (
+                <span key={i}>
+                {juz && (
+                  <span role="separator" aria-label={juzName(juz)} className="my-3 flex items-center justify-center" style={{ fontFamily: "var(--font-sans)", lineHeight: 1 }}>
+                    <span className="text-gold" style={{ fontSize: 14 }}>❁</span>
+                    <span
+                      className="mx-1 rounded-full border border-gold px-5 py-1 text-sm font-bold text-gold font-display"
+                      style={{ background: "linear-gradient(180deg, oklch(0.34 0.07 158), oklch(0.24 0.05 160))", boxShadow: "inset 0 0 0 2px oklch(0.24 0.05 160), inset 0 0 0 3px color-mix(in oklab, var(--gold) 50%, transparent)" }}
+                    >
+                      {juzName(juz)}
+                    </span>
+                    <span className="text-gold" style={{ fontSize: 14 }}>❁</span>
+                  </span>
+                )}
                 <span
-                  key={i}
                   id={`ayah-${i + 1}`}
                   onClick={() => save(i + 1)}
                   className={`cursor-pointer rounded-md ${selected === i + 1 ? "bg-gold/30" : ""}`}
                 >
-                  {t} <span className="text-gold">﴿{toAr(i + 1)}﴾</span>
+                  <AyahText text={t} /> <span className="mushaf-ayah-number text-gold">{toAr(i + 1)}</span>
                   <button
                     onClick={(e) => { e.stopPropagation(); toggle(surah!, i + 1); }}
                     aria-label={isFav(surah!, i + 1) ? "إزالة من المفضلة" : "إضافة إلى المفضلة"}
-                    className="mx-0.5 align-middle text-base text-gold"
-                    style={{ fontFamily: "system-ui" }}
+                    className="mx-0.5 align-middle text-gold"
+                    style={{ fontFamily: "system-ui", fontSize: Math.max(14, size * 0.62), textShadow: "none", filter: "none", boxShadow: "none", background: "transparent" }}
                   >
                     {isFav(surah!, i + 1) ? "★" : "☆"}
                   </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); openTafsir(i + 1); }}
-                    className="mx-0.5 rounded-full border border-gold/50 px-1.5 align-middle text-xs text-primary"
-                    style={{ fontFamily: "system-ui", lineHeight: 1.6 }}
+                    className="mx-0.5 rounded-full border border-gold/50 px-1.5 align-middle text-primary"
+                    style={{ fontFamily: "system-ui", lineHeight: 1.6, fontSize: Math.max(11, size * 0.46) }}
                   >
                     تفسير
                   </button>{" "}
                 </span>
-              ))}
+                </span>
+                );
+              })}
             </p>
             {(
               <div className="mt-6 flex justify-between gap-2">
@@ -275,7 +318,7 @@ function Mushaf() {
             <p className="mt-3 text-center text-xs text-muted-foreground">
               المصدر: التفسير الميسّر — مجمع الملك فهد لطباعة المصحف الشريف
             </p>
-            <button onClick={() => setTafsir(null)} className="mt-4 w-full rounded-full border border-border py-2 font-bold">
+            <button onClick={() => setTafsir(null)} className="mt-4 w-full btn-emboss rounded-full py-2 font-bold">
               إغلاق
             </button>
           </div>
@@ -284,15 +327,19 @@ function Mushaf() {
 
       {searchOpen && (
         <div className="fixed inset-0 z-30 flex flex-col bg-background pt-[max(0.75rem,env(safe-area-inset-top))]">
-          <div className="flex gap-2 border-b border-gold/40 px-3 pb-2">
+          <div className="flex flex-wrap items-center gap-2 border-b border-gold/40 px-3 pb-2">
             <input
               autoFocus
+              aria-label="كلمة البحث في القرآن"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="اكتب كلمة للبحث، مثل: الصبر"
-              className="min-w-0 flex-1 rounded-full border border-gold/50 bg-card px-4 py-2 text-base"
+              className="min-w-0 w-full flex-auto rounded-full border border-gold/50 bg-card px-4 py-2 text-base"
             />
             <button className={btn} onClick={() => setSearchOpen(false)}>إغلاق</button>
+            <p className="order-last w-full text-center text-sm leading-relaxed text-muted-foreground">
+              اضغط «بحث بالصوت» هنا، واسمح بالميكروفون، ثم انطق كلمة للبحث في الآيات.
+            </p>
           </div>
           <div className="flex-1 overflow-y-auto px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2">
             {q.length >= 2 && (
@@ -313,7 +360,7 @@ function Mushaf() {
                 className="mb-2 block w-full rounded-2xl border border-gold/40 bg-card p-3 text-right"
               >
                 <span className="text-xs font-bold text-primary">سورة {getSurah(r.s).name} — الآية {toAr(r.a)}</span>
-                <span className="mt-1 block text-lg leading-loose" style={{ fontFamily: "'Amiri Quran', serif" }}>{r.t}</span>
+                <span className="mt-1 block text-lg leading-loose" style={{ fontFamily: "var(--font-quran)" }}><AyahText text={r.t} /></span>
               </button>
             ))}
           </div>

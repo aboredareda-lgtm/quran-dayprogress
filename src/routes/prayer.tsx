@@ -1,5 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageHeader, VerseCard } from "@/components/PageHeader";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { CityFrame } from "@/components/CityFrame";
 import { prayerTimes, type PrayerTimes } from "@/lib/worship";
 
 export const Route = createFileRoute("/prayer")({
@@ -25,23 +27,49 @@ const NAMES: [keyof PrayerTimes, string][] = [
   ["isha", "العشاء"],
 ];
 const LOC = "wird:prayer-location";
+const CITY = "wird:prayer-city";
+type Place = { city: string | null; country: string | null };
+async function lookupCity(lat: number, lng: number): Promise<Place | null> {
+  try {
+    const r = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=ar`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    return { city: d.city || d.locality || d.principalSubdivision || null, country: d.countryName || null };
+  } catch {
+    return null;
+  }
+}
 const fmt = (d: Date) => new Intl.DateTimeFormat("ar", { hour: "numeric", minute: "2-digit" }).format(d);
 
 function Prayer() {
   const [loc, setLoc] = useState<{ lat: number; lng: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [place, setPlace] = useState<Place | null>(null);
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
     try {
       const v = JSON.parse(localStorage.getItem(LOC) || "null");
       if (v && typeof v.lat === "number") setLoc(v);
+      const c = JSON.parse(localStorage.getItem(CITY) || "null");
+      if (c) setPlace(c);
+      else if (v && typeof v.lat === "number") void lookupCity(v.lat, v.lng).then(savePlace);
     } catch {
       /* */
     }
     const t = setInterval(() => setNow(new Date()), 30000);
     return () => clearInterval(t);
   }, []);
+
+  const savePlace = (p: Place | null) => {
+    if (!p) return;
+    setPlace(p);
+    try {
+      localStorage.setItem(CITY, JSON.stringify(p));
+    } catch {
+      /* */
+    }
+  };
 
   const locate = () => {
     setError(null);
@@ -50,6 +78,7 @@ function Prayer() {
       (p) => {
         const v = { lat: p.coords.latitude, lng: p.coords.longitude };
         setLoc(v);
+        void lookupCity(v.lat, v.lng).then(savePlace);
         try {
           localStorage.setItem(LOC, JSON.stringify(v));
         } catch {
@@ -75,15 +104,13 @@ function Prayer() {
   const mins = next ? Math.max(0, Math.round((next.at.getTime() - now.getTime()) / 60000)) : 0;
 
   return (
-    <main className="pattern-cream min-h-dvh px-4 pb-10 pt-[max(1rem,env(safe-area-inset-top))]" dir="rtl">
-      <div className="mx-auto max-w-md">
-        <Link to="/" className="inline-block rounded-full border border-gold/50 bg-card px-4 py-1.5 text-sm font-bold text-primary">
-          رجوع
-        </Link>
-        <h1 className="mt-4 text-center text-2xl font-bold text-primary">🕌 أوقات الصلاة</h1>
+    <main className="pattern-cream min-h-dvh pb-10" dir="rtl">
+      <PageHeader title="أوقات الصلاة" />
+      <div className="mx-auto max-w-md px-4">
+        <VerseCard verse="إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا" source="النساء: ١٠٣" />
 
         {!times ? (
-          <div className="mt-6 rounded-3xl border-2 border-gold/50 bg-card p-5 text-center">
+          <div className="mt-6 islamic-card p-5 text-center">
             <p className="text-sm text-muted-foreground">نحتاج موقعك لحساب الأوقات. يبقى موقعك على جوالك فقط.</p>
             <button onClick={locate} className="btn-turquoise-3d mt-4 w-full rounded-full py-2.5 font-bold">
               حدد موقعي
@@ -91,6 +118,7 @@ function Prayer() {
           </div>
         ) : (
           <>
+            <CityFrame city={place?.city ?? null} country={place?.country ?? null} />
             {next && (
               <div className="mt-5 rounded-3xl border-2 border-gold/60 bg-primary p-4 text-center text-primary-foreground">
                 <p className="text-sm">الصلاة القادمة</p>
@@ -100,7 +128,7 @@ function Prayer() {
                 </p>
               </div>
             )}
-            <ul className="mt-4 divide-y divide-gold/30 rounded-3xl border-2 border-gold/50 bg-card">
+            <ul className="mt-4 divide-y divide-gold/30 islamic-card">
               {NAMES.map(([k, n]) => (
                 <li key={k} className={`flex justify-between px-5 py-3 text-lg ${next?.name === n ? "font-bold text-primary" : ""}`}>
                   <span>{n}</span>
@@ -109,7 +137,7 @@ function Prayer() {
               ))}
             </ul>
             <p className="mt-3 text-center text-xs text-muted-foreground">طريقة أم القرى — الأوقات تقريبية.</p>
-            <button onClick={locate} className="mt-3 w-full rounded-full border border-border py-2 text-sm">
+            <button onClick={locate} className="mt-3 w-full btn-emboss rounded-full py-2 text-sm">
               تحديث الموقع
             </button>
           </>

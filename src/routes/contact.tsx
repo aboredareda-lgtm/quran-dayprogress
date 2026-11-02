@@ -1,6 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageHeader } from "@/components/PageHeader";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Ornament, OrnamentDivider } from "@/components/Ornament";
+import { createContactMailto } from "@/lib/contact-email";
 
 const ADMIN_EMAIL = "aboreda.reda@gmail.com";
 
@@ -18,6 +20,8 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "في حال وجود أي ملاحظة أو اقتراح، تواصل مع إدارة التطبيق.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Contact,
@@ -26,46 +30,19 @@ export const Route = createFileRoute("/contact")({
 function Contact() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
-  const [copied, setCopied] = useState(false);
 
-  const mailto = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent(
-    subject || "ملاحظة على تطبيق الوِرد",
-  )}&body=${encodeURIComponent(body)}`;
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(ADMIN_EMAIL);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* تجاهل */
-    }
-  };
+  const mailto = createContactMailto(ADMIN_EMAIL, subject, body);
 
   return (
     <main className="pattern-cream screen-fill mx-auto overflow-x-hidden sm:max-w-[26rem] min-[700px]:max-w-none!">
-      <header className="bg-gradient-calm pattern-arch safe-top px-4 pb-8 text-on-emerald min-[380px]:px-5">
-        <Link to="/" className="text-sm text-gold-soft">
-          → عودة للرئيسية
-        </Link>
-        <h1 className="font-display mt-3 text-3xl font-bold">تواصل مع الإدارة</h1>
-      </header>
+      <PageHeader title="تواصل معنا" />
 
       <section className="space-y-3 px-3 pt-6 min-[380px]:px-5 min-[700px]:mx-auto min-[700px]:grid min-[700px]:max-w-5xl min-[700px]:grid-cols-2 min-[700px]:items-start min-[700px]:gap-5 min-[700px]:px-8 min-[700px]:pb-12 min-[700px]:space-y-0">
         <div className="pattern-cream shadow-raised rounded-3xl border-2 border-gold/50 p-4 text-center text-card-foreground">
           <OrnamentDivider />
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
-            في حال وجود أي ملاحظة أو اقتراح، تواصل معنا على البريد:
+            في حال وجود أي ملاحظة أو اقتراح، اكتب لنا رسالتك.
           </p>
-          <p className="mt-2 text-lg font-bold text-primary" dir="ltr">
-            {ADMIN_EMAIL}
-          </p>
-          <button
-            onClick={copyEmail}
-            className="mt-3 rounded-full border-2 border-gold/50 bg-secondary px-5 py-2 text-sm font-bold text-secondary-foreground"
-          >
-            {copied ? "تم نسخ البريد" : "نسخ البريد"}
-          </button>
         </div>
 
         <div className="pattern-cream rounded-3xl border border-gold/40 p-4 text-card-foreground">

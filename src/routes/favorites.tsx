@@ -1,7 +1,9 @@
+import { PageHeader, VerseCard } from "@/components/PageHeader";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getSurah } from "@/lib/surahs";
 import { useFavorites } from "@/hooks/useLocalList";
+import { QuranWordText } from "@/components/QuranWordText";
 
 export const Route = createFileRoute("/favorites")({
   head: () => ({
@@ -27,12 +29,10 @@ function Favorites() {
   }, []);
 
   return (
-    <main className="pattern-cream min-h-dvh px-4 pb-10 pt-[max(1rem,env(safe-area-inset-top))]" dir="rtl">
-      <div className="mx-auto max-w-xl">
-        <Link to="/" className="inline-block rounded-full border border-gold/50 bg-card px-4 py-1.5 text-sm font-bold text-primary">
-          رجوع
-        </Link>
-        <h1 className="mt-4 text-center text-2xl font-bold text-primary">⭐ آياتي المفضلة</h1>
+    <main className="pattern-cream min-h-dvh pb-10" dir="rtl">
+      <PageHeader title="آياتي المفضلة" />
+      <div className="mx-auto max-w-xl px-4">
+        <VerseCard verse="كِتَابٌ أَنزَلْنَاهُ إِلَيْكَ مُبَارَكٌ لِّيَدَّبَّرُوا آيَاتِهِ" source="ص: ٢٩" />
         {favorites.length === 0 ? (
           <p className="mt-8 text-center text-muted-foreground">
             لا توجد آيات بعد. اضغط ☆ بجانب أي آية في المصحف لإضافتها.
@@ -40,13 +40,13 @@ function Favorites() {
         ) : (
           <ul className="mt-5 grid gap-3">
             {favorites.map((f) => (
-              <li key={`${f.surah}-${f.ayah}`} className="rounded-2xl border-2 border-gold/40 bg-card p-4">
+              <li key={`${f.surah}-${f.ayah}`} className="islamic-card p-4">
                 <p className="text-sm font-bold text-primary">
                   سورة {getSurah(f.surah).name} — الآية {toAr(f.ayah)}
                 </p>
                 {quran && (
-                  <p className="mt-2 text-xl leading-loose text-foreground" style={{ fontFamily: "'Amiri Quran', serif" }}>
-                    {quran[f.surah - 1]?.[f.ayah - 1]}
+                  <p className="mt-2 text-xl leading-loose text-foreground" style={{ fontFamily: "var(--font-quran)" }}>
+                    <QuranWordText text={quran[f.surah - 1]?.[f.ayah - 1] ?? ""} />
                   </p>
                 )}
                 <div className="mt-3 flex gap-2">
@@ -57,7 +57,7 @@ function Favorites() {
                   >
                     افتح في المصحف
                   </Link>
-                  <button onClick={() => toggle(f.surah, f.ayah)} className="rounded-full border border-border px-4 py-1.5 text-sm">
+                  <button onClick={() => toggle(f.surah, f.ayah)} className="btn-emboss rounded-full px-4 py-1.5 text-sm">
                     حذف
                   </button>
                 </div>
