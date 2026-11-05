@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Ornament } from "@/components/Ornament";
 import { GOAL_OPTIONS, useDailyGoal } from "@/hooks/useDailyGoal";
 import type { ReadingEntry } from "@/hooks/useReadingLog";
-import { ayahsReadToday, daysToFinish, mushafPercent } from "@/lib/progress";
+import { juzReadToday, daysToFinish, mushafPercent } from "@/lib/progress";
 
 function Bar({ percent }: { percent: number }) {
   return (
@@ -26,17 +26,17 @@ export function ProgressPanel({
   const [pickerOpen, setPickerOpen] = useState(false);
 
   
-  const today = ayahsReadToday(entries);
+  const today = juzReadToday(entries);
   const goalPercent = Math.round((today / goal) * 100);
   const overall = last ? mushafPercent(last.surah, last.ayah) : 0;
-  const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : 0;
+  const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : Math.ceil(30 / goal);
 
   return (
     <div className="rounded-2xl border border-gold/40 bg-card px-3 py-1 text-card-foreground">
       <div className="flex items-center justify-between gap-2">
         <span className="flex min-w-0 items-center gap-1.5 text-sm font-bold text-primary">
           <Ornament className="h-4 w-4 shrink-0 text-gold" />
-          وِردك اليوم: {today} / {goal} آية
+          وِردك اليوم: {today.toLocaleString("ar-EG", { maximumFractionDigits: 2 })} / {goal.toLocaleString("ar-EG")} جزء
           
         </span>
         <button
@@ -72,9 +72,9 @@ export function ProgressPanel({
       <div className="mt-1 flex items-center justify-between gap-2 text-sm font-bold text-primary">
         <span className="min-w-0 truncate">
           تقدّمك في المصحف
-          {last && (
+          {(
             <span className="mr-1 text-[0.7rem] font-medium text-muted-foreground">
-              · الختمة بعد نحو {remainingDays} يومًا
+              · {remainingDays === 0 ? "أتممت المصحف" : `الختمة بعد نحو ${remainingDays} يومًا`}
             </span>
           )}
         </span>

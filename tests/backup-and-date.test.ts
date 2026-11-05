@@ -11,6 +11,12 @@ const wrap = (data: Record<string, string>) =>
   });
 
 describe("backup validation", () => {
+  it("preserves juz daily goals in backups", () => {
+    for (const goal of [0.5, 1, 2]) {
+      expect(validateBackup(wrap({ "wird:daily-goal-juz": String(goal) }))["wird:daily-goal-juz"]).toBe(String(goal));
+    }
+    expect(() => validateBackup(wrap({ "wird:daily-goal-juz": "50" }))).toThrow();
+  });
   it("accepts valid progress and turns imported reminders off", () => {
     const value = validateBackup(
       wrap({

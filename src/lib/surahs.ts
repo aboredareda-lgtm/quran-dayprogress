@@ -123,7 +123,7 @@ export function getSurah(number: number): Surah {
 
 
 // بدايات الأجزاء الثلاثين: [الجزء، السورة، الآية]
-const JUZ_STARTS: Array<[number, number, number]> = [
+export const JUZ_STARTS: Array<[number, number, number]> = [
   [1, 1, 1],
   [2, 2, 142],
   [3, 2, 253],

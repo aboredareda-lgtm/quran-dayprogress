@@ -22,6 +22,7 @@ export const reminderSchema = z.object({ enabled: z.boolean(), time: timeSchema 
 export const backupValueSchemas: Record<string, z.ZodTypeAny> = {
   "quran-reading-log-v1": readingEntriesSchema,
   "wird:daily-goal-ayahs": z.number().int().min(1).max(6236),
+  "wird:daily-goal-juz": z.union([z.literal(0.5), z.literal(1), z.literal(2)]),
   "wird:khatmahs": khatmahsSchema,
   "wird:reminder": reminderSchema,
 };

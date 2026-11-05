@@ -1,5 +1,5 @@
 import { localDayKey } from "./local-date";
-import { SURAHS, getSurah } from "./surahs";
+import { SURAHS, getSurah, getJuz, JUZ_STARTS } from "./surahs";
 import type { ReadingEntry } from "@/hooks/useReadingLog";
 
 /** العدد الكلي لآيات المصحف */
@@ -65,11 +65,31 @@ export function ayahsReadToday(entries: ReadingEntry[]): number {
   return Math.max(latestToday - baseline, 0);
 }
 
-/** الأيام المتبقّية تقديريًا لإتمام الختمة بناءً على الهدف اليومي */
-export function daysToFinish(surah: number, ayah: number, goalAyahs: number): number {
-  const remaining = TOTAL_AYAHS - ayahIndex(surah, ayah);
-  if (goalAyahs <= 0) return 0;
-  return Math.ceil(remaining / goalAyahs);
+/** الأجزاء المقروءة، مع تقدير كسر الجزء داخل حدوده الفعلية، لا بمتوسط آيات المصحف. */
+export function juzRead(surah: number, ayah: number): number {
+  const index = ayahIndex(surah, ayah);
+  const juz = getJuz(surah, ayah);
+  const start = JUZ_STARTS[juz - 1];
+  if (!start) return 0;
+  const next = JUZ_STARTS[juz];
+  const first = ayahIndex(start[1], start[2]);
+  const end = next ? ayahIndex(next[1], next[2]) - 1 : TOTAL_AYAHS;
+  return juz - 1 + (index - first + 1) / (end - first + 1);
+}
+
+/** الأيام المتبقية بناءً على الأجزاء اليومية، بدءًا من آخر آية مقروءة. */
+export function daysToFinish(surah: number, ayah: number, goalJuz: number): number {
+  if (!Number.isFinite(goalJuz) || goalJuz <= 0) return 0;
+  return Math.ceil(Math.max(0, 30 - juzRead(surah, ayah)) / goalJuz);
+}
+
+export function juzReadToday(entries: ReadingEntry[]): number {
+  const today = todayKey();
+  const todays = entries.filter(entry => dayKey(entry.at) === today);
+  if (!todays.length) return 0;
+  const latest = Math.max(...todays.map(entry => juzRead(entry.surah, entry.ayah)));
+  const before = entries.find(entry => dayKey(entry.at) < today);
+  return Math.max(0, latest - (before ? juzRead(before.surah, before.ayah) : 0));
 }
 
 /** عدد الآيات المقروءة في كل يوم (بناءً على تقدّم الموضع) */

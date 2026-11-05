@@ -9,6 +9,7 @@ import { LocalNotifications } from "@capacitor/local-notifications";
 const KEYS = [
   "quran-reading-log-v1",
   "wird:daily-goal-ayahs",
+  "wird:daily-goal-juz",
   "wird:khatmahs",
   "wird:reminder",
   "wird:theme",

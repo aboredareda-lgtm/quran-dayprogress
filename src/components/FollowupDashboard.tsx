@@ -6,7 +6,7 @@ import { useUserName } from "@/hooks/useUserName";
 import { useDailyGoal, GOAL_OPTIONS } from "@/hooks/useDailyGoal";
 import type { ReadingEntry } from "@/hooks/useReadingLog";
 import { getSurah, getJuz } from "@/lib/surahs";
-import { ayahsReadToday, mushafPercent, daysToFinish } from "@/lib/progress";
+import { juzReadToday, mushafPercent, daysToFinish } from "@/lib/progress";
 import { prayerTimes, type PrayerTimes } from "@/lib/worship";
 import mosque from "@/assets/followup-mosque-clean.jpg";
 import morningImage from "@/assets/followup-morning-clean.jpg";
@@ -50,7 +50,8 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
   }, []);
   const times = now && location ? prayerTimes(now, location.lat, location.lng) : null;
   const next = now && times ? prayers.find(([key]) => key !== "sunrise" && times[key] > now)?.[0] : null;
-  const today = ayahsReadToday(entries);
+  const today = juzReadToday(entries);
+  const remainingDays = last ? daysToFinish(last.surah, last.ayah, goal) : Math.ceil(30 / goal);
   const progress = last ? mushafPercent(last.surah, last.ayah) : 0;
   return <div className="followup-dashboard" dir="rtl">
     <header className="followup-header">
@@ -85,7 +86,7 @@ export function FollowupDashboard({ last, entries, daysTracked, khatmahCount, lo
       </section>
       <div className="followup-summary-grid">
         <section className="followup-panel followup-statistics"><h2>📊 متابعتك</h2><div className="followup-rings">{[{ value: daysTracked, label: "أيام المتابعة", icon: <BookOpen /> }, { value: entries.length, label: "مرات التسجيل", icon: <CalendarDays /> }, { value: khatmahCount, label: "الختمات", icon: <Trophy /> }].map(item => <div key={item.label}><span className="followup-ring"><strong>{item.value}</strong>{item.icon}</span><b>{item.label}</b></div>)}</div></section>
-        <section className="followup-panel followup-goal"><Button variant="ghost" onClick={() => setGoalOpen(!goalOpen)} className="followup-goal-title"><Target />وردك اليوم</Button><strong>{today} / {goal} آية</strong><progress max={goal} value={Math.min(today, goal)} /><span>{progress}%</span><b>🌿 تقدمك في المصحف</b><small>{last ? `الختمة بعد نحو ${daysToFinish(last.surah, last.ayah, goal)} يومًا إن شاء الله` : "بارك الله في قراءتك"}</small>{goalOpen && <div className="flex flex-wrap justify-center gap-1">{GOAL_OPTIONS.map(option => <Button key={option.value} size="sm" variant="secondary" onClick={() => { updateGoal(option.value); setGoalOpen(false); }}>{option.label}</Button>)}</div>}</section>
+        <section className="followup-panel followup-goal"><Button variant="ghost" onClick={() => setGoalOpen(!goalOpen)} className="followup-goal-title"><Target />وردك اليوم</Button><strong><bdi>{today.toLocaleString("ar-EG", { maximumFractionDigits: 2 })} / {goal.toLocaleString("ar-EG")}</bdi> جزء</strong><progress max={goal} value={Math.min(today, goal)} /><span>{progress}%</span><b>🌿 تقدمك في المصحف</b><small>{remainingDays === 0 ? "أتممت المصحف، بارك الله فيك" : `الختمة بعد نحو ${remainingDays} يومًا إن شاء الله`}</small>{goalOpen && <div className="flex flex-wrap justify-center gap-1">{GOAL_OPTIONS.map(option => <Button key={option.value} size="sm" variant="secondary" onClick={() => { updateGoal(option.value); setGoalOpen(false); }}>{option.label}</Button>)}</div>}</section>
       </div>
       <nav className="followup-shortcuts" aria-label="اختصارات التطبيق">{shortcuts.map(item => "to" in item ? <Button asChild variant="ghost" key={item.label} className={`followup-shortcut ${item.tone}`}><Link to={item.to}><span>{item.icon}</span>{item.label}</Link></Button> : <Button variant="ghost" key={item.label} className={`followup-shortcut ${item.tone}`} onClick={item.label === "تذكير الورد" ? onReminder : onWelcome}><span>{item.icon}</span>{item.label}</Button>)}</nav>
       <Button asChild className="followup-contact"><Link to="/contact"><ChevronLeft />💬 تواصل معنا</Link></Button>

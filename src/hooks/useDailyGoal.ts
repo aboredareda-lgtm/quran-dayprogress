@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 
-const STORAGE_KEY = "wird:daily-goal-ayahs";
-export const DEFAULT_GOAL = 50;
+const STORAGE_KEY = "wird:daily-goal-juz";
+export const DEFAULT_GOAL = 1;
 
-/** خيارات الهدف اليومي بعدد الآيات */
+/** خيارات الهدف اليومي بالأجزاء، مع إبقاء إعداد الآيات القديم دون تغيير. */
 export const GOAL_OPTIONS = [
-  { value: 10, label: "١٠ آيات" },
-  { value: 20, label: "٢٠ آية" },
-  { value: 50, label: "٥٠ آية" },
-  { value: 104, label: "نصف جزء" },
-  { value: 208, label: "جزء كامل" },
+  { value: 0.5, label: "نصف جزء" },
+  { value: 1, label: "جزء واحد" },
+  { value: 2, label: "جزآن" },
 ] as const;
 
 export function useDailyGoal() {
@@ -20,7 +18,7 @@ export function useDailyGoal() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       const parsed = raw ? Number(raw) : NaN;
-      if (Number.isFinite(parsed) && parsed > 0) setGoal(parsed);
+      if (GOAL_OPTIONS.some(option => option.value === parsed)) setGoal(parsed);
     } catch {
       /* تجاهل */
     }
@@ -28,7 +26,8 @@ export function useDailyGoal() {
   }, []);
 
   const updateGoal = useCallback((next: number) => {
-    const safe = Math.min(Math.max(Math.round(next), 1), TOTAL_MAX);
+    if (!GOAL_OPTIONS.some(option => option.value === next)) return;
+    const safe = next;
     setGoal(safe);
     try {
       localStorage.setItem(STORAGE_KEY, String(safe));
@@ -40,4 +39,3 @@ export function useDailyGoal() {
   return { goal, updateGoal, loaded };
 }
 
-const TOTAL_MAX = 6236;
