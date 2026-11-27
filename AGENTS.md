@@ -22,3 +22,4 @@
 - The optional App Store update prompt runs only in the native iOS shell and compares the installed version with Apple's lookup API, staying silent offline.
 - Daily goals and finish estimates use a separate device-local juz setting included in backups; fractional progress uses bundled juz boundaries, preserving legacy ayah settings and saved positions.
 - Mushaf recitation (Ibrahim Al-Akhdar) streams per-ayah files from everyayah.com via a top-bar player only (no per-ayah play buttons, by owner request); it needs internet while the rest stays offline.
+- Adhan alerts: per-prayer device-local toggles (wird:adhan-alerts) computed from existing prayerTimes and the saved location; native schedules a rolling 7-day queue refreshed on each open (iOS limits pending notifications), web only while open.

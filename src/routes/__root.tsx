@@ -19,6 +19,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { registerAppServiceWorker } from "../lib/register-sw";
 import { useTheme } from "../hooks/useTheme";
 import { UpdatePrompt } from "../components/UpdatePrompt";
+import { AdhanAlertsRunner } from "../hooks/useAdhanAlerts";
 
 function NotFoundComponent() {
   return (
@@ -139,6 +140,7 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <UpdatePrompt />
+      <AdhanAlertsRunner />
     </QueryClientProvider>
   );
 }
