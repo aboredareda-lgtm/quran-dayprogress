@@ -341,8 +341,8 @@ function Mushaf() {
                   </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); openTafsir(i + 1); }}
-                    className="mx-0.5 rounded-full border border-gold/50 px-1.5 align-middle text-primary"
-                    style={{ fontFamily: "system-ui", lineHeight: 1.6, fontSize: Math.max(11, size * 0.46) }}
+                    className="mx-0.5 rounded-full border border-gold/50 px-1.5 align-middle text-xs text-primary"
+                    style={{ fontFamily: "system-ui", lineHeight: 1.6 }}
                   >
                     تفسير
                   </button>{" "}
