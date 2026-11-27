@@ -236,7 +236,7 @@ function Mushaf() {
   }
 
   const btn = "inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-card text-sm font-bold text-primary max-[359px]:h-9";
-  const big = "inline-flex h-10 min-w-0 flex-1 max-w-[15rem] items-center justify-center truncate rounded-full px-3 text-sm font-bold max-[359px]:h-9 max-[359px]:text-xs";
+  const big = "inline-flex h-10 min-w-0 flex-1 max-w-[15rem] items-center justify-center truncate rounded-full px-3 text-sm font-bold max-[359px]:h-9 max-[399px]:px-2 max-[399px]:text-xs";
 
   return (
     <div className="fixed inset-0 flex flex-col bg-background" dir="rtl">
@@ -276,17 +276,17 @@ function Mushaf() {
           <button className={`${btn} w-10`} onClick={() => setSize((v) => Math.max(18, v - 2))} aria-label="تصغير الخط">أ−</button>
           <button className={`${btn} w-10`} onClick={() => setSize((v) => Math.min(44, v + 2))} aria-label="تكبير الخط">أ+</button>
           <span aria-hidden className="h-6 w-px shrink-0 bg-gold/60" />
-          <button className={`${btn} w-10`} onClick={() => setSpeed((v) => Math.max(1, v - 1))} aria-label="أبطأ">−</button>
+          <button className={`${btn} px-3 max-[399px]:px-2 max-[399px]:text-xs`} onClick={() => setSpeed((v) => Math.max(1, v - 1))}>أبطأ</button>
           <button
             onClick={() => { setAtEnd(false); setPlaying((p) => !p); }}
             className={`btn-turquoise-3d ${big}`}
           >
-            {playing ? "⏸ إيقاف الحركة" : `▶ تشغيل الحركة ${toAr(speed)}`}
+            {playing ? "⏸ إيقاف الحركة" : "▶ تشغيل الحركة"}
           </button>
-          <button className={`${btn} w-10`} onClick={() => setSpeed((v) => Math.min(10, v + 1))} aria-label="أسرع">+</button>
+          <button className={`${btn} px-3 max-[399px]:px-2 max-[399px]:text-xs`} onClick={() => setSpeed((v) => Math.min(10, v + 1))}>أسرع</button>
         </div>
         <p className="text-center text-xs text-muted-foreground">
-          {audioErr ? "تعذّر تشغيل التلاوة — تحقق من اتصال الإنترنت." : "اضغط على آية لتبدأ التلاوة منها"}
+          {audioErr ? "تعذّر تشغيل التلاوة — تحقق من اتصال الإنترنت." : `سرعة الحركة ${toAr(speed)} · اضغط على آية لتبدأ التلاوة منها`}
         </p>
       </div>
 
