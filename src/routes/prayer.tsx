@@ -2,6 +2,7 @@ import { PageHeader, VerseCard } from "@/components/PageHeader";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { CityFrame } from "@/components/CityFrame";
+import { AdhanCard } from "@/components/AdhanCard";
 import { prayerTimes, type PrayerTimes } from "@/lib/worship";
 
 export const Route = createFileRoute("/prayer")({
@@ -140,6 +141,7 @@ function Prayer() {
             <button onClick={locate} className="mt-3 w-full btn-emboss rounded-full py-2 text-sm">
               تحديث الموقع
             </button>
+            <AdhanCard times={times} />
           </>
         )}
         {error && <p role="alert" className="mt-3 text-center text-sm text-destructive">{error}</p>}

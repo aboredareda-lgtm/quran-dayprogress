@@ -2,7 +2,6 @@ import { PageHeader } from "@/components/PageHeader";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { Ornament } from "@/components/Ornament";
-import { AdhanCard } from "@/components/AdhanCard";
 import { useKhatmahs } from "@/hooks/useKhatmahs";
 import { useTheme } from "@/hooks/useTheme";
 import { useUserName } from "@/hooks/useUserName";
@@ -97,7 +96,6 @@ function Settings() {
           سياسة الخصوصية
         </Link>
         <NameEditor />
-        <AdhanCard />
         {/* الوضع الليلي */}
         <div className="pattern-cream flex items-center justify-between gap-3 rounded-3xl border border-gold/40 p-4 text-card-foreground">
           <span className="flex items-center gap-2 text-sm font-bold text-primary">
