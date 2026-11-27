@@ -21,3 +21,4 @@
 - The illustrated followup dashboard is presentation-only over the existing local reading hooks; preserve the legacy layout behind a reversible device preference, use existing prayer calculations only with a saved location, and link adhkar cards through validated period search parameters.
 - The optional App Store update prompt runs only in the native iOS shell and compares the installed version with Apple's lookup API, staying silent offline.
 - Daily goals and finish estimates use a separate device-local juz setting included in backups; fractional progress uses bundled juz boundaries, preserving legacy ayah settings and saved positions.
+- Mushaf recitation (Ibrahim Al-Akhdar) streams per-ayah files from everyayah.com via a top-bar player only (no per-ayah play buttons, by owner request); it needs internet while the rest stays offline.

@@ -4,8 +4,7 @@ import { SURAHS, getSurah, juzStartingAt, juzName } from "@/lib/surahs";
 import { useReadingLog } from "@/hooks/useReadingLog";
 import { useFavorites } from "@/hooks/useLocalList";
 import { normalizeArabic } from "@/lib/worship";
-import { Mic } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { recitationUrl } from "@/lib/recitation";
 import { QuranWordText } from "@/components/QuranWordText";
 import "@fontsource/amiri-quran/arabic-400.css";
 
@@ -83,6 +82,13 @@ function Mushaf() {
   const [tafsir, setTafsir] = useState<{ ayah: number; text: string | null; error?: boolean } | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const audio = useRef<HTMLAudioElement | null>(null);
+  const [reciting, setReciting] = useState<number | null>(null);
+  const [audioOn, setAudioOn] = useState(false);
+  const [repeat, setRepeat] = useState(false);
+  const [audioErr, setAudioErr] = useState(false);
+  const recite = useRef({ surah: 0, ayah: 1, repeat: false, count: 0 });
+  recite.current.repeat = repeat;
   const wake = useRef<{ release: () => Promise<void> } | null>(null);
 
   useEffect(() => {
@@ -144,7 +150,51 @@ function Mushaf() {
     };
   }, [playing, speed]);
 
+  const ayahs = quran && surah ? quran[surah - 1] : null;
+  const playAyah = (a: number) => {
+    if (surah === null || !ayahs) return;
+    const n = Math.min(Math.max(1, a), ayahs.length);
+    const el = audio.current ?? new Audio();
+    audio.current = el;
+    recite.current.surah = surah;
+    recite.current.ayah = n;
+    recite.current.count = ayahs.length;
+    el.onended = () => {
+      const c = recite.current;
+      if (c.repeat) { el.currentTime = 0; void el.play(); return; }
+      if (c.ayah >= c.count) { setAudioOn(false); setReciting(null); return; }
+      c.ayah += 1;
+      setReciting(c.ayah);
+      el.src = recitationUrl(c.surah, c.ayah);
+      void el.play().catch(() => { setAudioOn(false); setAudioErr(true); });
+    };
+    el.src = recitationUrl(surah, n);
+    setAudioErr(false);
+    setPlaying(false);
+    setReciting(n);
+    setAudioOn(true);
+    void el.play().catch(() => { setAudioOn(false); setAudioErr(true); });
+  };
+  const stopAudio = () => { audio.current?.pause(); setAudioOn(false); setReciting(null); };
+  const toggleAudio = () => {
+    if (audioOn) { audio.current?.pause(); setAudioOn(false); return; }
+    if (reciting !== null && audio.current && recite.current.surah === surah) {
+      setAudioOn(true);
+      void audio.current.play().catch(() => { setAudioOn(false); setAudioErr(true); });
+      return;
+    }
+    playAyah(selected ?? 1);
+  };
+  useEffect(() => () => { audio.current?.pause(); }, []);
+  useEffect(() => {
+    if (reciting === null) return;
+    const el = document.getElementById(`ayah-${reciting}`);
+    const box = scroller.current;
+    if (el && box) box.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+  }, [reciting]);
+
   const goSurah = (n: number) => {
+    stopAudio();
     setPlaying(false);
     setAtEnd(false);
     setSelected(null);
@@ -185,7 +235,6 @@ function Mushaf() {
     }
   }
 
-  const ayahs = quran && surah ? quran[surah - 1] : null;
   const btn = "rounded-full border border-gold/50 bg-card px-3 py-1.5 text-sm font-bold text-primary";
 
   return (
@@ -207,16 +256,6 @@ function Mushaf() {
           <button className={btn} onClick={() => setSize((v) => Math.min(44, v + 2))} aria-label="تكبير الخط">أ+</button>
           <button className={btn} onClick={() => setSize((v) => Math.max(18, v - 2))} aria-label="تصغير الخط">أ−</button>
         </div>
-        <div className="mx-auto flex w-full max-w-2xl justify-center">
-          <Button
-            onClick={() => { setPlaying(false); setSearchOpen(true); }}
-            className="h-11 rounded-full border border-gold px-5 text-base font-bold"
-            aria-label="فتح البحث بالصوت"
-          >
-            <Mic aria-hidden="true" />
-            بحث بالصوت
-          </Button>
-        </div>
         <div className="flex items-center justify-center gap-2">
           <button className={btn} onClick={() => setSpeed((v) => Math.max(1, v - 1))}>أبطأ</button>
           <button
@@ -228,6 +267,26 @@ function Mushaf() {
           <button className={btn} onClick={() => setSpeed((v) => Math.min(10, v + 1))}>أسرع</button>
           <span className="text-xs text-muted-foreground">السرعة {toAr(speed)}</span>
         </div>
+        <div className="flex items-center justify-center gap-2">
+          <button className={btn} aria-label="الآية التالية" onClick={() => playAyah((reciting ?? selected ?? 0) + 1)}>⏭</button>
+          <button
+            onClick={toggleAudio}
+            aria-label={audioOn ? "إيقاف التلاوة مؤقتًا" : "استماع للتلاوة"}
+            className="btn-turquoise-3d rounded-full px-5 py-1.5 text-sm font-bold"
+          >
+            {audioOn ? "⏸ إيقاف مؤقت" : "🎧 استماع — إبراهيم الأخضر"}
+          </button>
+          <button className={btn} aria-label="الآية السابقة" onClick={() => playAyah((reciting ?? selected ?? 2) - 1)}>⏮</button>
+          <button
+            className={`${btn} ${repeat ? "bg-gold/30" : ""}`}
+            aria-label={repeat ? "إيقاف تكرار الآية" : "تكرار الآية"}
+            aria-pressed={repeat}
+            onClick={() => setRepeat((v) => !v)}
+          >🔁</button>
+        </div>
+        <p className="text-center text-xs text-muted-foreground">
+          {audioErr ? "تعذّر تشغيل التلاوة — تحقق من اتصال الإنترنت." : "اضغط على آية لتبدأ التلاوة منها"}
+        </p>
       </div>
 
       <div
@@ -267,8 +326,8 @@ function Mushaf() {
                 )}
                 <span
                   id={`ayah-${i + 1}`}
-                  onClick={() => save(i + 1)}
-                  className={`cursor-pointer rounded-md ${selected === i + 1 ? "bg-gold/30" : ""}`}
+                  onClick={() => { save(i + 1); if (audioOn) playAyah(i + 1); else setReciting(null); }}
+                  className={`cursor-pointer rounded-md ${reciting === i + 1 ? "bg-primary/15 ring-1 ring-gold" : selected === i + 1 ? "bg-gold/30" : ""}`}
                 >
                   <AyahText text={t} /> <span className="mushaf-ayah-number text-gold">{toAr(i + 1)}</span>
                   <button
@@ -338,7 +397,7 @@ function Mushaf() {
             />
             <button className={btn} onClick={() => setSearchOpen(false)}>إغلاق</button>
             <p className="order-last w-full text-center text-sm leading-relaxed text-muted-foreground">
-              اضغط «بحث بالصوت» هنا، واسمح بالميكروفون، ثم انطق كلمة للبحث في الآيات.
+              اكتب كلمتين أو أكثر من الحروف للبحث في الآيات.
             </p>
           </div>
           <div className="flex-1 overflow-y-auto px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2">
