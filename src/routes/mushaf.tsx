@@ -235,54 +235,55 @@ function Mushaf() {
     }
   }
 
-  const btn = "rounded-full border border-gold/50 bg-card px-3 py-1.5 text-sm font-bold text-primary";
+  const btn = "inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-card text-sm font-bold text-primary max-[359px]:h-9";
+  const big = "inline-flex h-10 min-w-0 flex-1 max-w-[15rem] items-center justify-center truncate rounded-full px-3 text-sm font-bold max-[359px]:h-9 max-[359px]:text-xs";
 
   return (
     <div className="fixed inset-0 flex flex-col bg-background" dir="rtl">
       <div className="z-10 flex flex-col gap-2 border-b border-gold/40 bg-card/95 px-3 pb-2 pt-[max(0.5rem,env(safe-area-inset-top))]">
         <div className="mx-auto flex w-full max-w-2xl items-center gap-2">
-          <Link to="/" className={btn}>رجوع</Link>
+          <Link to="/" className={`${btn} px-3`}>رجوع</Link>
           <select
             value={surah ?? 1}
             onChange={(e) => goSurah(Number(e.target.value))}
             style={{ textAlignLast: "center" }}
-            className="min-w-0 flex-1 rounded-full border-2 border-gold/60 bg-background px-3 py-2 text-center text-xl font-bold text-primary outline-none focus:border-gold focus:ring-2 focus:ring-gold/40 focus-visible:outline-none"
+            className="h-10 min-w-0 flex-1 rounded-full border-2 border-gold/60 bg-background px-3 text-center text-lg font-bold text-primary outline-none focus:border-gold focus:ring-2 focus:ring-gold/40 focus-visible:outline-none"
           >
             {SURAHS.map((s) => (
               <option key={s.number} value={s.number}>{toAr(s.number)}. {s.name}</option>
             ))}
           </select>
-          <button className={btn} onClick={() => { setPlaying(false); setSearchOpen(true); }} aria-label="البحث في القرآن">🔍</button>
-          <button className={btn} onClick={() => setSize((v) => Math.min(44, v + 2))} aria-label="تكبير الخط">أ+</button>
-          <button className={btn} onClick={() => setSize((v) => Math.max(18, v - 2))} aria-label="تصغير الخط">أ−</button>
+          <button className={`${btn} w-10`} onClick={() => { setPlaying(false); setSearchOpen(true); }} aria-label="البحث في القرآن">🔍</button>
         </div>
-        <div className="flex items-center justify-center gap-2">
-          <button className={btn} onClick={() => setSpeed((v) => Math.max(1, v - 1))}>أبطأ</button>
-          <button
-            onClick={() => { setAtEnd(false); setPlaying((p) => !p); }}
-            className="btn-turquoise-3d rounded-full px-5 py-1.5 text-sm font-bold"
-          >
-            {playing ? "⏸ إيقاف الحركة" : "▶ تشغيل الحركة"}
-          </button>
-          <button className={btn} onClick={() => setSpeed((v) => Math.min(10, v + 1))}>أسرع</button>
-          <span className="text-xs text-muted-foreground">السرعة {toAr(speed)}</span>
-        </div>
-        <div className="flex items-center justify-center gap-2">
-          <button className={btn} aria-label="الآية التالية" onClick={() => playAyah((reciting ?? selected ?? 0) + 1)}>⏭</button>
+        <div className="mx-auto flex w-full max-w-2xl items-center justify-center gap-2">
+          <button className={`${btn} w-10`} aria-label="الآية السابقة" onClick={() => playAyah((reciting ?? selected ?? 2) - 1)}>⏮</button>
           <button
             onClick={toggleAudio}
             aria-label={audioOn ? "إيقاف التلاوة مؤقتًا" : "استماع للتلاوة"}
-            className="btn-turquoise-3d rounded-full px-5 py-1.5 text-sm font-bold"
+            className={`btn-turquoise-3d ${big}`}
           >
             {audioOn ? "⏸ إيقاف مؤقت" : "🎧 استماع — إبراهيم الأخضر"}
           </button>
-          <button className={btn} aria-label="الآية السابقة" onClick={() => playAyah((reciting ?? selected ?? 2) - 1)}>⏮</button>
+          <button className={`${btn} w-10`} aria-label="الآية التالية" onClick={() => playAyah((reciting ?? selected ?? 0) + 1)}>⏭</button>
           <button
-            className={`${btn} ${repeat ? "bg-gold/30" : ""}`}
+            className={`${btn} w-10 ${repeat ? "bg-gold/30" : ""}`}
             aria-label={repeat ? "إيقاف تكرار الآية" : "تكرار الآية"}
             aria-pressed={repeat}
             onClick={() => setRepeat((v) => !v)}
           >🔁</button>
+        </div>
+        <div className="mx-auto flex w-full max-w-2xl items-center justify-center gap-2">
+          <button className={`${btn} w-10`} onClick={() => setSize((v) => Math.max(18, v - 2))} aria-label="تصغير الخط">أ−</button>
+          <button className={`${btn} w-10`} onClick={() => setSize((v) => Math.min(44, v + 2))} aria-label="تكبير الخط">أ+</button>
+          <span aria-hidden className="h-6 w-px shrink-0 bg-gold/60" />
+          <button className={`${btn} w-10`} onClick={() => setSpeed((v) => Math.max(1, v - 1))} aria-label="أبطأ">−</button>
+          <button
+            onClick={() => { setAtEnd(false); setPlaying((p) => !p); }}
+            className={`btn-turquoise-3d ${big}`}
+          >
+            {playing ? "⏸ إيقاف الحركة" : `▶ تشغيل الحركة ${toAr(speed)}`}
+          </button>
+          <button className={`${btn} w-10`} onClick={() => setSpeed((v) => Math.min(10, v + 1))} aria-label="أسرع">+</button>
         </div>
         <p className="text-center text-xs text-muted-foreground">
           {audioErr ? "تعذّر تشغيل التلاوة — تحقق من اتصال الإنترنت." : "اضغط على آية لتبدأ التلاوة منها"}
@@ -352,8 +353,8 @@ function Mushaf() {
             </p>
             {(
               <div className="mt-6 flex justify-between gap-2">
-                {surah! > 1 ? <button className={btn} onClick={() => goSurah(surah! - 1)}>السورة السابقة</button> : <span />}
-                {surah! < 114 && <button className={btn} onClick={() => goSurah(surah! + 1)}>{atEnd ? "◀ " : ""}السورة التالية</button>}
+                {surah! > 1 ? <button className={`${btn} px-4`} onClick={() => goSurah(surah! - 1)}>السورة السابقة</button> : <span />}
+                {surah! < 114 && <button className={`${btn} px-4`} onClick={() => goSurah(surah! + 1)}>{atEnd ? "◀ " : ""}السورة التالية</button>}
               </div>
             )}
           </div>
@@ -395,7 +396,7 @@ function Mushaf() {
               placeholder="اكتب كلمة للبحث، مثل: الصبر"
               className="min-w-0 w-full flex-auto rounded-full border border-gold/50 bg-card px-4 py-2 text-base"
             />
-            <button className={btn} onClick={() => setSearchOpen(false)}>إغلاق</button>
+            <button className={`${btn} px-4`} onClick={() => setSearchOpen(false)}>إغلاق</button>
             <p className="order-last w-full text-center text-sm leading-relaxed text-muted-foreground">
               اكتب كلمتين أو أكثر من الحروف للبحث في الآيات.
             </p>
